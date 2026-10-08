@@ -402,7 +402,7 @@ export type PaymentPlanCategory = {
 };
 
 export const paymentOptions = {
-  methods: ["Bizum", "Venmo", "PayPal", "Apple Pay", "Google Pay"],
+  methods: ["Bizum", "Venmo", "PayPal", "Apple Pay", "Google Pay", "Bank transfer"],
   categories: [
     {
       title: "Group Classes",

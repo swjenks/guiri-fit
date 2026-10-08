@@ -281,8 +281,7 @@ import { siteData, pricingPlans, paymentOptions } from "../data/siteData";
             What payment methods do you accept?
           </h3>
           <p class="text-text-tertiary leading-relaxed">
-            We accept all major credit cards, debit cards, and bank transfers.
-            Monthly payments are automatically processed.
+            We accept {paymentOptions.methods.slice(0, -1).join(", ")}, and {paymentOptions.methods.at(-1)}.
           </p>
         </div>
       </div>
