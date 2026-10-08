@@ -1,7 +1,7 @@
 export const siteData = {
   name: "GuiriFit",
   tagline: "Get healthy get strong get GuiriFit",
-  description: "Personal Training and HIIT-style group classes for all ages, abilities, and fitness levels in Granada, Spain",
+  description: "Community focused HIIT-style classes and Personal Training for all ages, abilities, and fitness levels in Granada, Spain",
   address: "Granada, Spain",
   phone: "+34 630 074 083",
   email: "info@guirifit.com",
