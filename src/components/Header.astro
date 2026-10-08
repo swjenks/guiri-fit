@@ -1,14 +1,15 @@
 ---
-import { navigation, siteData } from '../data/siteData';
+import { navigation } from '../data/siteData';
+import BrandName from './BrandName.astro';
 ---
 
-<header class="fixed flex items-center justify-center w-full z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
+<header class="fixed flex items-center justify-center w-full z-50 bg-bg-primary/95 backdrop-blur-sm border-b border-border-primary">
   <nav class="max-w-5xl w-full px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between py-4">
       <!-- Logo -->
       <div class="shrink-0 flex items-center">
-        <a href="/" class="text-2xl font-bold text-orange-500 font-heading tracking-tight">
-          {siteData.name}
+        <a href="/" class="text-primary">
+          <BrandName />
         </a>
       </div>
 
@@ -17,14 +18,14 @@ import { navigation, siteData } from '../data/siteData';
         {navigation.map((item) => (
           <a
             href={item.href}
-            class="text-gray-300 hover:text-orange-500 transition-colors font-medium text-base py-2"
+            class="text-text-secondary hover:text-primary transition-colors font-medium text-base py-2"
           >
             {item.name}
           </a>
         ))}
         <a
           href="/contact"
-          class="bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-all duration-200 inline-flex items-center justify-center gap-2 px-6 py-2.5"
+          class="bg-primary hover:bg-primary-hover text-bg-primary rounded-lg font-semibold transition-all duration-200 inline-flex items-center justify-center gap-2 px-6 py-2.5"
         >
           Join Now
           <i class="ri-arrow-right-line"></i>
@@ -34,7 +35,7 @@ import { navigation, siteData } from '../data/siteData';
       <!-- Mobile menu button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden text-white p-2 flex items-center justify-center"
+        class="md:hidden text-text-primary p-2 flex items-center justify-center"
         aria-label="Toggle menu"
       >
         <i id="menu-icon" class="ri-menu-line text-2xl"></i>
@@ -50,14 +51,14 @@ import { navigation, siteData } from '../data/siteData';
       {navigation.map((item) => (
         <a
           href={item.href}
-          class="block px-4 py-3 text-gray-300 hover:text-orange-500 hover:bg-slate-800 rounded-lg transition-colors font-medium"
+          class="block px-4 py-3 text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors font-medium"
         >
           {item.name}
         </a>
       ))}
       <a
         href="/contact"
-        class="flex items-center justify-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-center font-semibold transition-all duration-200 mt-2 shadow-md hover:shadow-lg"
+        class="flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-bg-primary rounded-lg text-center font-semibold transition-all duration-200 mt-2 shadow-md hover:shadow-lg"
       >
         Join Now
         <i class="ri-arrow-right-line"></i>

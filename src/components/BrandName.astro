@@ -1,0 +1,25 @@
+---
+import { siteData } from "../data/siteData";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+const name = siteData.name;
+const guiri = name.endsWith("Fit") ? name.slice(0, -3) : name;
+const fit = name.endsWith("Fit") ? "Fit" : "";
+---
+
+<span class:list={["brand-name font-heading", className]}>
+  {
+    fit ? (
+      <>
+        <span class="brand-name-guiri">{guiri}</span>
+        <span class="brand-name-fit">{fit}</span>
+      </>
+    ) : (
+      name
+    )
+  }
+</span>

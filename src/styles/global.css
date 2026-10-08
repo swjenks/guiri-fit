@@ -2,32 +2,32 @@
 
 @theme {
   /* Typography - Custom Font Families */
-  --font-family-heading: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
-  --font-family-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-family-heading: "Syncopate", ui-sans-serif, system-ui, sans-serif;
+  --font-family-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Color Theme - Primary Colors */
-  --color-primary: oklch(70.5% 0.213 47.604); /* orange-500 */
-  --color-primary-hover: oklch(64.6% 0.222 41.116); /* orange-600 */
-  --color-primary-light: oklch(75% 0.183 55.934); /* orange-400 */
-  --color-primary-dark: oklch(55.3% 0.195 38.402); /* orange-700 */
+  /* Color Theme - Primary Colors (#C6F533) */
+  --color-primary: oklch(90.555% 0.2092 123.142);
+  --color-primary-hover: oklch(84.555% 0.2292 123.142);
+  --color-primary-light: oklch(95.555% 0.1792 123.142);
+  --color-primary-dark: oklch(76.555% 0.2392 123.142);
 
-  /* Color Theme - Background Colors */
-  --color-bg-primary: oklch(20.8% 0.042 265.755); /* slate-900 */
-  --color-bg-secondary: oklch(27.9% 0.041 260.031); /* slate-800 */
-  --color-bg-tertiary: oklch(37.2% 0.044 257.287); /* slate-700 */
-  --color-bg-card: var(--color-bg-secondary) ; /* slate-800 */
-  --color-bg-card-hover: var(--color-bg-tertiary); /* slate-700 */
+  /* Color Theme - Background Colors (#292929) */
+  --color-bg-primary: oklch(28.094% 0 0);
+  --color-bg-secondary: oklch(32.594% 0 0);
+  --color-bg-tertiary: oklch(37.094% 0 0);
+  --color-bg-card: var(--color-bg-secondary);
+  --color-bg-card-hover: var(--color-bg-tertiary);
 
-  /* Color Theme - Text Colors */
-  --color-text-primary: #ffffff; /* white */
-  --color-text-secondary: oklch(86.9% 0.022 252.894); /* slate-300 */
-  --color-text-tertiary: oklch(70.4% 0.04 256.788); /* slate-400 */
-  --color-text-muted: oklch(55.4% 0.046 257.417); /* slate-500 */
+  /* Color Theme - Text Colors (#FAFAFA) */
+  --color-text-primary: oklch(98.51% 0 0);
+  --color-text-secondary: oklch(84.51% 0 0);
+  --color-text-tertiary: oklch(72.51% 0 0);
+  --color-text-muted: oklch(60.51% 0 0);
 
   /* Color Theme - Border Colors */
-  --color-border-primary: var(--color-bg-tertiary); /* slate-700 */
-  --color-border-secondary: oklch(44.6% 0.043 257.281); /* slate-600 */
-  --color-border-accent: var(--color-primary); /* orange-500 */
+  --color-border-primary: oklch(46.681% 0.0373 183.563); /* #42615C */
+  --color-border-secondary: oklch(52.681% 0.0253 183.563);
+  --color-border-accent: oklch(66.965% 0.222 37.418); /* #FF4F00 */
 }
 
 html {
@@ -37,11 +37,69 @@ html {
 body {
   font-family: var(--font-family-body);
   line-height: 1.6;
+  @apply bg-bg-primary text-text-primary antialiased;
 }
 
-/* Utility classes for font families */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-wrap: balance;
+  text-transform: uppercase;
+}
+
+.heading-exempt-f {
+  text-transform: lowercase;
+}
+
+h1,
+h2 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+h5,
+h6 {
+  letter-spacing: -0.015em;
+}
+
 .font-heading {
   font-family: var(--font-family-heading);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.brand-name {
+  font-size: 1.75rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.brand-name-guiri {
+  font-weight: 400;
+}
+
+.brand-name-fit {
+  font-weight: 700;
+}
+
+.hero-tagline {
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  gap: 0.06em;
+}
+
+.hero-tagline .brand-name {
+  font-size: 1em;
+  display: inline;
+  line-height: inherit;
 }
 
 .font-body {
@@ -54,13 +112,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-900;
+  @apply bg-bg-primary;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-orange-500 rounded;
+  @apply bg-primary rounded;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-orange-600;
+  @apply bg-primary-hover;
 }

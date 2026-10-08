@@ -1,10 +1,10 @@
 export const siteData = {
-  name: "FitZone Gym",
-  tagline: "Transform Your Body, Transform Your Life",
-  description: "Your premier destination for fitness and wellness",
-  address: "123 Fitness Street, Health City, HC 12345",
-  phone: "+1 (555) 123-4567",
-  email: "info@fitzonegym.com",
+  name: "GuiriFit",
+  tagline: "Get healthy get strong get GuiriFit",
+  description: "Personal Training and HIIT-style group classes for all ages, abilities, and fitness levels in Granada, Spain",
+  address: "Granada, Spain",
+  phone: "+34 630 074 083",
+  email: "info@guirifit.com",
   social: {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
@@ -57,34 +57,34 @@ export const navigation = [
 
 export const features = [
   {
-    title: "24/7 Access",
-    description: "Work out on your schedule with round-the-clock access to our facilities",
-    icon: "ri-time-line",
-  },
-  {
-    title: "Expert Trainers",
-    description: "Certified personal trainers to guide you on your fitness journey",
+    title: "Personal Training",
+    description: "Receive one-on-one training directly from Coach Shawn, specifically tailored to your goals and fitness level.",
     icon: "ri-user-star-line",
   },
   {
-    title: "Modern Equipment",
-    description: "State-of-the-art fitness equipment for all your training needs",
-    icon: "ri-settings-3-line",
-  },
-  {
     title: "Group Classes",
-    description: "Join energizing group classes from yoga to HIIT",
+    description: "Train with other GuiriFit members in a small groups of 4-8 people to help motivate and support each other.",
     icon: "ri-group-line",
   },
   {
+    title: "Outdoor Training",
+    description: "During the spring and autumn months I offer outdoor training at a local calisthenics park where you can get your daily dose of vitamin D and fresh air.",
+    icon: "ri-sun-line",
+  },
+  {
+    title: "Bodyweight & Free Weight Focus",
+    description: "Using bodyweight and free weights, I focus on functional strength training to improve your everyday life.",
+    icon: "ri-weight-line",
+  },
+  {
     title: "Nutrition Support",
-    description: "Get personalized nutrition plans to complement your workouts",
+    description: "Get personalized nutrition plans to complement your workouts and help you achieve your goals.",
     icon: "ri-restaurant-line",
   },
   {
     title: "Community",
-    description: "Join a supportive community of fitness enthusiasts",
-    icon: "ri-community-line",
+    description: "Join a supportive community of fellow expats, guiris, and local fitness enthusiasts.",
+    icon: "ri-user-community-line",
   },
 ];
 
@@ -221,34 +221,19 @@ export const testimonials = [
 
 export const facilities = [
   {
-    title: "Cardio Zone",
-    description: "State-of-the-art treadmills, ellipticals, and bikes",
+    title: "Basic Fit - Plaza del Guitarrista Manuel Cano",
+    description: "Personal Training and small group classes with options for all forms of fitness.",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&q=80",
   },
   {
-    title: "Strength Training",
-    description: "Comprehensive free weights and machines",
+    title: "Rio Genil - Outdoor Calisthenics Park",
+    description: "Outdoor training with a gorgeous view of the river and the mountains.",
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&q=80",
   },
   {
-    title: "Group Class Studio",
-    description: "Spacious studio for yoga, HIIT, and more",
+    title: "In-House Training",
+    description: "Don't have time to go to the gym? I can come to your home and train you there.",
     image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=600&fit=crop&q=80",
-  },
-  {
-    title: "Locker Rooms",
-    description: "Clean, modern facilities with showers",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&q=80",
-  },
-  {
-    title: "Functional Training",
-    description: "TRX, battle ropes, and functional equipment",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop&q=80",
-  },
-  {
-    title: "Recovery Zone",
-    description: "Stretching area and foam rollers",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&q=80",
   },
 ];
 
@@ -279,16 +264,31 @@ export const faqs = [
   },
 ];
 
-export const classSchedule = [
-  { time: "6:00 AM", class: "HIIT Training", trainer: "Mike Chen" },
-  { time: "7:00 AM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-  { time: "8:00 AM", class: "Strength Training", trainer: "John Smith" },
-  { time: "9:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-  { time: "12:00 PM", class: "Pilates", trainer: "Sarah Johnson" },
-  { time: "5:00 PM", class: "HIIT Training", trainer: "Mike Chen" },
-  { time: "6:00 PM", class: "CrossFit", trainer: "John Smith" },
-  { time: "7:00 PM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-];
+const guiriFitSlotTimes = new Set(["9:00 AM", "10:00 AM", "4:00 PM", "5:00 PM"]);
+
+function createScheduleSlot(time: string) {
+  const isGuiriFit = guiriFitSlotTimes.has(time);
+  return {
+    time,
+    class: isGuiriFit ? "GuiriFit" : "Open Availability",
+    type: isGuiriFit ? "Group Class" : "Personal Training",
+  };
+}
+
+const dailySchedule = [
+  "7:00 AM",
+  "8:00 AM",
+  "9:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "3:00 PM",
+  "4:00 PM",
+  "5:00 PM",
+  "6:00 PM",
+  "7:00 PM",
+].map(createScheduleSlot);
+
+export const classSchedule = dailySchedule;
 
 export const successStories = [
   {
@@ -329,158 +329,126 @@ export const statistics = [
   { number: "15+", label: "Years Experience", icon: "ri-award-line" },
 ];
 
+const saturdaySchedule = [
+  { time: "10:00 AM", class: "GuiriFit", type: "Group Class" },
+  { time: "11:00 AM", class: "GuiriFit", type: "Group Class" },
+  { time: "11:00 AM", class: "Open Availability", type: "Personal Training" },
+  { time: "12:00 PM", class: "Open Availability", type: "Personal Training" },
+];
+
 export const fullSchedule = {
-  monday: [
-    { time: "6:00 AM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "7:00 AM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-    { time: "8:00 AM", class: "Strength Training", trainer: "John Smith" },
-    { time: "9:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "12:00 PM", class: "Pilates", trainer: "Sarah Johnson" },
-    { time: "5:00 PM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "6:00 PM", class: "CrossFit", trainer: "John Smith" },
-    { time: "7:00 PM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-  ],
-  tuesday: [
-    { time: "6:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "7:00 AM", class: "Strength Training", trainer: "John Smith" },
-    { time: "8:00 AM", class: "Pilates", trainer: "Sarah Johnson" },
-    { time: "9:00 AM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "12:00 PM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-    { time: "5:00 PM", class: "CrossFit", trainer: "John Smith" },
-    { time: "6:00 PM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "7:00 PM", class: "Strength Training", trainer: "John Smith" },
-  ],
-  wednesday: [
-    { time: "6:00 AM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "7:00 AM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-    { time: "8:00 AM", class: "Strength Training", trainer: "John Smith" },
-    { time: "9:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "12:00 PM", class: "Pilates", trainer: "Sarah Johnson" },
-    { time: "5:00 PM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "6:00 PM", class: "CrossFit", trainer: "John Smith" },
-    { time: "7:00 PM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-  ],
-  thursday: [
-    { time: "6:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "7:00 AM", class: "Strength Training", trainer: "John Smith" },
-    { time: "8:00 AM", class: "Pilates", trainer: "Sarah Johnson" },
-    { time: "9:00 AM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "12:00 PM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-    { time: "5:00 PM", class: "CrossFit", trainer: "John Smith" },
-    { time: "6:00 PM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "7:00 PM", class: "Strength Training", trainer: "John Smith" },
-  ],
-  friday: [
-    { time: "6:00 AM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "7:00 AM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-    { time: "8:00 AM", class: "Strength Training", trainer: "John Smith" },
-    { time: "9:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "12:00 PM", class: "Pilates", trainer: "Sarah Johnson" },
-    { time: "5:00 PM", class: "HIIT Training", trainer: "Mike Chen" },
-    { time: "6:00 PM", class: "CrossFit", trainer: "John Smith" },
-    { time: "7:00 PM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-  ],
-  saturday: [
-    { time: "8:00 AM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-    { time: "9:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-    { time: "10:00 AM", class: "Strength Training", trainer: "John Smith" },
-    { time: "11:00 AM", class: "Pilates", trainer: "Sarah Johnson" },
-  ],
-  sunday: [
-    { time: "9:00 AM", class: "Yoga & Flexibility", trainer: "Sarah Johnson" },
-    { time: "10:00 AM", class: "Pilates", trainer: "Sarah Johnson" },
-    { time: "11:00 AM", class: "Cardio Blast", trainer: "Mike Chen" },
-  ],
+  monday: dailySchedule,
+  tuesday: dailySchedule,
+  wednesday: dailySchedule,
+  thursday: dailySchedule,
+  friday: dailySchedule,
+  saturday: saturdaySchedule,
+  sunday: [],
 };
 
 export const trainers = [
   {
-    name: "John Smith",
-    role: "Head Trainer",
-    specialization: "Strength Training & Nutrition",
-    experience: "10+ years",
-    bio: "John is a certified strength and conditioning specialist with over a decade of experience helping athletes and fitness enthusiasts achieve their goals. He specializes in strength training, powerlifting, and nutrition coaching.",
+    name: "Shawn Jenkins",
+    role: "Coach & Personal Trainer",
+    specialization: "HIIT, CrossFit, TRX (Suspension Training), Circuit Training, and Kettlebells",
+    experience: "25+ years",
+    bio: "I am a newly certified gym coach and personal trainer specialized in helping people of all ages and fitness levels achieve their goals. I have spent my entire life training in multiple forms of fitness, including HIIT, HYROX, CrossFit, Calisthenics, TRX, Kettlebells, Circuit Training, Distance Running, Muay Thai Kickboxing, and Yoga. I am also currently working towards my nutrition certification.",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&q=80",
-    certifications: ["CSCS", "NASM-CPT", "Nutrition Specialist"],
-  },
-  {
-    name: "Sarah Johnson",
-    role: "Yoga & Pilates Instructor",
-    specialization: "Yoga, Pilates & Holistic Wellness",
-    experience: "8+ years",
-    bio: "Sarah is a certified yoga and Pilates instructor with extensive training in multiple yoga styles. She combines traditional practices with modern techniques to help members find balance, flexibility, and inner peace.",
-    image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&h=400&fit=crop&q=80",
-    certifications: ["RYT-500", "Pilates Certified", "Meditation Instructor"],
-  },
-  {
-    name: "Mike Chen",
-    role: "HIIT Specialist",
-    specialization: "High-Intensity Training & Athletic Performance",
-    experience: "7+ years",
-    bio: "Mike is an expert in high-intensity interval training and athletic performance. His dynamic classes push members to new limits while maintaining safety and proper form. He's passionate about helping people discover their inner athlete.",
-    image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&h=400&fit=crop&q=80",
-    certifications: ["ACE-CPT", "HIIT Specialist", "Athletic Performance Coach"],
-  },
-  {
-    name: "Emma Davis",
-    role: "Cardio & Dance Instructor",
-    specialization: "Cardio, Dance Fitness & Zumba",
-    experience: "5+ years",
-    bio: "Emma brings energy and fun to every class. With a background in dance and fitness, she creates engaging cardio workouts that make exercise enjoyable. Her classes are perfect for those who want to have fun while getting fit.",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&q=80",
-    certifications: ["Zumba Certified", "Dance Fitness Instructor", "ACE-CPT"],
-  },
-  {
-    name: "James Wilson",
-    role: "CrossFit Coach",
-    specialization: "CrossFit & Functional Movement",
-    experience: "6+ years",
-    bio: "James is a Level 2 CrossFit coach with a passion for functional fitness. He helps members build strength, improve mobility, and achieve their fitness goals through varied, high-intensity workouts.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
-    certifications: ["CrossFit Level 2", "Functional Movement Specialist", "Olympic Lifting Coach"],
+    certifications: ["EPTI Masters Certificate: Gym Coach & Personal Trainer", "Kettlebell Instructor", "Suspension Training Instructor", "Padwork Instructor", "Circuit Training Instructor"],
   },
 ];
 
 export const history = [
   {
-    year: "2009",
-    title: "Founded",
-    description: "FitZone Gym was founded with a vision to create an inclusive fitness community where everyone feels welcome.",
+    year: "1998",
+    title: "My humble beginnings",
+    description: "I started running Cross Country and Strength Training in High School, and have been obsessed with fitness ever since.",
   },
   {
-    year: "2012",
-    title: "First Expansion",
-    description: "Expanded facilities to include a dedicated group class studio and added 20+ new pieces of equipment.",
+    year: "2002",
+    title: "Upping my game",
+    description: "I continued to learn about fitness and started learning about HIIT and proper form for heavy lifting to build muscle and strength.",
   },
   {
-    year: "2015",
-    title: "24/7 Access",
+    year: "2008",
+    title: "Getting competitive",
     description: "Introduced 24/7 access for Premium and Elite members, making fitness accessible around the clock.",
   },
   {
-    year: "2018",
-    title: "500 Members Milestone",
+    year: "2013",
+    title: "Life in an office",
     description: "Reached 500 active members and expanded our trainer team to 20 certified professionals.",
   },
   {
-    year: "2020",
-    title: "Digital Integration",
+    year: "2022",
+    title: "Learning to train hard again",
     description: "Launched online class booking and virtual training options to adapt to changing needs.",
   },
   {
-    year: "2024",
-    title: "Award Winner",
-    description: "Recognized as 'Best Gym 2024' by the local fitness community, celebrating 15 years of excellence.",
+    year: "2026",
+    title: "Turning my passion into a business",
+    description: "I am now a certified gym coach and personal trainer specialized in helping people of all ages and fitness levels achieve their goals. I have spent my entire life training in multiple forms of fitness, including HIIT, HYROX, CrossFit, Calisthenics, TRX, Kettlebells, Circuit Training, Distance Running, Muay Thai Kickboxing, and Yoga. I am also currently working towards my nutrition certification.",
   },
 ];
 
+export type PaymentPlanOption = {
+  type: string;
+  description: string;
+};
+
+export type PaymentPlanCategory = {
+  title: string;
+  plans: PaymentPlanOption[];
+};
+
 export const paymentOptions = {
-  methods: ["Credit/Debit Cards", "Bank Transfer", "PayPal", "Apple Pay", "Google Pay"],
-  plans: [
-    { type: "Monthly", description: "Pay month-to-month with no long-term commitment" },
-    { type: "Annual", description: "Save 15% with annual payment - best value!" },
-    { type: "Family Plan", description: "Special rates for families - contact us for details" },
-  ],
+  methods: ["Bizum", "Venmo", "PayPal", "Apple Pay", "Google Pay"],
+  categories: [
+    {
+      title: "Group Classes",
+      plans: [
+        { type: "Drop-In", description: "Pay 10€ per session" },
+        {
+          type: "10-Pack",
+          description: "Pay 90€ for 10 sessions, train when you want",
+        },
+        {
+          type: "Monthly",
+          description: "Pay month-to-month with no long-term commitment",
+        },
+        {
+          type: "Annual",
+          description: "Save 15% with annual payment — best value!",
+        },
+        {
+          type: "Family Plan",
+          description: "Special rates for families — contact us for details",
+        },
+      ],
+    },
+    {
+      title: "Personal Training",
+      plans: [
+        { type: "Drop-In", description: "Pay per 1-on-1 session" },
+        {
+          type: "10-Pack",
+          description: "Prepay for 10 personal training sessions",
+        },
+        {
+          type: "Monthly",
+          description: "Month-to-month personal training with flexible scheduling",
+        },
+        {
+          type: "Annual",
+          description: "Save 15% with annual prepayment — best value!",
+        },
+        {
+          type: "Partner Plan",
+          description: "Train with a partner — contact us for shared-session rates",
+        },
+      ],
+    },
+  ] satisfies PaymentPlanCategory[],
   guarantee: "7-day money-back guarantee on all memberships",
   trial: "Free 7-day trial available for new members",
 };

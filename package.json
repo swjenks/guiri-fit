@@ -18,5 +18,8 @@
     "astro": "^7.0.4",
     "remixicon": "^4.7.0",
     "tailwindcss": "^4.1.16"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
   }
 }
