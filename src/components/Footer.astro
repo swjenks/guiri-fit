@@ -86,9 +86,16 @@ import BrandName from "./BrandName.astro";
       class="border-t border-border-primary mt-8 pt-8 text-center text-text-tertiary"
     >
       <p>
-        &copy; {new Date().getFullYear()}
+        &copy;{" "}
+        <span data-copyright-year>{new Date().getFullYear()}</span>{" "}
         {siteData.name}. All rights reserved.
       </p>
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  document.querySelectorAll("[data-copyright-year]").forEach((el) => {
+    el.textContent = String(new Date().getFullYear());
+  });
+</script>

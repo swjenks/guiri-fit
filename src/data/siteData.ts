@@ -28,10 +28,10 @@ export const contactInfo = [
     link: null,
   },
   {
-    icon: "ri-phone-line",
-    title: "Phone",
+    icon: "ri-whatsapp-line",
+    title: "WhatsApp",
     content: siteData.phone,
-    link: `tel:${siteData.phone}`,
+    link: `https://wa.me/${siteData.phone.replace(/\D/g, "")}`,
   },
   {
     icon: "ri-mail-line",
