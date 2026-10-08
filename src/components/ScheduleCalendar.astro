@@ -1,0 +1,79 @@
+---
+import ScheduleDayColumn from "./ScheduleDayColumn.astro";
+import ScheduleDayTabs from "./ScheduleDayTabs.astro";
+import ScheduleTimeGutter from "./ScheduleTimeGutter.astro";
+import type { ScheduleSlot } from "../utils/classSchedule";
+import { getCalendarRange, getHourMarkers } from "../utils/classSchedule";
+
+interface CalendarDay {
+  label: string;
+  slots: ScheduleSlot[];
+}
+
+interface Props {
+  days: CalendarDay[];
+  brandName: string;
+}
+
+const { days, brandName } = Astro.props;
+
+const daySchedules = days.map((day) => day.slots);
+const range = getCalendarRange(daySchedules);
+const hourMarkers = getHourMarkers(range.start, range.end);
+---
+
+<div class="schedule-calendar">
+  <!-- Below md: one day per swipe -->
+  <div class="schedule-mobile md:hidden" data-schedule-carousel>
+    <ScheduleDayTabs days={days} />
+    <div class="schedule-mobile-body">
+      <ScheduleTimeGutter hourMarkers={hourMarkers} range={range} />
+      <div class="schedule-mobile-track">
+        {
+          days.map((day) => (
+            <div class="schedule-mobile-slide">
+              <ScheduleDayColumn
+                slots={day.slots}
+                hourMarkers={hourMarkers}
+                range={range}
+                brandName={brandName}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- md and up: full week -->
+  <div class="schedule-desktop hidden md:block">
+    <div
+      class="schedule-calendar-grid min-w-0"
+      style={`--day-count: ${days.length}`}
+    >
+      <div class="schedule-calendar-corner" aria-hidden="true"></div>
+      {
+        days.map((day) => (
+          <div class="schedule-day-header">{day.label}</div>
+        ))
+      }
+
+      <ScheduleTimeGutter hourMarkers={hourMarkers} range={range} />
+
+      {
+        days.map((day) => (
+          <ScheduleDayColumn
+            slots={day.slots}
+            hourMarkers={hourMarkers}
+            range={range}
+            brandName={brandName}
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  import "../scripts/schedule-carousel.ts";
+</script>

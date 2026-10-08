@@ -1,0 +1,47 @@
+---
+import type { CalendarRange, ScheduleSlot } from "../utils/classSchedule";
+import { layoutMinutePercent, layoutSlotPercent } from "../utils/classSchedule";
+
+interface Props {
+  slots: ScheduleSlot[];
+  hourMarkers: number[];
+  range: CalendarRange;
+  brandName: string;
+}
+
+const { slots, hourMarkers, range, brandName } = Astro.props;
+
+function pct(value: number) {
+  return `${value}%`;
+}
+---
+
+<div class="schedule-day-column">
+  {
+    hourMarkers.map((minute) => (
+      <div
+        class="schedule-hour-line"
+        style={`top: ${pct(layoutMinutePercent(minute, range))}`}
+      />
+    ))
+  }
+  {
+    slots.map((slot) => {
+      const isBrand = slot.class === brandName;
+      const { top, height } = layoutSlotPercent(slot.time, range);
+      return (
+        <a
+          href="/contact"
+          class:list={[
+            "schedule-event",
+            isBrand ? "schedule-event--brand" : "schedule-event--open",
+          ]}
+          style={`top: ${pct(top)}; height: ${pct(height)}`}
+        >
+          <span class="schedule-event-title">{slot.class}</span>
+          <span class="schedule-event-time">{slot.time}</span>
+        </a>
+      );
+    })
+  }
+</div>

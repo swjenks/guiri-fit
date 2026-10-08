@@ -64,23 +64,23 @@ export const features = [
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&q=80",
   },
   {
-    title: "Group Classes",
+    title: "Private Group Classes",
     description:
-      "Train with other GuiriFit members in small groups of 4–8 people to help motivate and support each other.",
+      "Want to train with your friends and family? I offer private group classes for small groups of 2-4 people.",
     image:
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop&q=80",
   },
   {
-    title: "Outdoor Training",
+    title: "GuiriFit Group Classes",
     description:
-      "During the spring and autumn months I offer outdoor training at a local calisthenics park where you can get your daily dose of vitamin D and fresh air.",
+      "Train with other GuiriFit members in groups of 6-12 people to help motivate and support each other.",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&q=80",
   },
   {
-    title: "Bodyweight & Free Weight Focus",
+    title: "Online Coaching",
     description:
-      "Using bodyweight and free weights, I focus on functional strength training to improve your everyday life.",
+      "Want to train at your own pace and on your own schedule? I offer online coaching for those who prefer to train on their own.",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&q=80",
   },
@@ -258,29 +258,27 @@ export const faqs = [
   },
 ];
 
-const guiriFitSlotTimes = new Set(["9:00 AM", "10:00 AM", "4:00 PM", "5:00 PM"]);
-
-function createScheduleSlot(time: string) {
-  const isGuiriFit = guiriFitSlotTimes.has(time);
+function scheduleSlot(
+  time: string,
+  className: "GuiriFit" | "Open Availability",
+) {
   return {
     time,
-    class: isGuiriFit ? "GuiriFit" : "Open Availability",
-    type: isGuiriFit ? "Group Class" : "Personal Training",
+    class: className,
   };
 }
 
 const dailySchedule = [
-  "7:00 AM",
-  "8:00 AM",
-  "9:00 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "3:00 PM",
-  "4:00 PM",
-  "5:00 PM",
-  "6:00 PM",
-  "7:00 PM",
-].map(createScheduleSlot);
+  scheduleSlot("7:00–8:00 AM", "Open Availability"),
+  scheduleSlot("8:10–9:10 AM", "Open Availability"),
+  scheduleSlot("9:20–10:20 AM", "GuiriFit"),
+  scheduleSlot("10:30–11:30 AM", "GuiriFit"),
+  scheduleSlot("11:40 AM–12:40 PM", "Open Availability"),
+  scheduleSlot("3:00–4:00 PM", "Open Availability"),
+  scheduleSlot("4:10–5:10 PM", "GuiriFit"),
+  scheduleSlot("5:20–6:20 PM", "GuiriFit"),
+  scheduleSlot("6:30–7:30 PM", "Open Availability"),
+];
 
 export const classSchedule = dailySchedule;
 
@@ -315,10 +313,9 @@ export const successStories = [
 ];
 
 const saturdaySchedule = [
-  { time: "10:00 AM", class: "GuiriFit", type: "Group Class" },
-  { time: "11:00 AM", class: "GuiriFit", type: "Group Class" },
-  { time: "11:00 AM", class: "Open Availability", type: "Personal Training" },
-  { time: "12:00 PM", class: "Open Availability", type: "Personal Training" },
+  scheduleSlot("10:00–11:00 AM", "GuiriFit"),
+  scheduleSlot("11:10 AM–12:10 PM", "GuiriFit"),
+  scheduleSlot("12:20–1:20 PM", "GuiriFit"),
 ];
 
 export const fullSchedule = {

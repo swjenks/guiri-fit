@@ -1,5 +1,11 @@
 ---
-import { classSchedule, siteData } from "../data/siteData";
+import ScheduleCalendar from "./ScheduleCalendar.astro";
+import { classSchedule, fullSchedule, siteData } from "../data/siteData";
+
+const previewDays = [
+  { label: "Mon – Fri", slots: classSchedule },
+  { label: "Sat", slots: fullSchedule.saturday },
+];
 ---
 
 <section id="schedule" class="py-20 bg-bg-primary">
@@ -13,75 +19,8 @@ import { classSchedule, siteData } from "../data/siteData";
       </p>
     </div>
 
-    <div class="max-w-4xl mx-auto">
-      <div
-        class="bg-bg-secondary rounded-xl border border-border-primary overflow-hidden"
-      >
-        <div class="overflow-x-auto">
-          <table class="w-full">
-            <thead class="bg-bg-primary">
-              <tr>
-                <th
-                  class="px-6 py-4 text-left text-sm font-bold text-text-primary uppercase tracking-wider"
-                  >Time</th
-                >
-                <th
-                  class="px-6 py-4 text-left text-sm font-bold text-text-primary uppercase tracking-wider"
-                  >Class</th
-                >
-                <th
-                  class="px-6 py-4 text-left text-sm font-bold text-text-primary uppercase tracking-wider"
-                  >Type</th
-                >
-                <th
-                  class="px-6 py-4 text-left text-sm font-bold text-text-primary uppercase tracking-wider"
-                  >Action</th
-                >
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-border-primary">
-              {
-                classSchedule.map((schedule) => (
-                  <tr class="hover:bg-bg-tertiary/50 transition-colors">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="flex items-center gap-2">
-                        <i class="ri-time-line text-primary" />
-                        <span class="text-text-primary font-semibold">
-                          {schedule.time}
-                        </span>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4">
-                      <span
-                        class:list={[
-                          "font-medium",
-                          schedule.class === siteData.name
-                            ? "text-primary"
-                            : "text-text-primary",
-                        ]}
-                      >
-                        {schedule.class}
-                      </span>
-                    </td>
-                    <td class="px-6 py-4">
-                      <span class="text-text-tertiary">{schedule.type}</span>
-                    </td>
-                    <td class="px-6 py-4">
-                      <a
-                        href="/contact"
-                        class="text-primary hover:text-primary-light font-semibold flex items-center gap-2"
-                      >
-                        Book
-                        <i class="ri-arrow-right-line" />
-                      </a>
-                    </td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="max-w-5xl mx-auto">
+      <ScheduleCalendar days={previewDays} brandName={siteData.name} />
 
       <div class="text-center mt-8">
         <p class="text-text-tertiary mb-4">View the complete schedule</p>

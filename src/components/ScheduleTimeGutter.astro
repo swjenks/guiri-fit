@@ -1,0 +1,28 @@
+---
+import type { CalendarRange } from "../utils/classSchedule";
+import { formatMinutes, layoutMinutePercent } from "../utils/classSchedule";
+
+interface Props {
+  hourMarkers: number[];
+  range: CalendarRange;
+}
+
+const { hourMarkers, range } = Astro.props;
+
+function pct(value: number) {
+  return `${value}%`;
+}
+---
+
+<div class="schedule-time-gutter">
+  {
+    hourMarkers.map((minute) => (
+      <span
+        class="schedule-hour-label"
+        style={`top: ${pct(layoutMinutePercent(minute, range))}`}
+      >
+        {formatMinutes(minute)}
+      </span>
+    ))
+  }
+</div>

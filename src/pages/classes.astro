@@ -1,13 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { classes, siteData } from "@data/siteData";
-import {
-  findSlotsForTime,
-  getSortedScheduleTimes,
-  scheduleDays,
-} from "../utils/classSchedule";
+import ScheduleCalendar from "../components/ScheduleCalendar.astro";
+import { scheduleDays } from "../utils/classSchedule";
 
-const sortedScheduleTimes = getSortedScheduleTimes();
+const calendarDayLabels = [
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+  "Sun",
+];
+
+const calendarDays = scheduleDays.map((slots, index) => ({
+  label: calendarDayLabels[index],
+  slots,
+}));
 ---
 
 <Layout title={`Classes - ${siteData.name}`} description="Browse our wide range of fitness classes">
@@ -99,55 +109,8 @@ const sortedScheduleTimes = getSortedScheduleTimes();
       <p class="text-xl text-text-secondary mb-12 text-center max-w-2xl mx-auto">
         Plan your week with our complete class schedule
       </p>
-      <div class="bg-bg-secondary p-8 rounded-xl border border-border-primary overflow-x-auto">
-        <table class="w-full text-left min-w-[800px]">
-          <thead>
-            <tr class="border-b border-border-primary">
-              <th class="pb-4 pr-4 text-text-primary font-semibold">Time</th>
-              <th class="pb-4 px-4 text-text-primary font-semibold">Monday</th>
-              <th class="pb-4 px-4 text-text-primary font-semibold">Tuesday</th>
-              <th class="pb-4 px-4 text-text-primary font-semibold">Wednesday</th>
-              <th class="pb-4 px-4 text-text-primary font-semibold">Thursday</th>
-              <th class="pb-4 px-4 text-text-primary font-semibold">Friday</th>
-              <th class="pb-4 px-4 text-text-primary font-semibold">Saturday</th>
-              <th class="pb-4 px-4 text-text-primary font-semibold">Sunday</th>
-            </tr>
-          </thead>
-          <tbody class="text-text-secondary">
-            {sortedScheduleTimes.map((time) => (
-              <tr class="border-b border-border-primary/50 hover:bg-bg-tertiary/30 transition-colors">
-                <td class="py-3 pr-4 font-semibold text-text-primary">{time}</td>
-                {scheduleDays.map((daySchedule) => {
-                  const classSlots = findSlotsForTime(daySchedule, time);
-                  return (
-                    <td class="py-3 px-4 align-top">
-                      {classSlots.length > 0 ? (
-                        <div class="space-y-3">
-                          {classSlots.map((classSlot) => (
-                            <div>
-                              <div
-                                class:list={[
-                                  "font-medium",
-                                  classSlot.class === siteData.name &&
-                                    "text-primary",
-                                ]}
-                              >
-                                {classSlot.class}
-                              </div>
-                              <div class="text-xs text-text-tertiary">{classSlot.type}</div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <span class="text-text-muted/60">-</span>
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div class="p-4 sm:p-6">
+        <ScheduleCalendar days={calendarDays} brandName={siteData.name} />
         <p class="text-text-tertiary text-center mt-6 text-sm">
           * Schedule may vary. Please contact us for the most up-to-date class times or to book a spot.
         </p>

@@ -1,0 +1,38 @@
+---
+import { dayTabLetter, dayTabShort } from "../utils/classSchedule";
+
+interface CalendarDay {
+  label: string;
+}
+
+interface Props {
+  days: CalendarDay[];
+}
+
+const { days } = Astro.props;
+---
+
+<div class="schedule-day-toolbar">
+  <div class="schedule-day-tabs" role="tablist" aria-label="Schedule days">
+    {
+      days.map((day, index) => (
+        <button
+          type="button"
+          class="schedule-day-tab"
+          role="tab"
+          data-schedule-day-tab
+          data-index={index}
+          aria-selected={index === 0 ? "true" : "false"}
+          aria-label={day.label}
+        >
+          <span class="schedule-day-tab-letter">
+            {dayTabLetter(day.label, index, days.length)}
+          </span>
+          <span class="schedule-day-tab-short">
+            {dayTabShort(day.label, index, days.length)}
+          </span>
+        </button>
+      ))
+    }
+  </div>
+</div>
