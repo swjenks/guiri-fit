@@ -269,15 +269,13 @@ function scheduleSlot(
 }
 
 const dailySchedule = [
-  scheduleSlot("7:00–8:00 AM", "Open Availability"),
-  scheduleSlot("8:10–9:10 AM", "Open Availability"),
-  scheduleSlot("9:20–10:20 AM", "GuiriFit"),
-  scheduleSlot("10:30–11:30 AM", "GuiriFit"),
-  scheduleSlot("11:40 AM–12:40 PM", "Open Availability"),
-  scheduleSlot("3:00–4:00 PM", "Open Availability"),
-  scheduleSlot("4:10–5:10 PM", "GuiriFit"),
-  scheduleSlot("5:20–6:20 PM", "GuiriFit"),
-  scheduleSlot("6:30–7:30 PM", "Open Availability"),
+  scheduleSlot("7:00–8:50 AM", "Open Availability"),
+  scheduleSlot("9:00–10:00 AM", "GuiriFit"),
+  scheduleSlot("10:10–11:10 AM", "GuiriFit"),
+  scheduleSlot("1:30–4:20 PM", "Open Availability"),
+  scheduleSlot("4:30–5:30 PM", "GuiriFit"),
+  scheduleSlot("5:40–6:40 PM", "GuiriFit"),
+  scheduleSlot("6:50–8:00 PM", "Open Availability"),
 ];
 
 export const classSchedule = dailySchedule;
@@ -315,7 +313,7 @@ export const successStories = [
 const saturdaySchedule = [
   scheduleSlot("10:00–11:00 AM", "GuiriFit"),
   scheduleSlot("11:10 AM–12:10 PM", "GuiriFit"),
-  scheduleSlot("12:20–1:20 PM", "GuiriFit"),
+  scheduleSlot("12:20–2:30 PM", "Open Availability"),
 ];
 
 export const fullSchedule = {
