@@ -1,9 +1,11 @@
 ---
-import { navigation } from '../data/siteData';
-import BrandName from './BrandName.astro';
+import { navigation } from "../data/siteData";
+import BrandName from "./BrandName.astro";
 ---
 
-<header class="fixed flex items-center justify-center w-full z-50 bg-bg-primary/95 backdrop-blur-sm border-b border-border-primary">
+<header
+  class="fixed flex items-center justify-center w-full z-50 bg-bg-primary/95 backdrop-blur-sm border-b border-border-primary"
+>
   <nav class="max-w-5xl w-full px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between py-4">
       <!-- Logo -->
@@ -15,19 +17,21 @@ import BrandName from './BrandName.astro';
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex md:items-center md:justify-center md:gap-8">
-        {navigation.map((item) => (
-          <a
-            href={item.href}
-            class="text-text-secondary hover:text-primary transition-colors font-medium text-base py-2"
-          >
-            {item.name}
-          </a>
-        ))}
+        {
+          navigation.map((item) => (
+            <a
+              href={item.href}
+              class="text-text-secondary hover:text-primary transition-colors font-medium text-base py-2"
+            >
+              {item.name}
+            </a>
+          ))
+        }
         <a
           href="/contact"
           class="bg-primary hover:bg-primary-hover text-bg-primary rounded-lg font-semibold transition-all duration-200 inline-flex items-center justify-center gap-2 px-6 py-2.5"
         >
-          Join Now
+          Contact
           <i class="ri-arrow-right-line"></i>
         </a>
       </div>
@@ -44,23 +48,22 @@ import BrandName from './BrandName.astro';
     </div>
 
     <!-- Mobile Navigation -->
-    <div
-      id="mobile-menu"
-      class="hidden md:hidden pb-6 pt-2 space-y-2"
-    >
-      {navigation.map((item) => (
-        <a
-          href={item.href}
-          class="block px-4 py-3 text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors font-medium"
-        >
-          {item.name}
-        </a>
-      ))}
+    <div id="mobile-menu" class="hidden md:hidden pb-6 pt-2 space-y-2">
+      {
+        navigation.map((item) => (
+          <a
+            href={item.href}
+            class="block px-4 py-3 text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors font-medium"
+          >
+            {item.name}
+          </a>
+        ))
+      }
       <a
         href="/contact"
         class="flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-bg-primary rounded-lg text-center font-semibold transition-all duration-200 mt-2 shadow-md hover:shadow-lg"
       >
-        Join Now
+        Contact
         <i class="ri-arrow-right-line"></i>
       </a>
     </div>
@@ -68,15 +71,14 @@ import BrandName from './BrandName.astro';
 </header>
 
 <script>
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
 
-  mobileMenuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-    menuIcon?.classList.toggle('hidden');
-    closeIcon?.classList.toggle('hidden');
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+    menuIcon?.classList.toggle("hidden");
+    closeIcon?.classList.toggle("hidden");
   });
 </script>
-
