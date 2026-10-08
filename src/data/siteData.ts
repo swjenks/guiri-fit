@@ -320,15 +320,6 @@ export const successStories = [
   },
 ];
 
-export const statistics = [
-  { number: "500+", label: "Active Members", icon: "ri-user-line" },
-  { number: "50+", label: "Expert Trainers", icon: "ri-user-star-line" },
-  { number: "10k+", label: "Classes Completed", icon: "ri-calendar-check-line" },
-  { number: "5k+", label: "Pounds Lost", icon: "ri-line-chart-line" },
-  { number: "98%", label: "Satisfaction Rate", icon: "ri-heart-line" },
-  { number: "15+", label: "Years Experience", icon: "ri-award-line" },
-];
-
 const saturdaySchedule = [
   { time: "10:00 AM", class: "GuiriFit", type: "Group Class" },
   { time: "11:00 AM", class: "GuiriFit", type: "Group Class" },
