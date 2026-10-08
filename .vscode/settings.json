@@ -4,5 +4,11 @@
   "editor.detectIndentation": false,
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["tsconfig.json", "tsconfig.*.json"],
+      "url": ".vscode/schemas/tsconfig.schema.json"
+    }
+  ]
 }

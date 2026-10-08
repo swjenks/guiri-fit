@@ -58,33 +58,45 @@ export const navigation = [
 export const features = [
   {
     title: "Personal Training",
-    description: "Receive one-on-one training directly from Coach Shawn, specifically tailored to your goals and fitness level.",
-    icon: "ri-user-star-line",
+    description:
+      "Receive one-on-one training directly from Coach Shawn, specifically tailored to your goals and fitness level.",
+    image:
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&q=80",
   },
   {
     title: "Group Classes",
-    description: "Train with other GuiriFit members in a small groups of 4-8 people to help motivate and support each other.",
-    icon: "ri-group-line",
+    description:
+      "Train with other GuiriFit members in small groups of 4–8 people to help motivate and support each other.",
+    image:
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop&q=80",
   },
   {
     title: "Outdoor Training",
-    description: "During the spring and autumn months I offer outdoor training at a local calisthenics park where you can get your daily dose of vitamin D and fresh air.",
-    icon: "ri-sun-line",
+    description:
+      "During the spring and autumn months I offer outdoor training at a local calisthenics park where you can get your daily dose of vitamin D and fresh air.",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&q=80",
   },
   {
     title: "Bodyweight & Free Weight Focus",
-    description: "Using bodyweight and free weights, I focus on functional strength training to improve your everyday life.",
-    icon: "ri-weight-line",
+    description:
+      "Using bodyweight and free weights, I focus on functional strength training to improve your everyday life.",
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&q=80",
   },
   {
     title: "Nutrition Support",
-    description: "Get personalized nutrition plans to complement your workouts and help you achieve your goals.",
-    icon: "ri-restaurant-line",
+    description:
+      "Get personalized nutrition plans to complement your workouts and help you achieve your goals.",
+    image:
+      "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=600&fit=crop&q=80",
   },
   {
     title: "Community",
-    description: "Join a supportive community of fellow expats, guiris, and local fitness enthusiasts.",
-    icon: "ri-user-community-line",
+    description:
+      "Join a supportive community of fellow expats, guiris, and local fitness enthusiasts.",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&q=80",
   },
 ];
 
@@ -216,24 +228,6 @@ export const testimonials = [
     role: "Member for 6 months",
     content: "I love the variety of classes offered. The HIIT sessions are intense but so rewarding. Highly recommend!",
     rating: 5,
-  },
-];
-
-export const facilities = [
-  {
-    title: "Basic Fit - Plaza del Guitarrista Manuel Cano",
-    description: "Personal Training and small group classes with options for all forms of fitness.",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&q=80",
-  },
-  {
-    title: "Rio Genil - Outdoor Calisthenics Park",
-    description: "Outdoor training with a gorgeous view of the river and the mountains.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&q=80",
-  },
-  {
-    title: "In-House Training",
-    description: "Don't have time to go to the gym? I can come to your home and train you there.",
-    image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=600&fit=crop&q=80",
   },
 ];
 

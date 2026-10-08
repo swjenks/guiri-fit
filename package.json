@@ -6,20 +6,28 @@
   "engines": {
     "node": ">=22.12.0"
   },
-  "description": "A modern, responsive fitness gym website built with Astro 5.15.3 and Tailwind CSS 4.1. Features include hero section, class schedules, pricing plans, testimonials, FAQ, contact forms, and more. Perfect for gyms, fitness centers, and wellness businesses.",
+  "description": "A modern, responsive fitness gym website built with Astro and Tailwind CSS.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "sync": "astro sync"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.16",
-    "astro": "^7.0.4",
-    "remixicon": "^4.7.0",
-    "tailwindcss": "^4.1.16"
+    "@tailwindcss/vite": "4.1.16",
+    "astro": "7.3.7",
+    "remixicon": "^4.9.1",
+    "tailwindcss": "4.1.16"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/ts-plugin": "^1.10.12",
+    "@types/node": "^22.10.0",
     "typescript": "~5.8.3"
+  },
+  "overrides": {
+    "@astrojs/internal-helpers": "0.12.0"
   }
 }
