@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import { siteData } from "@data/siteData";
-import HeroImage from "@assets/photo-1534438327276-14e5300c3a48.jpg";
+import HeroBackgroundImage from "@assets/photo-1534438327276-14e5300c3a48.jpg";
+import HeroForegroundImage from "@assets/shawn.jpeg";
 import BrandName from "./BrandName.astro";
 
 const taglineClean = siteData.tagline.replace(/[,!]/g, "").trim();
@@ -15,10 +16,10 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
 <section
   class="relative flex min-h-screen items-center justify-center overflow-hidden pt-20"
 >
-  <!-- Background media (swap <Image /> for <video> when ready) -->
+  <!-- Full-bleed background (swap for <video> when ready) -->
   <div class="absolute inset-0" aria-hidden="true">
     <Image
-      src={HeroImage}
+      src={HeroBackgroundImage}
       alt=""
       width={1920}
       height={1080}
@@ -28,65 +29,89 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
     />
   </div>
 
-  <div
-    class="absolute inset-0 bg-bg-primary/80"
-    aria-hidden="true"
-  ></div>
+  <div class="absolute inset-0 bg-bg-primary/80" aria-hidden="true"></div>
 
   <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-3xl text-center">
-      <h1
-        class="hero-tagline font-bold text-text-primary mb-6 flex flex-col items-center w-full"
-      >
-        {
-          taglineLine1 && (
-            <span class="hero-tagline-line whitespace-nowrap">
-              {taglineLine1}
-            </span>
-          )
-        }
-        {
-          taglineLine2 && (
-            <span class="hero-tagline-line whitespace-nowrap">
-              {taglineLine2}
-            </span>
-          )
-        }
-        {
-          taglineClosingMatch ? (
-            <span class="hero-tagline-line whitespace-nowrap">
-              {taglineClosingMatch[1]}
-              <BrandName class="hero-tagline-brand text-primary" />
-            </span>
-          ) : (
-            taglineClosing && (
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <!-- Text content -->
+      <div class="text-center lg:text-left">
+        <h1
+          class="hero-tagline font-bold text-text-primary mb-6 flex flex-col items-center lg:items-start w-full"
+        >
+          {
+            taglineLine1 && (
               <span class="hero-tagline-line whitespace-nowrap">
-                {taglineClosing}
+                {taglineLine1}
               </span>
             )
-          )
-        }
-      </h1>
-      <p class="text-xl md:text-2xl text-text-secondary mb-8 leading-relaxed">
-        {siteData.description}
-      </p>
-      <div
-        class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center"
-      >
-        <a
-          href="/contact"
-          class="bg-primary hover:bg-primary-hover text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all transform inline-flex items-center justify-center gap-3"
+          }
+          {
+            taglineLine2 && (
+              <span class="hero-tagline-line whitespace-nowrap">
+                {taglineLine2}
+              </span>
+            )
+          }
+          {
+            taglineClosingMatch ? (
+              <span class="hero-tagline-line whitespace-nowrap">
+                {taglineClosingMatch[1]}
+                <BrandName class="hero-tagline-brand text-primary" />
+              </span>
+            ) : (
+              taglineClosing && (
+                <span class="hero-tagline-line whitespace-nowrap">
+                  {taglineClosing}
+                </span>
+              )
+            )
+          }
+        </h1>
+        <p class="text-xl md:text-2xl text-text-secondary mb-8 leading-relaxed">
+          {siteData.description}
+        </p>
+        <div
+          class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start"
         >
-          Start Your Journey
-          <i class="ri-arrow-right-line"></i>
-        </a>
-        <a
-          href="/about"
-          class="bg-transparent border-2 border-text-primary text-text-primary hover:bg-text-primary hover:text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-3"
+          <a
+            href="/contact"
+            class="bg-primary hover:bg-primary-hover text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all transform inline-flex items-center justify-center gap-3"
+          >
+            Start Your Journey
+            <i class="ri-arrow-right-line"></i>
+          </a>
+          <a
+            href="/about"
+            class="bg-transparent border-2 border-text-primary text-text-primary hover:bg-text-primary hover:text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-3"
+          >
+            Learn More
+            <i class="ri-information-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Foreground hero image with bottom banner -->
+      <div class="hidden lg:block">
+        <div
+          class="relative aspect-square overflow-hidden rounded-full border-2 border-border-primary bg-bg-secondary shadow-2xl"
         >
-          Learn More
-          <i class="ri-information-line"></i>
-        </a>
+            <Image
+              src={HeroForegroundImage}
+              alt="Fitness training with GuiriFit"
+              width={800}
+              height={800}
+              class="h-full w-full object-cover"
+              loading="eager"
+            />
+            <div class="hero-profile-banner absolute inset-x-0 bottom-0 bg-primary px-3 pb-5 pt-6 text-center">
+              <h4 class="text-sm font-bold leading-tight text-bg-primary">
+                Coach Shawn
+              </h4>
+              <p class="mt-0.5 text-xs font-medium leading-tight text-bg-primary/85">
+                Your Guiri Trainer
+              </p>
+            </div>
+        </div>
       </div>
     </div>
   </div>

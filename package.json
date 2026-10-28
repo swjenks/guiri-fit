@@ -17,17 +17,14 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "4.1.16",
-    "astro": "7.3.7",
+    "astro": "^7.4.3",
     "remixicon": "^4.9.1",
     "tailwindcss": "4.1.16"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "@astrojs/ts-plugin": "^1.10.12",
     "@types/node": "^22.10.0",
     "typescript": "~5.8.3"
-  },
-  "overrides": {
-    "@astrojs/internal-helpers": "0.12.0"
   }
 }

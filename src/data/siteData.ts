@@ -1,7 +1,7 @@
 export const siteData = {
   name: "GuiriFit",
   tagline: "Get healthy get strong get GuiriFit",
-  description: "Community focused HIIT-style classes and Personal Training for all ages, abilities, and fitness levels in Granada, Spain",
+  description: "Functional fitness classes and Personal Training for all ages, abilities, and skill levels in Granada, Spain",
   address: "Granada, Spain",
   phone: "+34 630 074 083",
   email: "info@guirifit.com",
@@ -48,8 +48,8 @@ export const contactInfo = [
 ];
 
 export const navigation = [
-  { name: "Home", href: "/" },
   { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
   { name: "Hours", href: "/hours" },
   { name: "Pricing", href: "/pricing" },
 ];
@@ -63,18 +63,18 @@ export const features = [
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&q=80",
   },
   {
-    title: "Private Group Classes",
+    title: "Group Training",
     description:
-      "Want to train with your friends and family? I offer private group classes for small groups of 2-4 people.",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop&q=80",
-  },
-  {
-    title: "GuiriFit Group Classes",
-    description:
-      "Train with other GuiriFit members in groups of 6-12 people to help motivate and support each other.",
+      "Want to train with your friends and family? I offer private classes for small groups of 2-4 people.",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&q=80",
+  },
+  {
+    title: "Outdoor Training (Seasonal)",
+    description:
+      "Train with other GuiriFit members, make new friends, and motivate each other to achieve your goals.",
+    image:
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop&q=80",
   },
   {
     title: "Online Coaching",

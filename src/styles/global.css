@@ -102,6 +102,12 @@ h6 {
   line-height: inherit;
 }
 
+/* LinkedIn-style open-to-work frame on hero portrait */
+.hero-profile-banner {
+  border-top-left-radius: 50% 1.75rem;
+  border-top-right-radius: 50% 1.75rem;
+}
+
 .font-body {
   font-family: var(--font-family-body);
 }
