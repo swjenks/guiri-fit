@@ -1,20 +1,164 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
+import FAQ from "../components/FAQ.astro";
+import CoachPhoto from "@assets/shawn.jpeg";
+import eptiLogo from "@assets/cert-logos/epti.png";
+import crossfitLogo from "@assets/cert-logos/crossfit.svg";
+import nasmLogo from "@assets/cert-logos/nasm.png";
 import { siteData, trainers, history } from "../data/siteData";
+
+const coach = trainers[0]!;
+
+const instituteLogos = {
+  epti: eptiLogo,
+  crossfit: crossfitLogo,
+  nasm: nasmLogo,
+} as const;
+
+type InstituteLogoKey = keyof typeof instituteLogos;
 ---
 
 <Layout
-  title={`About Us - ${siteData.name}`}
-  description="Learn about our mission, values, and expert trainers"
+  title={`About - ${siteData.name}`}
+  description="Meet Coach Shawn and learn about the mission behind GuiriFit"
 >
+  <section
+    class="pt-32 pb-20 bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
+          About
+        </h1>
+        <p class="text-xl text-text-secondary">
+          Get to know your Guiri Coach
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <div
+            class="relative mx-auto max-w-md overflow-hidden rounded-2xl border-2 border-border-primary bg-bg-secondary shadow-2xl lg:mx-0"
+          >
+            <Image
+              src={CoachPhoto}
+              alt={`${coach.name} - ${coach.role}`}
+              width={600}
+              height={750}
+              class="aspect-[4/5] w-full object-cover"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-3">
+            {coach.name}
+          </h2>
+          <p class="text-xl font-semibold text-primary mb-2">{coach.role}</p>
+          <p class="text-text-tertiary mb-4">{coach.specialization}</p>
+          <p class="mb-8 inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-primary/60 px-4 py-2 text-sm text-text-secondary">
+            <i class="ri-medal-line text-primary" aria-hidden="true"></i>
+            {coach.experience}
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed mb-8">
+            {coach.bio}
+          </p>
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div>
+              <h2
+                class="text-sm font-semibold uppercase tracking-wide text-text-primary mb-4"
+              >
+                Certifications
+              </h2>
+              <div
+                class="rounded-xl border border-border-primary bg-bg-primary/60 px-5 py-4 h-full"
+              >
+                <div class="mb-3 flex items-center gap-3">
+                  <Image
+                    src={
+                      instituteLogos[
+                        coach.certifications.logo as InstituteLogoKey
+                      ]
+                    }
+                    alt=""
+                    width={158}
+                    height={32}
+                    class="h-8 w-auto max-w-[5.5rem] shrink-0 object-contain object-left"
+                  />
+                  <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
+                    {coach.certifications.institute}
+                  </p>
+                </div>
+                <ul class="space-y-1.5 pl-1">
+                  {
+                    coach.certifications.credentials.map((credential) => (
+                      <li class="flex items-start gap-2 text-sm text-text-secondary">
+                        <span
+                          class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary"
+                          aria-hidden="true"
+                        />
+                        {credential}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <h2
+                class="text-sm font-semibold uppercase tracking-wide text-text-primary mb-4"
+              >
+                Next Up
+              </h2>
+              <div class="flex h-full flex-col gap-4">
+                {
+                  coach.currentlyStudying.map((program) => (
+                    <div class="rounded-xl border border-border-primary bg-bg-primary/60 px-5 py-4">
+                      <div class="mb-3 flex items-center gap-3">
+                        <Image
+                          src={
+                            instituteLogos[program.logo as InstituteLogoKey]
+                          }
+                          alt=""
+                          width={158}
+                          height={32}
+                          class="h-8 w-auto max-w-[5.5rem] shrink-0 object-contain object-left"
+                        />
+                        <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
+                          {program.institute}
+                        </p>
+                      </div>
+                      <ul class="space-y-1.5 pl-1">
+                        {program.credentials.map((credential) => (
+                          <li class="flex items-start gap-2 text-sm text-text-secondary">
+                            <span
+                              class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary"
+                              aria-hidden="true"
+                            />
+                            {credential}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Mission Section -->
-  <section class="pt-32 pb-20 bg-bg-secondary">
+  <section class="py-20 bg-bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <h1 class="sr-only">About {siteData.name}</h1>
         <h2 class="text-4xl font-bold text-text-primary mb-8 text-center">
-          Our Mission
+          My Mission
         </h2>
         <div class="prose prose-invert max-w-none">
           <p class="text-xl text-text-secondary mb-6">
@@ -37,7 +181,7 @@ import { siteData, trainers, history } from "../data/siteData";
   <section class="py-20 bg-bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
-        Our Values
+        My Values
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         <div
@@ -88,7 +232,7 @@ import { siteData, trainers, history } from "../data/siteData";
   <section class="py-20 bg-bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
-        Our Journey
+        My Journey
       </h2>
       <div class="max-w-4xl mx-auto">
         <div class="relative">
@@ -131,67 +275,5 @@ import { siteData, trainers, history } from "../data/siteData";
     </div>
   </section>
 
-  <!-- Team Section -->
-  <section class="py-20 bg-bg-secondary">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-text-primary mb-4 text-center">
-        Expert Trainers
-      </h2>
-      <p
-        class="text-xl text-text-secondary mb-12 text-center max-w-2xl mx-auto"
-      >
-        Meet our certified professionals dedicated to your success
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-8">
-        {
-          trainers.map((trainer, index) => {
-            let className = "";
-            if (index + 1 == 4) {
-              className = "lg:col-start-2";
-            } else if (index + 1 == 5) {
-              className = "md:col-start-2 lg:col-start-4";
-            }
-            return (
-              <div
-                class={`bg-bg-primary p-8 rounded-xl border border-border-primary hover:border-border-accent transition-all transform hover:scale-105 md:col-span-2 ${className}`}
-              >
-                <div class="text-center mb-6">
-                  <div class="w-40 h-40 rounded-full mx-auto mb-4 overflow-hidden border-4 border-border-accent/20">
-                    <Image
-                      src={trainer.image}
-                      alt={`${trainer.name} - ${trainer.role}`}
-                      width={400}
-                      height={400}
-                      class="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h3 class="text-xl font-bold text-text-primary mb-2">
-                    {trainer.name}
-                  </h3>
-                  <p class="text-primary mb-1 font-semibold">{trainer.role}</p>
-                  <p class="text-text-tertiary text-sm mb-3">
-                    {trainer.specialization}
-                  </p>
-                  <p class="text-text-muted text-xs">
-                    {trainer.experience} experience
-                  </p>
-                </div>
-                <p class="text-text-secondary text-sm leading-relaxed mb-4 text-center">
-                  {trainer.bio}
-                </p>
-                <div class="flex flex-wrap gap-2 justify-center">
-                  {trainer.certifications.map((cert) => (
-                    <span class="bg-bg-secondary text-text-secondary text-xs px-3 py-1 rounded-full border border-border-primary">
-                      {cert}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            );
-          })
-        }
-      </div>
-    </div>
-  </section>
+  <FAQ />
 </Layout>

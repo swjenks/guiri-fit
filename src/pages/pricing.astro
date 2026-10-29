@@ -8,23 +8,22 @@ import { siteData, pricingPlans, paymentOptions } from "../data/siteData";
   title={`Pricing - ${siteData.name}`}
   description="Choose the perfect membership plan for your fitness journey"
 >
-  <!-- Hero Section -->
   <section
     class="pt-32 pb-20 bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
         <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
-          Membership Plans
+          Pricing
         </h1>
         <p class="text-xl text-text-secondary">
           Flexible pricing options to fit your lifestyle and fitness goals
         </p>
       </div>
+
+      <PricingPlans embedded />
     </div>
   </section>
-
-  <PricingPlans showHeading={false} />
 
   <!-- Comparison Table Section -->
   <section class="py-20 bg-bg-secondary">

@@ -3,22 +3,70 @@ import { pricingPlans } from '../data/siteData';
 
 interface Props {
   showHeading?: boolean;
+  /** Render only the plan grid (no outer section wrapper) */
+  embedded?: boolean;
 }
 
-const { showHeading = true } = Astro.props;
+const { showHeading = true, embedded = false } = Astro.props;
 ---
 
-<section id="pricing" class="py-20 bg-bg-secondary">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {showHeading && (
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">Membership Plans</h2>
-        <p class="text-xl text-text-secondary max-w-2xl mx-auto">
-          Choose the plan that fits your fitness journey
-        </p>
-      </div>
-    )}
+{
+  embedded ? (
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {pricingPlans.map((plan) => (
+        <div
+          class={`bg-bg-primary p-8 rounded-xl border-2 ${
+            plan.popular
+              ? "border-border-accent transform scale-105 shadow-lg shadow-border-accent/20"
+              : "border-border-primary"
+          } hover:border-border-accent transition-all`}
+        >
+          {plan.popular && (
+            <div class="bg-primary text-bg-primary text-sm font-bold px-4 py-1 rounded-full inline-block mb-4">
+              Most Popular
+            </div>
+          )}
+          <h3 class="text-xl font-bold text-text-primary mb-2">{plan.name}</h3>
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-text-primary">{plan.price}</span>
+            <span class="text-text-tertiary">{plan.period}</span>
+          </div>
+          <ul class="space-y-4 mb-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-start text-text-secondary gap-3">
+                <i class="ri-checkbox-circle-fill text-primary text-xl shrink-0 mt-0.5" />
+                <span class="leading-relaxed">{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="/contact"
+            class={`w-full px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-3 ${
+              plan.popular
+                ? "bg-primary hover:bg-primary-hover text-bg-primary"
+                : "bg-bg-secondary hover:bg-bg-tertiary text-text-primary border border-border-primary"
+            }`}
+          >
+            Get Started
+            <i class="ri-arrow-right-line" />
+          </a>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <section id="pricing" class="py-20 bg-bg-secondary">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {showHeading && (
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">
+              Membership Plans
+            </h2>
+            <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+              Choose the plan that fits your fitness journey
+            </p>
+          </div>
+        )}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {pricingPlans.map((plan) => (
         <div
           class={`bg-bg-primary p-8 rounded-xl border-2 ${
@@ -58,7 +106,8 @@ const { showHeading = true } = Astro.props;
           </a>
         </div>
       ))}
-    </div>
-  </div>
-</section>
-
+        </div>
+      </div>
+    </section>
+  )
+}

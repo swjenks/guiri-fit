@@ -24,7 +24,24 @@ import { faqs } from "../data/siteData";
               <i class="faq-icon ri-arrow-down-s-line text-2xl text-primary transition-transform shrink-0" />
             </summary>
             <div class="px-6 pb-6">
-              <p class="text-text-secondary leading-relaxed">{faq.answer}</p>
+              <p class="text-text-secondary leading-relaxed whitespace-pre-line">
+                {
+                  faq.answerLink ? (
+                    <>
+                      {faq.answer.split(faq.answerLink.label)[0]}
+                      <a
+                        href={faq.answerLink.href}
+                        class="font-medium text-primary hover:text-primary-hover underline-offset-2 hover:underline"
+                      >
+                        {faq.answerLink.label}
+                      </a>
+                      {faq.answer.split(faq.answerLink.label)[1] ?? ""}
+                    </>
+                  ) : (
+                    faq.answer
+                  )
+                }
+              </p>
             </div>
           </details>
         ))
