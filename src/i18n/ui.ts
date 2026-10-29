@@ -28,7 +28,6 @@ export type UiStrings = {
   contactFormWhatsAppPlaceholder: string;
   contactFormMessagePlaceholder: string;
   heroCoachName: string;
-  heroCoachRole: string;
   pricingTable: {
     package: string;
     total: string;
@@ -78,7 +77,6 @@ const en: UiStrings = {
   contactFormWhatsAppPlaceholder: "+34 600 000 000",
   contactFormMessagePlaceholder: "Tell me about your fitness goals…",
   heroCoachName: "Coach Shawn",
-  heroCoachRole: "Your Guiri Trainer",
   pricingTable: {
     package: "Package",
     total: "Total",
@@ -128,7 +126,6 @@ const es: UiStrings = {
   contactFormWhatsAppPlaceholder: "+34 600 000 000",
   contactFormMessagePlaceholder: "Cuéntame tus objetivos fitness…",
   heroCoachName: "Coach Shawn",
-  heroCoachRole: "Tu entrenador Guiri",
   pricingTable: {
     package: "Paquete",
     total: "Total",
