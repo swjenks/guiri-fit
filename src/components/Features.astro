@@ -37,10 +37,10 @@ const classByName = new Map(classes.map((item) => [item.name, item]));
           return (
             <article
               class:list={[
-                "group flex flex-col bg-bg-primary rounded-xl overflow-hidden border border-border-primary transition-all",
+                "group flex flex-col overflow-hidden rounded-xl border border-border-primary bg-bg-primary",
                 comingSoon
                   ? "service-coming-soon border-border-primary/80"
-                  : "hover:border-border-accent transform hover:scale-105",
+                  : "card-interactive",
               ]}
             >
               {comingSoon && (

@@ -23,7 +23,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
   description="Meet Coach Shawn and learn about the mission behind GuiriFit"
 >
   <section
-    class="pt-32 pb-20 bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary"
+    class="page-hero-bg"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
@@ -45,7 +45,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
               alt={`${coach.name} - ${coach.role}`}
               width={600}
               height={750}
-              class="aspect-[4/5] w-full object-cover"
+              class="hero-profile-parallelogram w-full object-cover"
               loading="eager"
             />
           </div>
@@ -84,7 +84,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
                     alt=""
                     width={158}
                     height={32}
-                    class="h-8 w-auto max-w-[5.5rem] shrink-0 object-contain object-left"
+                    class="h-8 w-auto max-w-22 shrink-0 object-contain object-left"
                   />
                   <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
                     {coach.certifications.institute}
@@ -124,7 +124,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
                           alt=""
                           width={158}
                           height={32}
-                          class="h-8 w-auto max-w-[5.5rem] shrink-0 object-contain object-left"
+                          class="h-8 w-auto max-w-22 shrink-0 object-contain object-left"
                         />
                         <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
                           {program.institute}
@@ -276,7 +276,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
 
           <div class="space-y-12">
             {
-              history.map((milestone, index) => (
+              history.map((milestone) => (
                 <div class="relative flex items-start gap-6">
                   <div class="hidden md:block shrink-0">
                     <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center border-4 border-bg-primary">

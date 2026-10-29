@@ -184,7 +184,7 @@ export function isServiceComingSoon(slug: string): boolean {
 
 export function serviceCta(
   slug: string,
-  variant: "home" | "detail",
+  _variant?: "home" | "detail",
 ): { label: string; href: string; external: boolean } {
   if (slug === "community") {
     return {

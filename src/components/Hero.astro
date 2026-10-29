@@ -35,9 +35,7 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
       <!-- Text content -->
       <div class="text-center lg:text-left">
-        <h1
-          class="hero-tagline font-bold text-text-primary mb-6 flex flex-col items-center lg:items-start w-full"
-        >
+        <h1 class="hero-tagline mb-6 font-bold text-text-primary">
           {
             taglineLine1 && (
               <span class="hero-tagline-line whitespace-nowrap">
@@ -94,7 +92,7 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
       <!-- Foreground hero image with parallelogram name banner -->
       <div class="hidden lg:block px-3 py-2">
         <div
-          class="group hero-profile-parallelogram relative mx-auto aspect-[4/5] w-full max-w-md -skew-x-10 overflow-hidden rounded-xl border border-border-primary bg-bg-secondary shadow-2xl transition-all transform hover:scale-105 hover:border-border-accent"
+          class="group hero-profile-parallelogram card-interactive relative mx-auto w-full max-w-md -skew-x-10 overflow-hidden rounded-xl border border-border-primary bg-bg-secondary shadow-2xl"
         >
           <div class="absolute inset-0 skew-x-10 origin-center scale-[1.14]">
             <Image

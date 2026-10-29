@@ -14,7 +14,7 @@ import {
   description="Personal training, group classes, and fitness services in Granada"
 >
   <section
-    class="pt-32 pb-20 bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary"
+    class="page-hero-bg"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
@@ -36,10 +36,10 @@ import {
             <div
               id={`service-${classItem.slug}`}
               class:list={[
-                "scroll-mt-28 overflow-hidden rounded-xl border border-border-primary bg-bg-primary transition-all",
+                "scroll-mt-28 overflow-hidden rounded-xl border border-border-primary bg-bg-primary",
                 comingSoon
                   ? "service-coming-soon"
-                  : "transform hover:scale-105 hover:border-border-accent",
+                  : "card-interactive",
               ]}
             >
               {comingSoon && (

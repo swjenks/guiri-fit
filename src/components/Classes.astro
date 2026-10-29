@@ -13,7 +13,7 @@ import { classes } from '../data/siteData';
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {classes.map((classItem) => (
-        <div class="bg-bg-secondary p-8 rounded-xl border border-border-primary hover:border-border-accent transition-all transform hover:scale-105">
+        <div class="card-interactive bg-bg-secondary p-8 rounded-xl border border-border-primary">
           <div class="flex justify-between items-start mb-6">
             <h3 class="text-xl font-bold text-text-primary">{classItem.name}</h3>
             <span class="bg-primary text-bg-primary text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
@@ -41,7 +41,7 @@ import { classes } from '../data/siteData';
     <div class="text-center mt-16">
       <a
         href="/services"
-        class="inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
+        class="btn-interactive inline-flex items-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary hover:bg-primary-hover"
       >
         View Services
         <i class="ri-arrow-right-line"></i>
