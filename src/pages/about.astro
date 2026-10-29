@@ -5,6 +5,7 @@ import CoachPhoto from "@assets/shawn.jpeg";
 import eptiLogo from "@assets/cert-logos/epti.png";
 import crossfitLogo from "@assets/cert-logos/crossfit.svg";
 import nasmLogo from "@assets/cert-logos/nasm.png";
+import AboutCertifications from "../components/AboutCertifications.astro";
 import type { Locale } from "../i18n/config";
 import { getSiteContent } from "../data/getSiteContent";
 
@@ -20,7 +21,6 @@ const instituteLogos = {
   nasm: nasmLogo,
 } as const;
 
-type InstituteLogoKey = keyof typeof instituteLogos;
 ---
 
 <Layout
@@ -59,99 +59,31 @@ type InstituteLogoKey = keyof typeof instituteLogos;
             {coach.name}
           </h2>
           <p class="text-xl font-semibold text-primary mb-2">{coach.role}</p>
-          <p class="text-text-tertiary mb-4">{coach.specialization}</p>
+          <p class="text-text-tertiary mb-4">
+            {copy.specializedIn} {coach.specialization}
+          </p>
           <p class="coach-experience-badge mb-8">
             <i class="ri-medal-line text-primary" aria-hidden="true"></i>
             {coach.experience}
           </p>
-          <p class="text-lg text-text-secondary leading-relaxed mb-8">
+          <p class="text-lg text-text-secondary leading-relaxed">
             {coach.bio}
           </p>
-          <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div>
-              <h2
-                class="text-sm font-semibold uppercase tracking-wide text-text-primary mb-4"
-              >
-                Certifications
-              </h2>
-              <div class="space-y-3">
-                <div class="flex items-center gap-3">
-                  <Image
-                    src={
-                      instituteLogos[
-                        coach.certifications.logo as InstituteLogoKey
-                      ]
-                    }
-                    alt=""
-                    width={158}
-                    height={32}
-                    class="h-8 w-auto max-w-22 shrink-0 object-contain object-left"
-                  />
-                  <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
-                    {coach.certifications.institute}
-                  </p>
-                </div>
-                <ul class="space-y-1.5">
-                  {
-                    coach.certifications.credentials.map((credential) => (
-                      <li class="flex items-start gap-2 text-sm text-text-secondary">
-                        <span
-                          class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary"
-                          aria-hidden="true"
-                        />
-                        {credential}
-                      </li>
-                    ))
-                  }
-                </ul>
-              </div>
-            </div>
-
-            <div>
-              <h2
-                class="text-sm font-semibold uppercase tracking-wide text-text-primary mb-4"
-              >
-                Next Up
-              </h2>
-              <div class="flex flex-col gap-8">
-                {
-                  coach.currentlyStudying.map((program) => (
-                    <div class="space-y-3">
-                      <div class="flex items-center gap-3">
-                        <Image
-                          src={
-                            instituteLogos[program.logo as InstituteLogoKey]
-                          }
-                          alt=""
-                          width={158}
-                          height={32}
-                          class="h-8 w-auto max-w-22 shrink-0 object-contain object-left"
-                        />
-                        <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
-                          {program.institute}
-                        </p>
-                      </div>
-                      <ul class="space-y-1.5">
-                        {program.credentials.map((credential) => (
-                          <li class="flex items-start gap-2 text-sm text-text-secondary">
-                            <span
-                              class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary"
-                              aria-hidden="true"
-                            />
-                            {credential}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <AboutCertifications
+    issuers={coach.certificationIssuers}
+    title={copy.certificationsTitle}
+    institutionLabel={copy.certificationsInstitution}
+    certificationLabel={copy.certificationsCertification}
+    statusLabel={copy.certificationsStatus}
+    certifiedLabel={copy.certificationCertified}
+    inProgressLabel={copy.certificationInProgress}
+    logos={instituteLogos}
+  />
 
   <!-- Mission Section -->
   <section class="py-20 bg-bg-primary">

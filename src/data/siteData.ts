@@ -374,6 +374,21 @@ const springFallWeekdays = [
 
 export const outdoorFullSchedule = buildWeekSchedule(springFallWeekdays);
 
+export type CertificationLogoKey = "epti" | "crossfit" | "nasm";
+
+export type TrainerCertification = {
+  name: string;
+  inProgress?: boolean;
+};
+
+export type TrainerCertificationIssuer = {
+  institute: string;
+  /** Compact label in the institution column on small screens (e.g. EPTI, NASM). */
+  institutionShort: string;
+  logo: CertificationLogoKey;
+  certifications: TrainerCertification[];
+};
+
 export const trainers = [
   {
     name: "Shawn Jenkins",
@@ -382,31 +397,34 @@ export const trainers = [
     experience: "25+ years of fitness experience",
     bio: "I am a newly certified gym coach and personal trainer specialized in helping people of all ages and fitness levels achieve their goals. I have spent my entire life training in multiple forms of fitness, including HIIT, HYROX, CrossFit, Calisthenics, TRX, Kettlebells, Circuit Training, Distance Running, Muay Thai Kickboxing, and Yoga. I am also currently working towards my nutrition certification.",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&q=80",
-    certifications: {
-      institute: "European Personal Training Institute (EPTI)",
-      logo: "epti",
-      credentials: [
-        "Master Gym Instructor",
-        "Master Personal Trainer",
-        "Kettlebell Trainer",
-        "Suspension (TRX) Trainer",
-        "Circuit Trainer",
-        "Padwork & Boxing Trainer",
-        "Outdoor Trainer",
-      ],
-    },
-    currentlyStudying: [
+    certificationIssuers: [
+      {
+        institute: "European Personal Training Institute (EPTI)",
+        institutionShort: "EPTI",
+        logo: "epti",
+        certifications: [
+          { name: "Master Gym Instructor" },
+          { name: "Master Personal Trainer" },
+          { name: "Kettlebell Trainer" },
+          { name: "Suspension (TRX) Trainer" },
+          { name: "Circuit Trainer" },
+          { name: "Padwork & Boxing Trainer" },
+          { name: "Outdoor Trainer" },
+        ],
+      },
       {
         institute: "CrossFit",
+        institutionShort: "CrossFit",
         logo: "crossfit",
-        credentials: ["Level 1 Instructor"],
+        certifications: [{ name: "Level 1 Instructor", inProgress: true }],
       },
       {
         institute: "National Academy of Sports Medicine (NASM)",
+        institutionShort: "NASM",
         logo: "nasm",
-        credentials: ["Nutrition Coach"],
+        certifications: [{ name: "Nutrition Coach", inProgress: true }],
       },
-    ],
+    ] satisfies TrainerCertificationIssuer[],
   },
 ];
 

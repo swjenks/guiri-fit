@@ -34,6 +34,18 @@
   @apply inline-flex items-center gap-2 rounded-full border border-primary/35 bg-primary/10 px-4 py-2 text-sm text-text-secondary;
 }
 
+.cert-status-badge {
+  @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide;
+}
+
+.cert-status-badge--certified {
+  @apply border-border-primary/50 bg-bg-secondary text-text-secondary;
+}
+
+.cert-status-badge--progress {
+  @apply border-primary/35 bg-primary/10 text-text-secondary;
+}
+
 @utility hero-profile-parallelogram {
   aspect-ratio: 4 / 5;
 }
@@ -394,84 +406,112 @@ html[data-outdoor-schedule="inactive"]
   @apply max-w-xs text-lg font-bold leading-snug text-text-primary sm:text-xl;
 }
 
-/* Pricing package tables (shared desktop + compact) */
-.pricing-packages-shell {
+/* Site data tables (pricing, certifications, nutrition) */
+.site-table-shell {
   @apply min-w-0 overflow-hidden;
 }
 
-.pricing-packages-table {
-  @apply w-full min-w-[640px] table-fixed;
+.site-table-card {
+  @apply min-w-0 overflow-hidden bg-bg-primary rounded-xl border border-border-primary;
 }
 
-.pricing-packages-table th,
-.pricing-packages-table td {
+.site-table {
+  @apply w-full;
+}
+
+.site-table th,
+.site-table td {
   @apply px-4 py-4 sm:px-6;
 }
 
-.pricing-packages-table tbody td:first-child {
-  @apply font-medium text-text-primary;
+.site-table thead th {
+  @apply text-sm font-semibold text-text-primary sm:text-base;
 }
 
-.pricing-packages-table .pricing-packages-table__total {
-  @apply text-right;
-}
-
-.pricing-packages-table tbody tr.pricing-packages-table__row,
-.pricing-compact-table tbody tr.pricing-packages-table__row,
-.pricing-nutrition-table tbody tr.pricing-packages-table__row {
-  @apply transition-colors duration-150;
-}
-
-.pricing-packages-table tbody tr.pricing-packages-table__row:hover td,
-.pricing-compact-table tbody tr.pricing-packages-table__row:hover td,
-.pricing-nutrition-table tbody tr.pricing-packages-table__row:hover td {
-  @apply bg-bg-secondary;
-}
-
-.pricing-packages-table__total-value {
-  @apply font-bold text-primary tabular-nums transition-colors duration-150;
-}
-
-.pricing-packages-table
-  tbody
-  tr.pricing-packages-table__row:hover
-  .pricing-packages-table__total-value,
-.pricing-compact-table
-  tbody
-  tr.pricing-packages-table__row:hover
-  .pricing-packages-table__total-value,
-.pricing-nutrition-table
-  tbody
-  tr.pricing-packages-table__row:hover
-  .pricing-packages-table__total-value {
-  @apply text-border-accent;
-}
-
-.pricing-nutrition-table th,
-.pricing-nutrition-table td {
-  @apply px-4 py-4 align-top sm:px-6;
-}
-
-.pricing-nutrition-table thead th,
-.pricing-packages-table thead th {
-  @apply font-semibold text-text-primary;
-}
-
-.pricing-nutrition-table tbody,
-.pricing-packages-table tbody {
+.site-table tbody {
   @apply text-text-secondary;
 }
 
-.pricing-nutrition-table__service {
+.site-table--wide {
+  @apply min-w-[640px] table-fixed;
+}
+
+.site-table--auto {
+  @apply table-auto;
+}
+
+.site-table--cells-top td {
+  @apply align-top;
+}
+
+.site-table--wide tbody td:first-child {
+  @apply font-medium text-text-primary;
+}
+
+.site-table tbody tr.site-table__row,
+.pricing-compact-table tbody tr.site-table__row {
+  @apply transition-colors duration-150;
+}
+
+.site-table tbody tr.site-table__row:hover td,
+.pricing-compact-table tbody tr.site-table__row:hover td {
+  @apply bg-bg-secondary;
+}
+
+.site-table__total {
+  @apply text-right;
+}
+
+.site-table__total-value {
+  @apply font-bold text-primary tabular-nums transition-colors duration-150;
+}
+
+.site-table tbody tr.site-table__row:hover .site-table__total-value {
+  @apply text-border-accent;
+}
+
+.site-table__col-institution {
+  @apply md:min-w-40 md:w-40;
+}
+
+.site-table__col-fit {
+  @apply w-0 whitespace-nowrap;
+}
+
+.site-table__institution-cell {
+  @apply w-0 whitespace-nowrap align-middle pr-3 sm:pr-4 md:min-w-40 md:w-40;
+}
+
+.site-table__institution-acronym {
+  @apply text-sm font-semibold text-text-primary md:hidden;
+}
+
+.site-table__status-cell {
+  @apply w-0 whitespace-nowrap align-middle pl-2 text-left sm:pl-4;
+}
+
+.site-table__fill-cell {
+  @apply min-w-0 font-medium text-text-primary;
+}
+
+.site-table__service-col {
   @apply w-[26%] min-w-30 font-medium text-text-primary;
 }
 
-.pricing-nutrition-table__included {
+.site-table__included-col {
   @apply text-sm leading-relaxed;
 }
 
-.pricing-nutrition-table__price {
+.site-table__price-col {
   @apply w-22 whitespace-nowrap text-right;
+}
+
+.cert-institution-logo {
+  @apply box-border inline-flex h-10 w-40 shrink-0 items-center justify-center rounded-lg border border-border-primary/40 bg-white px-3 py-2;
+}
+
+.cert-institution-logo__img {
+  @apply h-7 w-full max-w-full object-contain object-center;
 }
 
 /* Pricing tables: compact layout with swappable center column */

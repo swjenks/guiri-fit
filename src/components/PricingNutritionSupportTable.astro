@@ -23,14 +23,14 @@ const rowBorder = (index: number, length: number) =>
   <div class="flex flex-col gap-8">
     <div class="min-w-0">
       <div
-        class="pricing-packages-shell bg-bg-primary rounded-xl border border-border-primary min-w-0 overflow-x-auto"
+        class="site-table-card min-w-0 overflow-x-auto"
       >
-        <table class="pricing-nutrition-table w-full min-w-[520px]">
+        <table class="site-table site-table--auto site-table--cells-top min-w-[520px]">
           <thead>
             <tr class="border-b border-border-primary">
               <th class="text-left">{table.service}</th>
               <th class="text-left">{table.whatsIncluded}</th>
-              <th class="pricing-nutrition-table__price">{table.price}</th>
+              <th class="site-table__price-col">{table.price}</th>
             </tr>
           </thead>
           <tbody>
@@ -38,16 +38,16 @@ const rowBorder = (index: number, length: number) =>
               rows.map((row, index) => (
                 <tr
                   class:list={[
-                    "pricing-packages-table__row",
+                    "site-table__row",
                     rowBorder(index, rows.length),
                   ]}
                 >
-                  <td class="pricing-nutrition-table__service">{row.service}</td>
-                  <td class="pricing-nutrition-table__included">
+                  <td class="site-table__service-col">{row.service}</td>
+                  <td class="site-table__included-col">
                     {row.whatsIncluded}
                   </td>
-                  <td class="pricing-nutrition-table__price">
-                    <span class="pricing-packages-table__total-value">
+                  <td class="site-table__price-col">
+                    <span class="site-table__total-value">
                       {row.price}
                     </span>
                   </td>

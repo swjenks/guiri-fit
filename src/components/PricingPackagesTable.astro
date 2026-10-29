@@ -17,12 +17,12 @@ const { rows, tableId, totalColumnLabel = table.total } = Astro.props;
 const rowBorder = (index: number, length: number) =>
   index < length - 1 ? "border-b border-border-primary/50" : "";
 
-const rowClass = "pricing-packages-table__row";
+const rowClass = "site-table__row";
 ---
 
 <div class="min-w-0" data-pricing-packages-root>
   <div
-    class="pricing-packages-shell bg-bg-primary rounded-xl border border-border-primary"
+    class="site-table-card"
   >
     <!-- Compact: fixed package + total, swappable center metric -->
     <div class="p-3 sm:p-4" data-pricing-compact hidden>
@@ -115,7 +115,7 @@ const rowClass = "pricing-packages-table__row";
                     </span>
                   </td>
                   <td class="pricing-compact-edge pricing-compact-edge--end px-2 py-3 text-right text-sm sm:px-3">
-                    <span class="pricing-packages-table__total-value">
+                    <span class="site-table__total-value">
                       {row.total}
                     </span>
                   </td>
@@ -129,7 +129,7 @@ const rowClass = "pricing-packages-table__row";
 
     <!-- Desktop: full table -->
     <div class="min-w-0 overflow-x-auto" data-pricing-desktop>
-      <table class="pricing-packages-table">
+      <table class="site-table site-table--wide">
         <colgroup>
           <col style="width: 30%" />
           <col style="width: 17%" />
@@ -143,7 +143,7 @@ const rowClass = "pricing-packages-table__row";
             <th class="text-center">{table.sessionsPerMonth}</th>
             <th class="text-center">{table.effectivePerSession}</th>
             <th class="text-center">{table.discount}</th>
-            <th class="pricing-packages-table__total">{totalColumnLabel}</th>
+            <th class="site-table__total">{totalColumnLabel}</th>
           </tr>
         </thead>
         <tbody>
@@ -156,8 +156,8 @@ const rowClass = "pricing-packages-table__row";
                   {row.effectivePerSession}
                 </td>
                 <td class="text-center">{row.discount ?? "—"}</td>
-                <td class="pricing-packages-table__total">
-                  <span class="pricing-packages-table__total-value">
+                <td class="site-table__total">
+                  <span class="site-table__total-value">
                     {row.total}
                   </span>
                 </td>

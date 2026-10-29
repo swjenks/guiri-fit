@@ -1,4 +1,4 @@
-import { siteData as enSiteData } from "../siteData";
+import { siteData as enSiteData, type TrainerCertificationIssuer } from "../siteData";
 
 /** Spanish overrides for user-facing copy (schedules & prices stay shared). */
 export const spanishContent = {
@@ -314,31 +314,36 @@ export const spanishContent = {
       bio: "Entrenador personal recién certificado, especializado en ayudar a personas de todas las edades y niveles. He entrenado HIIT, HYROX, CrossFit, calistenia, TRX, kettlebells, circuitos, running, kickboxing muay thai y yoga. Actualmente completo la certificación en nutrición.",
       image:
         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&q=80",
-      certifications: {
-        institute: "European Personal Training Institute (EPTI)",
-        logo: "epti",
-        credentials: [
-          "Master Gym Instructor",
-          "Master Personal Trainer",
-          "Kettlebell Trainer",
-          "Suspension (TRX) Trainer",
-          "Circuit Trainer",
-          "Padwork & Boxing Trainer",
-          "Outdoor Trainer",
-        ],
-      },
-      currentlyStudying: [
+      certificationIssuers: [
+        {
+          institute: "European Personal Training Institute (EPTI)",
+          institutionShort: "EPTI",
+          logo: "epti",
+          certifications: [
+            { name: "Master Gym Instructor" },
+            { name: "Master Personal Trainer" },
+            { name: "Kettlebell Trainer" },
+            { name: "Suspension (TRX) Trainer" },
+            { name: "Circuit Trainer" },
+            { name: "Padwork & Boxing Trainer" },
+            { name: "Outdoor Trainer" },
+          ],
+        },
         {
           institute: "CrossFit",
+          institutionShort: "CrossFit",
           logo: "crossfit",
-          credentials: ["Level 1 Instructor"],
+          certifications: [
+            { name: "Level 1 Instructor", inProgress: true },
+          ],
         },
         {
           institute: "National Academy of Sports Medicine (NASM)",
+          institutionShort: "NASM",
           logo: "nasm",
-          credentials: ["Nutrition Coach"],
+          certifications: [{ name: "Nutrition Coach", inProgress: true }],
         },
-      ],
+      ] satisfies TrainerCertificationIssuer[],
     },
   ],
   history: [

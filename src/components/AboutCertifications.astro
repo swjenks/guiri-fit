@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type {
+  CertificationLogoKey,
+  TrainerCertificationIssuer,
+} from "../data/siteData";
+
+interface Props {
+  issuers: TrainerCertificationIssuer[];
+  title: string;
+  institutionLabel: string;
+  certificationLabel: string;
+  statusLabel: string;
+  certifiedLabel: string;
+  inProgressLabel: string;
+  logos: Record<CertificationLogoKey, ImageMetadata>;
+}
+
+const {
+  issuers,
+  title,
+  institutionLabel,
+  certificationLabel,
+  statusLabel,
+  certifiedLabel,
+  inProgressLabel,
+  logos,
+} = Astro.props;
+
+const rows = issuers.flatMap((issuer) =>
+  issuer.certifications.map((cert) => ({
+    logo: issuer.logo,
+    institute: issuer.institute,
+    institutionShort: issuer.institutionShort,
+    name: cert.name,
+    inProgress: Boolean(cert.inProgress),
+  })),
+);
+
+const rowClass = "site-table__row";
+
+const rowBorder = (index: number) =>
+  index < rows.length - 1 ? "border-b border-border-primary/50" : "";
+---
+
+<section class="py-20 bg-bg-secondary">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
+      {title}
+    </h2>
+
+    <div class="max-w-5xl mx-auto min-w-0">
+      <div
+        class="site-table-card"
+      >
+        <table class="site-table site-table--auto">
+          <thead>
+            <tr class="border-b border-border-primary">
+              <th class="site-table__col-institution text-left">
+                {institutionLabel}
+              </th>
+              <th class="text-left">{certificationLabel}</th>
+              <th class="site-table__col-fit text-left">{statusLabel}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((row, index) => (
+                <tr class:list={[rowClass, rowBorder(index)]}>
+                  <td class="site-table__institution-cell">
+                    <span class="site-table__institution-acronym">
+                      {row.institutionShort}
+                    </span>
+                    <span class="cert-institution-logo hidden md:inline-flex">
+                      <Image
+                        src={logos[row.logo]}
+                        alt={row.institute}
+                        width={158}
+                        height={32}
+                        class="cert-institution-logo__img"
+                      />
+                    </span>
+                    <span class="sr-only md:hidden">{row.institute}</span>
+                  </td>
+                  <td class="site-table__fill-cell">{row.name}</td>
+                  <td class="site-table__status-cell">
+                    {row.inProgress ? (
+                      <span class="cert-status-badge cert-status-badge--progress">
+                        {inProgressLabel}
+                      </span>
+                    ) : (
+                      <span class="cert-status-badge cert-status-badge--certified">
+                        {certifiedLabel}
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

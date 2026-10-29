@@ -38,6 +38,7 @@ const en = {
     metaDescription: "Meet Coach Shawn and learn about the mission behind GUIRIFIT",
     heroTitle: "About Me",
     heroSubtitle: "Get to know your Guiri Coach",
+    specializedIn: "Specialized in",
     missionTitle: "My Mission",
     missionBody:
       "I provide expert guidance and a supportive environment that empowers everyone that trains with me to push their limits and achieve extraordinary results.",
@@ -57,7 +58,12 @@ const en = {
       },
     ],
     journeyTitle: "My Journey",
-    currentlyStudying: "Currently studying",
+    certificationsTitle: "Certifications",
+    certificationsInstitution: "Institution",
+    certificationsCertification: "Certification",
+    certificationsStatus: "Status",
+    certificationCertified: "Certified",
+    certificationInProgress: "In Progress",
   },
   contact: {
     metaDescription: "Get in touch with us to start your fitness journey",
@@ -141,6 +147,7 @@ const es: PageCopy = {
       "Conoce a Coach Shawn y la misión detrás de GUIRIFIT",
     heroTitle: "Sobre mí",
     heroSubtitle: "Conoce a tu entrenador Guiri",
+    specializedIn: "Especializado en",
     missionTitle: "Mi misión",
     missionBody:
       "Ofrezco orientación experta y un entorno de apoyo para que quien entrena conmigo supere sus límites y logre resultados extraordinarios.",
@@ -160,7 +167,12 @@ const es: PageCopy = {
       },
     ],
     journeyTitle: "Mi trayectoria",
-    currentlyStudying: "Formación en curso",
+    certificationsTitle: "Certificaciones",
+    certificationsInstitution: "Institución",
+    certificationsCertification: "Certificación",
+    certificationsStatus: "Estado",
+    certificationCertified: "Certificado",
+    certificationInProgress: "En progreso",
   },
   contact: {
     metaDescription: "Ponte en contacto y empieza tu camino fitness",
