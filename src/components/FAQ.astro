@@ -46,7 +46,7 @@ const {
               <h3 class="text-xl font-bold text-text-primary pr-4">
                 {faq.question}
               </h3>
-              <i class="faq-icon ri-arrow-down-s-line text-2xl text-primary transition-transform shrink-0" aria-hidden="true" />
+              <i class="faq-icon ri-arrow-down-s-line text-2xl text-primary shrink-0" aria-hidden="true" />
             </summary>
             <div class="px-6 pb-6">
               <p class="text-text-secondary leading-relaxed whitespace-pre-line">
@@ -95,7 +95,22 @@ const {
     display: none;
   }
 
+  .faq-icon {
+    display: inline-block;
+    transition: transform 0.2s ease-out;
+  }
+
   details[open] .faq-icon {
     transform: rotate(180deg);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .faq-item:not([open]) summary:hover .faq-icon {
+      transform: translateY(0.25rem);
+    }
+
+    .faq-item[open] summary:hover .faq-icon {
+      transform: rotate(180deg) translateY(-0.25rem);
+    }
   }
 </style>

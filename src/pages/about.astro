@@ -217,7 +217,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {
           copy.values.map((value, index) => (
-            <div class="bg-bg-secondary p-8 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all">
+            <div class="card-interactive bg-bg-secondary p-8 rounded-xl border border-border-primary text-center">
               <div class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
                 <i
                   class={`${(["ri-heart-pulse-line", "ri-run-line", "ri-hand-heart-line"] as const)[index]} text-4xl text-primary`}
@@ -259,7 +259,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
                       </span>
                     </div>
                   </div>
-                  <div class="flex-1 bg-bg-secondary p-6 rounded-xl border border-border-primary hover:border-border-accent transition-all">
+                  <div class="card-interactive flex-1 bg-bg-secondary p-6 rounded-xl border border-border-primary">
                     <div class="md:hidden mb-2">
                       <span class="bg-primary text-bg-primary px-3 py-1 rounded-full text-sm font-bold">
                         {milestone.year}
