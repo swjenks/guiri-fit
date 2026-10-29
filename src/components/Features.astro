@@ -1,5 +1,11 @@
 ---
-import { classes, features, serviceCta } from "../data/siteData";
+import {
+  classes,
+  features,
+  isServiceComingSoon,
+  serviceComingSoonMessage,
+  serviceCta,
+} from "../data/siteData";
 
 /** Match home “What I Offer” cards to Services page entries */
 function featureClassName(title: string) {
@@ -26,16 +32,40 @@ const classByName = new Map(classes.map((item) => [item.name, item]));
           const service = classByName.get(featureClassName(feature.title));
           const href = service ? `/services#service-${service.slug}` : "/services";
           const cta = service ? serviceCta(service.slug, "home") : serviceCta("", "home");
+          const comingSoon = service ? isServiceComingSoon(service.slug) : false;
 
           return (
-            <article class="group flex flex-col bg-bg-primary rounded-xl overflow-hidden border border-border-primary hover:border-border-accent transition-all transform hover:scale-105">
+            <article
+              class:list={[
+                "group flex flex-col bg-bg-primary rounded-xl overflow-hidden border border-border-primary transition-all",
+                comingSoon
+                  ? "service-coming-soon border-border-primary/80"
+                  : "hover:border-border-accent transform hover:scale-105",
+              ]}
+            >
+              {comingSoon && (
+                <div class="service-coming-soon__overlay">
+                  <p class="service-coming-soon__label">
+                    {serviceComingSoonMessage}
+                  </p>
+                </div>
+              )}
+              <div
+                class:list={[
+                  "relative flex flex-1 flex-col",
+                  comingSoon && "service-coming-soon__content",
+                ]}
+              >
               <div class="relative h-64 overflow-hidden">
                 <img
                   src={feature.image}
                   alt={feature.title}
                   width={800}
                   height={600}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  class:list={[
+                    "w-full h-full object-cover transition-transform duration-500",
+                    !comingSoon && "group-hover:scale-110",
+                  ]}
                   loading="lazy"
                 />
                 <div class="absolute inset-0 bg-linear-to-t from-bg-primary/80 to-transparent" />
@@ -46,47 +76,37 @@ const classByName = new Map(classes.map((item) => [item.name, item]));
                 </div>
               </div>
               <div class="flex flex-1 flex-col p-6">
-                {
-                  service && (
-                    <div class="mb-4 flex items-center justify-between gap-3">
-                      <span class="bg-primary text-bg-primary text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
-                        {service.difficulty}
-                      </span>
-                      <div class="flex items-center text-text-muted gap-2 text-sm">
-                        <i class="ri-time-line text-primary" aria-hidden="true" />
-                        <span>{service.duration}</span>
-                      </div>
-                    </div>
-                  )
-                }
                 <p class="text-text-tertiary leading-relaxed mb-6">
                   {feature.description}
                 </p>
-                <div class="mt-auto flex items-center justify-between gap-4">
-                  <a
-                    href={href}
-                    class="text-primary hover:text-primary-light font-semibold"
-                  >
-                    More
-                  </a>
-                  <a
-                    href={cta.href}
-                    class="text-primary hover:text-primary-light font-semibold inline-flex items-center gap-2 text-right"
-                    {...(cta.external
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
-                    {cta.label}
-                    <i
-                      class={
-                        service?.slug === "community"
-                          ? "ri-whatsapp-line"
-                          : "ri-arrow-right-line"
-                      }
-                      aria-hidden="true"
-                    />
-                  </a>
-                </div>
+                {!comingSoon && (
+                  <div class="mt-auto flex items-center justify-between gap-4">
+                    <a
+                      href={href}
+                      class="text-primary hover:text-primary-light font-semibold"
+                    >
+                      More
+                    </a>
+                    <a
+                      href={cta.href}
+                      class="text-primary hover:text-primary-light font-semibold inline-flex items-center gap-2 text-right"
+                      {...(cta.external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      {cta.label}
+                      <i
+                        class={
+                          service?.slug === "community"
+                            ? "ri-whatsapp-line"
+                            : "ri-arrow-right-line"
+                        }
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                )}
+              </div>
               </div>
             </article>
           );

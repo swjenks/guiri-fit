@@ -1,7 +1,12 @@
 ---
+import FAQ from "../components/FAQ.astro";
 import Layout from "../layouts/Layout.astro";
-import PricingPlans from "../components/PricingPlans.astro";
-import { siteData, pricingPlans, paymentOptions } from "../data/siteData";
+import PricingServiceCategories from "../components/PricingServiceCategories.astro";
+import PricingGroupTrainingTables from "../components/PricingGroupTrainingTables.astro";
+import PricingNutritionSupportTable from "../components/PricingNutritionSupportTable.astro";
+import PricingOutdoorTrainingTable from "../components/PricingOutdoorTrainingTable.astro";
+import PricingTrainingPackagesTable from "../components/PricingTrainingPackagesTable.astro";
+import { paymentOptions, pricingFaqs, siteData } from "../data/siteData";
 ---
 
 <Layout
@@ -21,133 +26,11 @@ import { siteData, pricingPlans, paymentOptions } from "../data/siteData";
         </p>
       </div>
 
-      <PricingPlans embedded />
-    </div>
-  </section>
-
-  <!-- Comparison Table Section -->
-  <section class="py-20 bg-bg-secondary">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-text-primary mb-4 text-center">
-        Plan Comparison
-      </h2>
-      <p
-        class="text-xl text-text-secondary mb-12 text-center max-w-2xl mx-auto"
-      >
-        Compare features across all membership plans
-      </p>
-      <div
-        class="bg-bg-primary rounded-xl border border-border-primary overflow-x-auto"
-      >
-        <table class="w-full min-w-[600px]">
-          <thead>
-            <tr class="border-b border-border-primary">
-              <th class="px-6 py-4 text-left text-text-primary font-semibold"
-                >Features</th
-              >
-              {
-                pricingPlans.map((plan) => (
-                  <th class="px-6 py-4 text-center text-text-primary font-semibold">
-                    {plan.name}
-                    {plan.popular && (
-                      <span class="block text-primary text-sm font-normal mt-1">
-                        Most Popular
-                      </span>
-                    )}
-                  </th>
-                ))
-              }
-            </tr>
-          </thead>
-          <tbody class="text-text-secondary">
-            <tr class="border-b border-border-primary/50">
-              <td class="px-6 py-4 font-medium">Gym Access</td>
-              {
-                pricingPlans.map(() => (
-                  <td class="px-6 py-4 text-center">
-                    <i class="ri-checkbox-circle-fill text-primary text-xl" />
-                  </td>
-                ))
-              }
-            </tr>
-            <tr class="border-b border-border-primary/50">
-              <td class="px-6 py-4 font-medium">24/7 Access</td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-close-circle-line text-text-muted/60 text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-checkbox-circle-fill text-primary text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-checkbox-circle-fill text-primary text-xl"></i>
-              </td>
-            </tr>
-            <tr class="border-b border-border-primary/50">
-              <td class="px-6 py-4 font-medium">Group Classes</td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-close-circle-line text-text-muted/60 text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-checkbox-circle-fill text-primary text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-checkbox-circle-fill text-primary text-xl"></i>
-              </td>
-            </tr>
-            <tr class="border-b border-border-primary/50">
-              <td class="px-6 py-4 font-medium">Personal Trainer</td>
-              <td class="px-6 py-4 text-center">
-                <span class="text-text-tertiary text-sm">Consultation only</span
-                >
-              </td>
-              <td class="px-6 py-4 text-center">
-                <span class="text-text-tertiary text-sm"
-                  >Consultation included</span
-                >
-              </td>
-              <td class="px-6 py-4 text-center">
-                <span class="text-primary font-semibold">Unlimited</span>
-              </td>
-            </tr>
-            <tr class="border-b border-border-primary/50">
-              <td class="px-6 py-4 font-medium">Nutrition Guidance</td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-close-circle-line text-text-muted/60 text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-checkbox-circle-fill text-primary text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <span class="text-primary font-semibold">Custom Plans</span>
-              </td>
-            </tr>
-            <tr class="border-b border-border-primary/50">
-              <td class="px-6 py-4 font-medium">Spa & Recovery</td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-close-circle-line text-text-muted/60 text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-close-circle-line text-text-muted/60 text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-checkbox-circle-fill text-primary text-xl"></i>
-              </td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 font-medium">Priority Booking</td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-close-circle-line text-text-muted/60 text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-close-circle-line text-text-muted/60 text-xl"></i>
-              </td>
-              <td class="px-6 py-4 text-center">
-                <i class="ri-checkbox-circle-fill text-primary text-xl"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <PricingTrainingPackagesTable />
+      <PricingGroupTrainingTables />
+      <PricingOutdoorTrainingTable />
+      <PricingNutritionSupportTable />
+      <PricingServiceCategories categories={paymentOptions.categories} />
     </div>
   </section>
 
@@ -157,33 +40,9 @@ import { siteData, pricingPlans, paymentOptions } from "../data/siteData";
       <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
         Payment Options
       </h2>
-      <div class="space-y-16 max-w-5xl mx-auto mb-12">
-        {
-          paymentOptions.categories.map((category) => (
-            <div>
-              <h3 class="text-2xl md:text-3xl font-bold text-text-primary mb-8 text-center">
-                {category.title}
-              </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.plans.map((plan) => (
-                  <div class="bg-bg-secondary p-6 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all">
-                    <h4 class="text-xl font-bold text-text-primary mb-3">
-                      {plan.type}
-                    </h4>
-                    <p class="text-text-secondary leading-relaxed">
-                      {plan.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))
-        }
-      </div>
-
       <div class="max-w-4xl mx-auto">
         <div
-          class="bg-bg-secondary p-8 rounded-xl border border-border-primary mb-8"
+          class="bg-bg-primary p-8 rounded-xl border border-border-primary mb-8"
         >
           <h3 class="text-2xl font-bold text-text-primary mb-6 text-center">
             Accepted Payment Methods
@@ -191,7 +50,7 @@ import { siteData, pricingPlans, paymentOptions } from "../data/siteData";
           <div class="flex flex-wrap justify-center gap-4">
             {
               paymentOptions.methods.map((method) => (
-                <div class="bg-bg-primary px-6 py-3 rounded-lg border border-border-primary">
+                <div class="bg-bg-secondary px-6 py-3 rounded-lg border border-border-primary">
                   <span class="text-text-secondary font-medium">{method}</span>
                 </div>
               ))
@@ -203,89 +62,36 @@ import { siteData, pricingPlans, paymentOptions } from "../data/siteData";
           <div
             class="bg-primary/10 border border-border-accent/30 p-6 rounded-xl text-center"
           >
-            <i class="ri-shield-check-line text-4xl text-primary mb-4"></i>
+            <i class="ri-group-line text-4xl text-primary mb-4"></i>
             <h4 class="text-xl font-bold text-text-primary mb-2">
-              Money-Back Guarantee
+              {paymentOptions.freeSeasonalClass.title}
             </h4>
-            <p class="text-text-secondary">{paymentOptions.guarantee}</p>
+            <p class="text-text-secondary">
+              {paymentOptions.freeSeasonalClass.description}
+            </p>
           </div>
           <div
             class="bg-primary/10 border border-border-accent/30 p-6 rounded-xl text-center"
           >
             <i class="ri-gift-line text-4xl text-primary mb-4"></i>
-            <h4 class="text-xl font-bold text-text-primary mb-2">Free Trial</h4>
-            <p class="text-text-secondary">{paymentOptions.trial}</p>
+            <h4 class="text-xl font-bold text-text-primary mb-2">
+              {paymentOptions.freeConsultation.title}
+            </h4>
+            <p class="text-text-secondary">
+              {paymentOptions.freeConsultation.description}
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="py-20 bg-bg-primary">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
-        Frequently Asked Questions
-      </h2>
-      <div class="max-w-3xl mx-auto space-y-6">
-        <div
-          class="bg-bg-secondary p-6 rounded-xl border border-border-primary hover:border-border-accent transition-all"
-        >
-          <h3
-            class="text-xl font-bold text-text-primary mb-3 flex items-center gap-2"
-          >
-            <i class="ri-question-line text-primary"></i>
-            Can I cancel my membership anytime?
-          </h3>
-          <p class="text-text-tertiary leading-relaxed">
-            Yes, you can cancel your membership at any time with 30 days notice.
-            No long-term contracts required.
-          </p>
-        </div>
-        <div
-          class="bg-bg-secondary p-6 rounded-xl border border-border-primary hover:border-border-accent transition-all"
-        >
-          <h3
-            class="text-xl font-bold text-text-primary mb-3 flex items-center gap-2"
-          >
-            <i class="ri-question-line text-primary"></i>
-            Do you offer trial periods?
-          </h3>
-          <p class="text-text-tertiary leading-relaxed">
-            Yes! We offer a 7-day free trial for new members. Come in and
-            experience everything we have to offer.
-          </p>
-        </div>
-        <div
-          class="bg-bg-secondary p-6 rounded-xl border border-border-primary hover:border-border-accent transition-all"
-        >
-          <h3
-            class="text-xl font-bold text-text-primary mb-3 flex items-center gap-2"
-          >
-            <i class="ri-question-line text-primary"></i>
-            Are personal training sessions included?
-          </h3>
-          <p class="text-text-tertiary leading-relaxed">
-            Personal training sessions are included in Premium and Elite plans.
-            Basic members can purchase sessions separately.
-          </p>
-        </div>
-        <div
-          class="bg-bg-secondary p-6 rounded-xl border border-border-primary hover:border-border-accent transition-all"
-        >
-          <h3
-            class="text-xl font-bold text-text-primary mb-3 flex items-center gap-2"
-          >
-            <i class="ri-question-line text-primary"></i>
-            What payment methods do you accept?
-          </h3>
-          <p class="text-text-tertiary leading-relaxed">
-            We accept {paymentOptions.methods.slice(0, -1).join(", ")}, and {paymentOptions.methods.at(-1)}.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <FAQ
+    id="payment-questions"
+    items={pricingFaqs}
+    title="Common Payment Questions"
+    showFooter={false}
+  />
 
   <!-- CTA Section -->
   <section class="py-20 bg-linear-to-r from-primary to-primary-dark">

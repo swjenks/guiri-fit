@@ -1,0 +1,70 @@
+---
+import { nutritionSupportPackages } from "../data/siteData";
+
+const { subtitle, footnote, disclaimer, rows } = nutritionSupportPackages;
+
+const rowBorder = (index: number, length: number) =>
+  index < length - 1 ? "border-b border-border-primary/50" : "";
+---
+
+<div class="max-w-6xl mx-auto mb-16">
+  <div class="text-center mb-10">
+    <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-3">
+      Nutrition Support
+    </h2>
+    <p class="text-lg md:text-xl text-text-secondary">{subtitle}</p>
+  </div>
+
+  <div class="flex flex-col gap-8">
+    <div class="min-w-0">
+      <div
+        class="pricing-packages-shell bg-bg-primary rounded-xl border border-border-primary min-w-0 overflow-x-auto"
+      >
+        <table class="pricing-nutrition-table w-full min-w-[520px]">
+          <thead>
+            <tr class="border-b border-border-primary">
+              <th class="text-left">Service</th>
+              <th class="text-left">What's Included</th>
+              <th class="pricing-nutrition-table__price">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((row, index) => (
+                <tr class:list={["pricing-packages-table__row", rowBorder(index, rows.length)]}>
+                  <td class="pricing-nutrition-table__service">{row.service}</td>
+                  <td class="pricing-nutrition-table__included">
+                    {row.whatsIncluded}
+                  </td>
+                  <td class="pricing-nutrition-table__price">
+                    <span class="pricing-packages-table__total-value">
+                      {row.price}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-4 text-sm text-text-tertiary leading-relaxed">{footnote}</p>
+
+      <p
+        class="mt-4 text-xs text-text-tertiary leading-relaxed border border-border-primary/60 rounded-lg bg-bg-secondary/40 p-4 sm:p-5"
+      >
+        {disclaimer}
+      </p>
+    </div>
+
+    <div class="flex justify-center">
+      <a
+        href="/contact"
+        class="inline-flex min-w-[14rem] items-center justify-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary transition-all hover:bg-primary-hover"
+      >
+        Get Started
+        <i class="ri-arrow-right-line" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,170 @@
+---
+import type { TrainingPackageRow } from "../data/siteData";
+
+interface Props {
+  rows: TrainingPackageRow[];
+  tableId: string;
+  totalColumnLabel?: string;
+}
+
+const { rows, tableId, totalColumnLabel = "Total" } = Astro.props;
+
+const rowBorder = (index: number, length: number) =>
+  index < length - 1 ? "border-b border-border-primary/50" : "";
+
+const rowClass = "pricing-packages-table__row";
+---
+
+<div class="min-w-0" data-pricing-packages-root>
+  <div
+    class="pricing-packages-shell bg-bg-primary rounded-xl border border-border-primary"
+  >
+    <!-- Compact: fixed package + total, swappable center metric -->
+    <div class="p-3 sm:p-4" data-pricing-compact hidden>
+      <div
+        class="pricing-metric-tabs"
+        role="tablist"
+        aria-label={`Pricing details for ${tableId}`}
+      >
+        <button
+          type="button"
+          role="tab"
+          class="pricing-metric-tab is-active"
+          data-pricing-metric-tab="sessions"
+          aria-selected="true"
+        >
+          <span class="pricing-metric-tab-long">Sessions/Month</span>
+          <span class="pricing-metric-tab-short">Sessions</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="pricing-metric-tab"
+          data-pricing-metric-tab="effective"
+          aria-selected="false"
+        >
+          <span class="pricing-metric-tab-long">Effective €/session</span>
+          <span class="pricing-metric-tab-short">€/session</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="pricing-metric-tab"
+          data-pricing-metric-tab="discount"
+          aria-selected="false"
+        >
+          Discount
+        </button>
+      </div>
+
+      <div class="pricing-compact-table-wrap mt-3">
+        <table class="pricing-compact-table w-full table-fixed text-text-secondary">
+          <colgroup>
+            <col class="w-[38%]" />
+            <col class="w-[34%]" />
+            <col class="w-[28%]" />
+          </colgroup>
+          <thead>
+            <tr class="border-b border-border-primary">
+              <th
+                class="pricing-compact-edge pricing-compact-edge--start px-2 py-3 text-left text-sm font-semibold text-text-primary sm:px-3"
+              >
+                Package
+              </th>
+              <th
+                class="px-2 py-3 text-center text-sm font-semibold text-text-primary sm:px-3"
+                data-pricing-metric-header
+              >
+                Sessions/Month
+              </th>
+              <th
+                class="pricing-compact-edge pricing-compact-edge--end px-2 py-3 text-right text-sm font-semibold text-text-primary sm:px-3"
+              >
+                {totalColumnLabel}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((row, index) => (
+                <tr class:list={[rowClass, rowBorder(index, rows.length)]}>
+                  <td class="pricing-compact-edge pricing-compact-edge--start px-2 py-3 text-sm font-medium text-text-primary sm:px-3">
+                    {row.package}
+                  </td>
+                  <td class="px-2 py-3 text-center text-sm sm:px-3">
+                    <span
+                      class="tabular-nums"
+                      data-pricing-metric-value="sessions"
+                    >
+                      {row.sessionsPerMonth}
+                    </span>
+                    <span
+                      class="tabular-nums"
+                      data-pricing-metric-value="effective"
+                      hidden
+                    >
+                      {row.effectivePerSession}
+                    </span>
+                    <span data-pricing-metric-value="discount" hidden>
+                      {row.discount ?? "—"}
+                    </span>
+                  </td>
+                  <td class="pricing-compact-edge pricing-compact-edge--end px-2 py-3 text-right text-sm sm:px-3">
+                    <span class="pricing-packages-table__total-value">
+                      {row.total}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Desktop: full table -->
+    <div class="min-w-0 overflow-x-auto" data-pricing-desktop>
+      <table class="pricing-packages-table">
+        <colgroup>
+          <col style="width: 30%" />
+          <col style="width: 17%" />
+          <col style="width: 22%" />
+          <col style="width: 15%" />
+          <col style="width: 16%" />
+        </colgroup>
+        <thead>
+          <tr class="border-b border-border-primary">
+            <th class="text-left">Package</th>
+            <th class="text-center">Sessions/Month</th>
+            <th class="text-center">Effective €/session</th>
+            <th class="text-center">Discount</th>
+            <th class="pricing-packages-table__total">{totalColumnLabel}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row, index) => (
+              <tr class:list={[rowClass, rowBorder(index, rows.length)]}>
+                <td>{row.package}</td>
+                <td class="text-center tabular-nums">{row.sessionsPerMonth}</td>
+                <td class="text-center tabular-nums">
+                  {row.effectivePerSession}
+                </td>
+                <td class="text-center">{row.discount ?? "—"}</td>
+                <td class="pricing-packages-table__total">
+                  <span class="pricing-packages-table__total-value">
+                    {row.total}
+                  </span>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  import "../scripts/pricing-packages-table.ts";
+</script>

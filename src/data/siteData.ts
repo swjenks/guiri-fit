@@ -171,6 +171,14 @@ export const classes = [
   },
 ];
 
+export const serviceComingSoonMessage = "Online Options Coming Soon";
+
+const serviceComingSoonSlugs = new Set(["online-coaching"]);
+
+export function isServiceComingSoon(slug: string): boolean {
+  return serviceComingSoonSlugs.has(slug);
+}
+
 export function serviceCta(
   slug: string,
   variant: "home" | "detail",
@@ -438,57 +446,348 @@ export type PaymentPlanOption = {
 export type PaymentPlanCategory = {
   title: string;
   plans: PaymentPlanOption[];
+  /** When set, plans are shown greyed with an overlay note (e.g. pricing TBD). */
+  comingSoonNote?: string;
+};
+
+export type TrainingPackageRow = {
+  package: string;
+  sessionsPerMonth: number | string;
+  effectivePerSession: string;
+  discount?: string;
+  total: string;
+};
+
+export type NutritionServiceRow = {
+  service: string;
+  whatsIncluded: string;
+  price: string;
+};
+
+export const nutritionSupportPackages = {
+  subtitle:
+    "One-time educational consultation • Not medical nutrition advice",
+  footnote:
+    "Standalone follow-ups only available to clients who completed the core review.",
+  disclaimer:
+    "This is an educational service provided by a certified fitness professional with 25+ years of experience in training and nutrition fundamentals. I am not a licensed dietitian or clinical nutritionist (dietista-nutricionista). Recommendations are general guidelines for healthy adults and are not intended to diagnose, treat, or manage medical conditions. Clients with diabetes, kidney disease, cardiovascular conditions, eating disorders, or pregnancy should consult a qualified healthcare provider or registered dietitian before making dietary changes. Results vary and depend on individual adherence.",
+  rows: [
+    {
+      service: "Eating Habits Review",
+      whatsIncluded:
+        "60 min session: habit audit, food-label education, body metrics & BMI, personalised adjustments based on tastes",
+      price: "€75",
+    },
+    {
+      service: "Follow-Up (Optional)",
+      whatsIncluded:
+        "30 min, 2–4 weeks later: what stuck, what slipped, revised recommendations",
+      price: "€30",
+    },
+    {
+      service: "Both Together",
+      whatsIncluded: "Core review + follow-up",
+      price: "€95",
+    },
+  ] satisfies NutritionServiceRow[],
+};
+
+export const personalTrainingPackages = {
+  footnote:
+    "*Monthly = 4-week blocks. Expiry: 5-pack (90 days), 10-pack (120 days). Contact me directly for plans of more than 3×/week Monthly or if you wish to integrate in off-day training plans.",
+  rows: [
+    {
+      package: "Drop-in / Single",
+      sessionsPerMonth: 1,
+      effectivePerSession: "€30.00",
+      discount: "—",
+      total: "€30",
+    },
+    {
+      package: "5-Pack",
+      sessionsPerMonth: 5,
+      effectivePerSession: "€27.00",
+      discount: "10%",
+      total: "€135",
+    },
+    {
+      package: "10-Pack",
+      sessionsPerMonth: 10,
+      effectivePerSession: "€25.50",
+      discount: "15%",
+      total: "€255",
+    },
+    {
+      package: "1×/week Monthly",
+      sessionsPerMonth: 4,
+      effectivePerSession: "€29.00",
+      discount: "3%",
+      total: "€116",
+    },
+    {
+      package: "2×/week Monthly",
+      sessionsPerMonth: 8,
+      effectivePerSession: "€27.00",
+      discount: "10%",
+      total: "€216",
+    },
+    {
+      package: "3×/week Monthly",
+      sessionsPerMonth: 12,
+      effectivePerSession: "€24.50",
+      discount: "18%",
+      total: "€295",
+    },
+  ] satisfies TrainingPackageRow[],
+};
+
+export type GroupTrainingPricingTable = {
+  title: string;
+  rows: TrainingPackageRow[];
+};
+
+export const groupTrainingPackages = {
+  subtitle: "2-4 people • Lower cost per person • Better results together",
+  footnote:
+    "*Monthly = 4-week blocks. Expiry: 5-pack (90 days), 10-pack (120 days). Contact me directly for plans of more than 3×/week Monthly or if you wish to integrate in off-day training plans.",
+  totalColumnLabel: "Total /person",
+  tables: [
+    {
+      title: "Duo (2 people)",
+      rows: [
+        {
+          package: "Drop-in",
+          sessionsPerMonth: 1,
+          effectivePerSession: "€22.00",
+          discount: "—",
+          total: "€22",
+        },
+        {
+          package: "5-Pack",
+          sessionsPerMonth: 5,
+          effectivePerSession: "€20.00",
+          discount: "9%",
+          total: "€100",
+        },
+        {
+          package: "10-Pack",
+          sessionsPerMonth: 10,
+          effectivePerSession: "€19.00",
+          discount: "14%",
+          total: "€190",
+        },
+        {
+          package: "1×/week Monthly",
+          sessionsPerMonth: 4,
+          effectivePerSession: "€21.00",
+          discount: "5%",
+          total: "€84",
+        },
+        {
+          package: "2×/week Monthly",
+          sessionsPerMonth: 8,
+          effectivePerSession: "€20.00",
+          discount: "9%",
+          total: "€160",
+        },
+        {
+          package: "3×/week Monthly",
+          sessionsPerMonth: 12,
+          effectivePerSession: "€18.50",
+          discount: "16%",
+          total: "€222",
+        },
+      ],
+    },
+    {
+      title: "Trio (3 people)",
+      rows: [
+        {
+          package: "Drop-in",
+          sessionsPerMonth: 1,
+          effectivePerSession: "€17.00",
+          discount: "—",
+          total: "€17",
+        },
+        {
+          package: "5-Pack",
+          sessionsPerMonth: 5,
+          effectivePerSession: "€15.50",
+          discount: "9%",
+          total: "€77.50",
+        },
+        {
+          package: "10-Pack",
+          sessionsPerMonth: 10,
+          effectivePerSession: "€14.50",
+          discount: "15%",
+          total: "€145",
+        },
+        {
+          package: "1×/week Monthly",
+          sessionsPerMonth: 4,
+          effectivePerSession: "€16.00",
+          discount: "6%",
+          total: "€64",
+        },
+        {
+          package: "2×/week Monthly",
+          sessionsPerMonth: 8,
+          effectivePerSession: "€15.50",
+          discount: "9%",
+          total: "€124",
+        },
+        {
+          package: "3×/week Monthly",
+          sessionsPerMonth: 12,
+          effectivePerSession: "€14.00",
+          discount: "18%",
+          total: "€168",
+        },
+      ],
+    },
+    {
+      title: "Quad (4 people)",
+      rows: [
+        {
+          package: "Drop-in",
+          sessionsPerMonth: 1,
+          effectivePerSession: "€14.00",
+          discount: "—",
+          total: "€14",
+        },
+        {
+          package: "5-Pack",
+          sessionsPerMonth: 5,
+          effectivePerSession: "€13.00",
+          discount: "7%",
+          total: "€65",
+        },
+        {
+          package: "10-Pack",
+          sessionsPerMonth: 10,
+          effectivePerSession: "€12.00",
+          discount: "14%",
+          total: "€120",
+        },
+        {
+          package: "1×/week Monthly",
+          sessionsPerMonth: 4,
+          effectivePerSession: "€13.50",
+          discount: "4%",
+          total: "€54",
+        },
+        {
+          package: "2×/week Monthly",
+          sessionsPerMonth: 8,
+          effectivePerSession: "€13.00",
+          discount: "7%",
+          total: "€104",
+        },
+        {
+          package: "3×/week Monthly",
+          sessionsPerMonth: 12,
+          effectivePerSession: "€11.50",
+          discount: "18%",
+          total: "€138",
+        },
+      ],
+    },
+  ] satisfies GroupTrainingPricingTable[],
+};
+
+export const outdoorTrainingPackages = {
+  subtitle: "Spring and Fall • Max 12 participants • Monthly rates only",
+  rows: [
+    {
+      package: "Drop-in",
+      sessionsPerMonth: 1,
+      effectivePerSession: "€10.00",
+      discount: "—",
+      total: "€10",
+    },
+    {
+      package: "1×/week",
+      sessionsPerMonth: 4,
+      effectivePerSession: "€7.50",
+      discount: "25%",
+      total: "€30",
+    },
+    {
+      package: "2×/week",
+      sessionsPerMonth: 8,
+      effectivePerSession: "€6.25",
+      discount: "38%",
+      total: "€50",
+    },
+    {
+      package: "3×/week",
+      sessionsPerMonth: 12,
+      effectivePerSession: "€5.83",
+      discount: "42%",
+      total: "€70",
+    },
+    {
+      package: "Unlimited (5×/wk)",
+      sessionsPerMonth: "~20",
+      effectivePerSession: "€4.25",
+      discount: "58%",
+      total: "€85",
+    },
+  ] satisfies TrainingPackageRow[],
 };
 
 export const paymentOptions = {
   methods: ["Bizum", "Venmo", "PayPal", "Apple Pay", "Google Pay", "Bank transfer"],
   categories: [
     {
-      title: "Group Classes",
+      title: "Online Coaching",
+      comingSoonNote: "All options TBD",
       plans: [
-        { type: "Drop-In", description: "Pay 10€ per session" },
-        {
-          type: "10-Pack",
-          description: "Pay 90€ for 10 sessions, train when you want",
-        },
+        { type: "Drop-In", description: "Single check-in and program tune-up" },
         {
           type: "Monthly",
-          description: "Pay month-to-month with no long-term commitment",
+          description: "Custom plan with weekly feedback and messaging support",
+        },
+        {
+          type: "10-Week Block",
+          description: "Structured program with regular form reviews",
         },
         {
           type: "Annual",
-          description: "Save 15% with annual payment — best value!",
+          description: "Year-round remote coaching — contact for details",
         },
         {
-          type: "Family Plan",
-          description: "Special rates for families — contact us for details",
-        },
-      ],
-    },
-    {
-      title: "Personal Training",
-      plans: [
-        { type: "Drop-In", description: "Pay per 1-on-1 session" },
-        {
-          type: "10-Pack",
-          description: "Prepay for 10 personal training sessions",
-        },
-        {
-          type: "Monthly",
-          description: "Month-to-month personal training with flexible scheduling",
-        },
-        {
-          type: "Annual",
-          description: "Save 15% with annual prepayment — best value!",
-        },
-        {
-          type: "Partner Plan",
-          description: "Train with a partner — contact us for shared-session rates",
+          type: "Add-On",
+          description: "Combine with in-person training for a hybrid package",
         },
       ],
     },
   ] satisfies PaymentPlanCategory[],
-  guarantee: "7-day money-back guarantee on all memberships",
-  trial: "Free 7-day trial available for new members",
+  freeSeasonalClass: {
+    title: "Free Seasonal Group Class",
+    description: "First-time clients can try one seasonal class for free!",
+  },
+  freeConsultation: {
+    title: "Free 20 minute Consultation",
+    description: "Only valid to Personal and Group Training options.",
+  },
 };
+
+export const pricingFaqs = [
+  {
+    question: "Can I change or cancel my monthly membership at any time?",
+    answer:
+      "Yes, you can change or cancel your membership at any time with one week's notice prior to the end of the month. No long-term contracts required.",
+  },
+  {
+    question:
+      "If I'm signed up for Personal or Group training, are seasonal outdoor classes included?",
+    answer: "No, these are separate options.",
+  },
+  {
+    question: "Can I pay by Credit Card?",
+    answer: "Currently no, but that option may come in the future!",
+  },
+];
 

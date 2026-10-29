@@ -1,27 +1,47 @@
 ---
 import { faqs } from "../data/siteData";
+
+type FaqItem = (typeof faqs)[number];
+
+interface Props {
+  items?: FaqItem[];
+  title?: string;
+  subtitle?: string;
+  id?: string;
+  showFooter?: boolean;
+}
+
+const {
+  items = faqs,
+  title = "Frequently Asked Questions",
+  subtitle,
+  id = "faq",
+  showFooter = true,
+} = Astro.props;
 ---
 
-<section id="faq" class="py-20 bg-bg-secondary">
+<section id={id} class="py-20 bg-bg-secondary">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">
-        Frequently Asked Questions
+        {title}
       </h2>
-      <p class="text-xl text-text-secondary max-w-2xl mx-auto">
-        Everything you need to know about GuiriFit
-      </p>
+      {
+        subtitle && (
+          <p class="text-xl text-text-secondary max-w-2xl mx-auto">{subtitle}</p>
+        )
+      }
     </div>
 
     <div class="space-y-4">
       {
-        faqs.map((faq, index) => (
+        items.map((faq) => (
           <details class="faq-item bg-bg-primary rounded-xl border border-border-primary hover:border-border-accent transition-all">
             <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
               <h3 class="text-xl font-bold text-text-primary pr-4">
                 {faq.question}
               </h3>
-              <i class="faq-icon ri-arrow-down-s-line text-2xl text-primary transition-transform shrink-0" />
+              <i class="faq-icon ri-arrow-down-s-line text-2xl text-primary transition-transform shrink-0" aria-hidden="true" />
             </summary>
             <div class="px-6 pb-6">
               <p class="text-text-secondary leading-relaxed whitespace-pre-line">
@@ -48,16 +68,20 @@ import { faqs } from "../data/siteData";
       }
     </div>
 
-    <div class="text-center mt-12">
-      <p class="text-text-tertiary mb-4">Still have questions?</p>
-      <a
-        href="/contact"
-        class="inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
-      >
-        Contact Me
-        <i class="ri-arrow-right-line"></i>
-      </a>
-    </div>
+    {
+      showFooter && (
+        <div class="text-center mt-12">
+          <p class="text-text-tertiary mb-4">Still have questions?</p>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
+          >
+            Contact Me
+            <i class="ri-arrow-right-line" aria-hidden="true"></i>
+          </a>
+        </div>
+      )
+    }
   </div>
 </section>
 

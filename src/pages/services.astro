@@ -1,6 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { classes, siteData, serviceCta } from "@data/siteData";
+import {
+  classes,
+  isServiceComingSoon,
+  serviceComingSoonMessage,
+  siteData,
+  serviceCta,
+} from "@data/siteData";
 ---
 
 <Layout
@@ -23,12 +29,30 @@ import { classes, siteData, serviceCta } from "@data/siteData";
 
       <div class="space-y-16">
         {
-          classes.map((classItem) => (
+          classes.map((classItem) => {
+            const comingSoon = isServiceComingSoon(classItem.slug);
+
+            return (
             <div
               id={`service-${classItem.slug}`}
-              class="scroll-mt-28 bg-bg-primary rounded-xl border border-border-primary overflow-hidden"
+              class:list={[
+                "scroll-mt-28 bg-bg-primary rounded-xl border border-border-primary overflow-hidden",
+                comingSoon && "service-coming-soon",
+              ]}
             >
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              {comingSoon && (
+                <div class="service-coming-soon__overlay">
+                  <p class="service-coming-soon__label">
+                    {serviceComingSoonMessage}
+                  </p>
+                </div>
+              )}
+              <div
+                class:list={[
+                  "grid grid-cols-1 lg:grid-cols-2 gap-0",
+                  comingSoon && "service-coming-soon__content",
+                ]}
+              >
                 <div class="relative h-64 lg:h-auto">
                   <img
                     src={classItem.image}
@@ -39,11 +63,6 @@ import { classes, siteData, serviceCta } from "@data/siteData";
                     loading="lazy"
                     decoding="async"
                   />
-                  <div class="absolute top-4 right-4">
-                    <span class="bg-primary text-bg-primary text-sm px-4 py-2 rounded-full font-semibold">
-                      {classItem.difficulty}
-                    </span>
-                  </div>
                 </div>
 
                 <div class="p-8">
@@ -85,7 +104,7 @@ import { classes, siteData, serviceCta } from "@data/siteData";
                     </ul>
                   </div>
 
-                  {
+                  {!comingSoon &&
                     (() => {
                       const cta = serviceCta(classItem.slug, "detail");
                       return (
@@ -106,12 +125,12 @@ import { classes, siteData, serviceCta } from "@data/siteData";
                           />
                         </a>
                       );
-                    })()
-                  }
+                    })()}
                 </div>
               </div>
             </div>
-          ))
+            );
+          })
         }
       </div>
     </div>
