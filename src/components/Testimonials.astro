@@ -2,7 +2,7 @@
 import { testimonials } from '../data/siteData';
 ---
 
-<section id="testimonials" class="py-20 bg-bg-primary">
+<section id="testimonials" class="py-20 bg-bg-secondary">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">What Our Members Say</h2>
@@ -13,7 +13,7 @@ import { testimonials } from '../data/siteData';
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {testimonials.map((testimonial) => (
-        <div class="bg-bg-secondary p-8 rounded-xl border border-border-primary hover:border-border-accent transition-all">
+        <div class="bg-bg-primary p-8 rounded-xl border border-border-primary hover:border-border-accent transition-all">
           <div class="flex mb-6 gap-1">
             {Array.from({ length: testimonial.rating }).map(() => (
               <i class="ri-star-fill text-primary text-xl"></i>

@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { classes, siteData } from "@data/siteData";
+import { classes, siteData, serviceCta } from "@data/siteData";
 ---
 
 <Layout
@@ -24,7 +24,10 @@ import { classes, siteData } from "@data/siteData";
       <div class="space-y-16">
         {
           classes.map((classItem) => (
-            <div class="bg-bg-primary rounded-xl border border-border-primary overflow-hidden">
+            <div
+              id={`service-${classItem.slug}`}
+              class="scroll-mt-28 bg-bg-primary rounded-xl border border-border-primary overflow-hidden"
+            >
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <div class="relative h-64 lg:h-auto">
                   <img
@@ -82,13 +85,29 @@ import { classes, siteData } from "@data/siteData";
                     </ul>
                   </div>
 
-                  <a
-                    href="/contact"
-                    class="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-bg-primary px-6 py-3 rounded-lg font-semibold transition-all"
-                  >
-                    Book This Class
-                    <i class="ri-arrow-right-line" />
-                  </a>
+                  {
+                    (() => {
+                      const cta = serviceCta(classItem.slug, "detail");
+                      return (
+                        <a
+                          href={cta.href}
+                          class="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-bg-primary px-6 py-3 rounded-lg font-semibold transition-all"
+                          {...(cta.external
+                            ? { target: "_blank", rel: "noopener noreferrer" }
+                            : {})}
+                        >
+                          {cta.label}
+                          <i
+                            class={
+                              classItem.slug === "community"
+                                ? "ri-whatsapp-line"
+                                : "ri-arrow-right-line"
+                            }
+                          />
+                        </a>
+                      );
+                    })()
+                  }
                 </div>
               </div>
             </div>

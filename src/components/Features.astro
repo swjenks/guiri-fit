@@ -1,5 +1,12 @@
 ---
-import { features } from "../data/siteData";
+import { classes, features, serviceCta } from "../data/siteData";
+
+/** Match home “What I Offer” cards to Services page entries */
+function featureClassName(title: string) {
+  return title.replace(/ \(Seasonal\)/, "");
+}
+
+const classByName = new Map(classes.map((item) => [item.name, item]));
 ---
 
 <section id="features" class="py-20 bg-bg-secondary">
@@ -15,31 +22,75 @@ import { features } from "../data/siteData";
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        features.map((feature) => (
-          <div class="group bg-bg-primary rounded-xl overflow-hidden border border-border-primary hover:border-border-accent transition-all transform hover:scale-105">
-            <div class="relative h-64 overflow-hidden">
-              <img
-                src={feature.image}
-                alt={feature.title}
-                width={800}
-                height={600}
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-linear-to-t from-bg-primary/80 to-transparent" />
-              <div class="absolute bottom-4 left-4 right-4">
-                <h3 class="text-xl font-bold text-text-primary mb-2">
-                  {feature.title}
-                </h3>
+        features.map((feature) => {
+          const service = classByName.get(featureClassName(feature.title));
+          const href = service ? `/services#service-${service.slug}` : "/services";
+          const cta = service ? serviceCta(service.slug, "home") : serviceCta("", "home");
+
+          return (
+            <article class="group flex flex-col bg-bg-primary rounded-xl overflow-hidden border border-border-primary hover:border-border-accent transition-all transform hover:scale-105">
+              <div class="relative h-64 overflow-hidden">
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  width={800}
+                  height={600}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-bg-primary/80 to-transparent" />
+                <div class="absolute bottom-4 left-4 right-4">
+                  <h3 class="text-xl font-bold text-text-primary mb-2">
+                    {feature.title}
+                  </h3>
+                </div>
               </div>
-            </div>
-            <div class="p-6">
-              <p class="text-text-tertiary leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          </div>
-        ))
+              <div class="flex flex-1 flex-col p-6">
+                {
+                  service && (
+                    <div class="mb-4 flex items-center justify-between gap-3">
+                      <span class="bg-primary text-bg-primary text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap">
+                        {service.difficulty}
+                      </span>
+                      <div class="flex items-center text-text-muted gap-2 text-sm">
+                        <i class="ri-time-line text-primary" aria-hidden="true" />
+                        <span>{service.duration}</span>
+                      </div>
+                    </div>
+                  )
+                }
+                <p class="text-text-tertiary leading-relaxed mb-6">
+                  {feature.description}
+                </p>
+                <div class="mt-auto flex items-center justify-between gap-4">
+                  <a
+                    href={href}
+                    class="text-primary hover:text-primary-light font-semibold"
+                  >
+                    More
+                  </a>
+                  <a
+                    href={cta.href}
+                    class="text-primary hover:text-primary-light font-semibold inline-flex items-center gap-2 text-right"
+                    {...(cta.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    {cta.label}
+                    <i
+                      class={
+                        service?.slug === "community"
+                          ? "ri-whatsapp-line"
+                          : "ri-arrow-right-line"
+                      }
+                      aria-hidden="true"
+                    />
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })
       }
     </div>
   </div>

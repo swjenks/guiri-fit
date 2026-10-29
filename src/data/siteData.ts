@@ -3,8 +3,11 @@ export const siteData = {
   tagline: "Get healthy get strong get GuiriFit",
   description: "Functional Fitness based personal and group training for abilities and skill levels in Granada",
   address: "Granada, Spain",
-  phone: "+34 630 074 083",
+  phone: "+34 746 055 787",
   email: "info@guirifit.com",
+  /** WhatsApp community group invite (https://chat.whatsapp.com/...) */
+  whatsappCommunityInviteUrl:
+    "https://chat.whatsapp.com/Gt1XWCRsf48ADmvBlGZXlf?s=cl&p=i&mlu=4&ilr=4&iam=2",
   social: {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
@@ -102,6 +105,7 @@ export const features = [
 export const classes = [
   {
     name: "Personal Training",
+    slug: "personal-training",
     description: "1-on-1 training with Coach Shawn.",
     detailedDescription: "Have specific goals in mind? I'll help you achieve them with a personalized training plan that is tailored to your needs and fitness level.",
     duration: "60 min",
@@ -113,6 +117,7 @@ export const classes = [
   },
   {
     name: "Group Training",
+    slug: "group-training",
     description: "Private classes for small groups of 2-4 people.",
     detailedDescription: "Want to train with friends and/or family? This is a great way to hold each other accountable and make training more fun and social.",
     duration: "60 min",
@@ -124,6 +129,7 @@ export const classes = [
   },
   {
     name: "Outdoor Training",
+    slug: "outdoor-training",
     description: "Seasonal larger group training in a local Calisthenics park.",
     detailedDescription: "Seasonal outdoor training in a local Calisthenics park with other GuiriFit members, make new friends, motivate each other, and get some vitamin D while doing it.",
     duration: "60 min",
@@ -135,6 +141,7 @@ export const classes = [
   },
   {
     name: "Online Coaching",
+    slug: "online-coaching",
     description: "Fitness plans tailored to you with feedback and support from Coach Shawn.",
     detailedDescription: "Want to train at your own pace and on your own schedule? I'll create a personalized training plan tailored to your needs and abilities, and you can train at your own pace and on your own schedule, recording your progress and reviewing your form and technique with me.",
     duration: "30 min per week",
@@ -146,6 +153,7 @@ export const classes = [
   },
   {
     name: "Nutrition Support",
+    slug: "nutrition-support",
     description: "Personalized nutrition plans to complement your workouts and help you achieve your goals.",
     detailedDescription: "Getting healthy is a lot more than just working out. Whether you're looking to lose weight, gain muscle, or improve your overall health, I'll help you create a personalized nutrition plan tailored to you that is sustainable and realistic.",
     duration: "60 min",
@@ -157,6 +165,7 @@ export const classes = [
   },
   {
     name: "Community",
+    slug: "community",
     description: "Join a supportive community of fellow expats, guiris, and local fitness enthusiasts.",
     detailedDescription: "Many gyms and fitness studios are focused only on the physical aspect of fitness, but I believe that a strong community with motivation from your peers, and no egos is the key to health and happiness. I want to create a community of people who are supportive of each other and who are committed to living a healthy and fit lifestyle.",
     duration: "Lifetime",
@@ -167,6 +176,24 @@ export const classes = [
     whatToExpect: "This isn't a class, there's no cost here. The community is built around all of you. We have a WhatsApp group where we can all share our progress, ask questions, support each other, and plan group events such as hikes, dinner & tapas outings, and more!",
   },
 ];
+
+export function serviceCta(
+  slug: string,
+  variant: "home" | "detail",
+): { label: string; href: string; external: boolean } {
+  if (slug === "community") {
+    return {
+      label: "Join us on WhatsApp",
+      href: siteData.whatsappCommunityInviteUrl || "/contact",
+      external: Boolean(siteData.whatsappCommunityInviteUrl),
+    };
+  }
+  return {
+    label: variant === "detail" ? "Book This Class" : "Book Now",
+    href: "/contact",
+    external: false,
+  };
+}
 
 export const pricingPlans = [
   {
