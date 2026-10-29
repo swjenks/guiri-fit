@@ -16,17 +16,22 @@
 
 /** Default card hover: accent border + lift (scale + shadow). */
 @utility card-interactive {
-  @apply interactive-motion interactive-border-hover hover:scale-105 hover:shadow-lg;
+  @apply interactive-motion interactive-border-hover hover:scale-[1.03] hover:shadow-md;
 }
 
-/** Wide/full-width cards: same lift, lighter shadow + 2% scale. */
+/** Wide/full-width cards: lighter lift (1% scale + softer shadow). */
 @utility card-interactive-subtle {
-  @apply interactive-motion interactive-border-hover hover:scale-[1.02] hover:shadow-md;
+  @apply interactive-motion interactive-border-hover hover:scale-[1.01] hover:shadow-sm;
 }
 
-/** Border hover only (no scale) — e.g. FAQ accordions. */
+/** Border + shadow only (no scale) — optional for non-scaling bordered blocks. */
 @utility card-interactive-border {
   @apply interactive-motion interactive-border-hover hover:shadow-sm;
+}
+
+/** Experience / stat chip on About — not a card. */
+@utility coach-experience-badge {
+  @apply inline-flex items-center gap-2 rounded-full border border-primary/35 bg-primary/10 px-4 py-2 text-sm text-text-secondary;
 }
 
 @utility hero-profile-parallelogram {

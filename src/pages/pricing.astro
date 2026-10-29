@@ -48,7 +48,7 @@ const copy = pages.pricing;
           <div class="flex flex-wrap justify-center gap-4">
             {
               paymentOptions.methods.map((method) => (
-                <div class="bg-bg-secondary px-6 py-3 rounded-lg border border-border-primary">
+                <div class="card-bordered card-interactive bg-bg-secondary px-6 py-3">
                   <span class="text-text-secondary font-medium">{method}</span>
                 </div>
               ))
@@ -57,9 +57,7 @@ const copy = pages.pricing;
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div
-            class="bg-primary/10 border border-border-accent/30 p-6 rounded-xl text-center"
-          >
+          <div class="card-bordered card-interactive bg-primary/10 p-6 text-center">
             <i class="ri-group-line text-4xl text-primary mb-4"></i>
             <h4 class="text-xl font-bold text-text-primary mb-2">
               {paymentOptions.freeSeasonalClass.title}
@@ -68,9 +66,7 @@ const copy = pages.pricing;
               {paymentOptions.freeSeasonalClass.description}
             </p>
           </div>
-          <div
-            class="bg-primary/10 border border-border-accent/30 p-6 rounded-xl text-center"
-          >
+          <div class="card-bordered card-interactive bg-primary/10 p-6 text-center">
             <i class="ri-gift-line text-4xl text-primary mb-4"></i>
             <h4 class="text-xl font-bold text-text-primary mb-2">
               {paymentOptions.freeConsultation.title}
