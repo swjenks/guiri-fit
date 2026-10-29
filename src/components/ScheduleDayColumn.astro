@@ -7,16 +7,24 @@ interface Props {
   hourMarkers: number[];
   range: CalendarRange;
   brandName: string;
+  closed?: boolean;
 }
 
-const { slots, hourMarkers, range, brandName } = Astro.props;
+const { slots, hourMarkers, range, brandName, closed = false } = Astro.props;
 
 function pct(value: number) {
   return `${value}%`;
 }
 ---
 
-<div class="schedule-day-column">
+<div class:list={["schedule-day-column", closed && "schedule-day-column--closed"]}>
+  {
+    closed && (
+      <p class="schedule-day-closed-label" aria-hidden="true">
+        No Training
+      </p>
+    )
+  }
   {
     hourMarkers.map((minute) => (
       <div
@@ -27,7 +35,8 @@ function pct(value: number) {
   }
   {
     slots.map((slot) => {
-      const isBrand = slot.class === brandName;
+      const isBrand =
+        slot.class === brandName || slot.class === "Outdoor Training";
       const { top, height } = layoutSlotPercent(slot.time, range);
       return (
         <a

@@ -102,12 +102,6 @@ h6 {
   line-height: inherit;
 }
 
-/* LinkedIn-style open-to-work frame on hero portrait */
-.hero-profile-banner {
-  border-top-left-radius: 50% 1.75rem;
-  border-top-right-radius: 50% 1.75rem;
-}
-
 .font-body {
   font-family: var(--font-family-body);
 }
@@ -127,6 +121,89 @@ h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primary-hover;
+}
+
+/* Seasonal schedule blocks (Spring/Fall vs Summer/Winter) */
+.schedule-season-stack {
+  @apply flex flex-col gap-14 md:gap-16;
+}
+
+.schedule-season-header {
+  @apply mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6;
+}
+
+.schedule-season-badge {
+  @apply hidden items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide;
+}
+
+.schedule-season-badge--status-active {
+  @apply border-primary/40 bg-primary/10 text-primary;
+}
+
+.schedule-season-badge--status-inactive {
+  @apply border-border-primary bg-bg-secondary text-text-tertiary;
+}
+
+html[data-outdoor-schedule="active"]
+  [data-schedule-season="spring-fall"]
+  .schedule-season-badge--status-active,
+html[data-outdoor-schedule="active"]
+  [data-schedule-season="summer-winter"]
+  .schedule-season-badge--status-inactive,
+html[data-outdoor-schedule="inactive"]
+  [data-schedule-season="spring-fall"]
+  .schedule-season-badge--status-inactive,
+html[data-outdoor-schedule="inactive"]
+  [data-schedule-season="summer-winter"]
+  .schedule-season-badge--status-active {
+  @apply inline-flex;
+}
+
+html[data-outdoor-schedule="active"]
+  [data-schedule-season="spring-fall"] {
+  order: 1;
+}
+
+html[data-outdoor-schedule="active"]
+  [data-schedule-season="summer-winter"] {
+  order: 2;
+}
+
+html[data-outdoor-schedule="inactive"]
+  [data-schedule-season="summer-winter"] {
+  order: 1;
+}
+
+html[data-outdoor-schedule="inactive"]
+  [data-schedule-season="spring-fall"] {
+  order: 2;
+}
+
+html[data-outdoor-schedule="active"]
+  [data-schedule-season="summer-winter"]
+  .schedule-calendar,
+html[data-outdoor-schedule="inactive"]
+  [data-schedule-season="spring-fall"]
+  .schedule-calendar {
+  @apply opacity-55 saturate-50;
+}
+
+html[data-outdoor-schedule="active"]
+  [data-schedule-season="summer-winter"]
+  .schedule-event,
+html[data-outdoor-schedule="inactive"]
+  [data-schedule-season="spring-fall"]
+  .schedule-event {
+  @apply pointer-events-none cursor-default;
+}
+
+html[data-outdoor-schedule="active"]
+  [data-schedule-season="summer-winter"]
+  .schedule-event:hover,
+html[data-outdoor-schedule="inactive"]
+  [data-schedule-season="spring-fall"]
+  .schedule-event:hover {
+  @apply scale-100 shadow-sm;
 }
 
 /* Google Calendar–style schedule grid */
@@ -245,6 +322,22 @@ h6 {
 .schedule-day-column {
   @apply relative min-h-0 border-l border-border-primary/40 bg-bg-secondary/50;
   height: clamp(22rem, 52vh, 40rem);
+}
+
+.schedule-day-column--closed {
+  @apply bg-bg-primary/70 opacity-60 saturate-50;
+}
+
+.schedule-day-closed-label {
+  @apply pointer-events-none absolute inset-0 z-[5] flex items-center justify-center text-sm font-semibold uppercase tracking-widest text-text-muted;
+}
+
+.schedule-day-header--closed {
+  @apply text-text-muted opacity-70;
+}
+
+.schedule-day-tab--closed {
+  @apply border-border-primary/40 text-text-muted opacity-70;
 }
 
 .schedule-hour-line {

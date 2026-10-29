@@ -82,35 +82,44 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
           </a>
           <a
             href="/about"
-            class="bg-transparent border-2 border-text-primary text-text-primary hover:bg-text-primary hover:text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-3"
+            class="bg-transparent border-2 border-text-primary text-text-primary hover:bg-text-primary hover:text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center"
           >
-            Learn More
-            <i class="ri-information-line"></i>
+            About Me
           </a>
         </div>
       </div>
 
-      <!-- Foreground hero image with bottom banner -->
-      <div class="hidden lg:block">
+      <!-- Foreground hero image with parallelogram name banner -->
+      <div class="hidden lg:block px-3 py-2">
         <div
-          class="relative aspect-square overflow-hidden rounded-full border-2 border-border-primary bg-bg-secondary shadow-2xl"
+          class="group hero-profile-parallelogram relative mx-auto aspect-[4/5] w-full max-w-md -skew-x-10 overflow-hidden rounded-xl border border-border-primary bg-bg-secondary shadow-2xl transition-all transform hover:scale-105 hover:border-border-accent"
         >
+          <div class="absolute inset-0 skew-x-10 origin-center scale-[1.14]">
             <Image
               src={HeroForegroundImage}
               alt="Fitness training with GuiriFit"
               width={800}
-              height={800}
-              class="h-full w-full object-cover"
+              height={1000}
+              class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
               loading="eager"
             />
-            <div class="hero-profile-banner absolute inset-x-0 bottom-0 bg-primary px-3 pb-5 pt-6 text-center">
-              <h4 class="text-sm font-bold leading-tight text-bg-primary">
-                Coach Shawn
-              </h4>
-              <p class="mt-0.5 text-xs font-medium leading-tight text-bg-primary/85">
-                Your Guiri Trainer
-              </p>
+          </div>
+          <div class="absolute inset-x-0 bottom-0 z-10 p-3">
+            <div
+              class="hero-profile-banner rounded-lg bg-primary px-4 py-4 text-center"
+            >
+              <div class="skew-x-10">
+                <h4 class="text-sm font-bold leading-tight text-bg-primary">
+                  Coach Shawn
+                </h4>
+                <p
+                  class="mt-0.5 text-xs font-medium leading-tight text-bg-primary/85"
+                >
+                  Your Guiri Trainer
+                </p>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>

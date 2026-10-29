@@ -1,0 +1,29 @@
+---
+import { SCHEDULE_TIMEZONE } from "../utils/scheduleSeason";
+---
+
+<script is:inline define:vars={{ timeZone: SCHEDULE_TIMEZONE }}>
+  (function () {
+    function madridMonth() {
+      var parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: timeZone,
+        month: "numeric",
+      }).formatToParts(new Date());
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i].type === "month") {
+          return parseInt(parts[i].value, 10);
+        }
+      }
+      return new Date().getMonth() + 1;
+    }
+
+    function outdoorInSeason() {
+      var m = madridMonth();
+      return (m >= 3 && m <= 5) || (m >= 9 && m <= 11);
+    }
+
+    document.documentElement.dataset.outdoorSchedule = outdoorInSeason()
+      ? "active"
+      : "inactive";
+  })();
+</script>

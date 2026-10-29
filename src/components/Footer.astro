@@ -6,6 +6,8 @@ import {
   contactInfo,
 } from "../data/siteData";
 import BrandName from "./BrandName.astro";
+
+const footerQuickLinks = [{ name: "Home", href: "/" }, ...navigation];
 ---
 
 <footer class="bg-bg-primary border-t border-border-primary">
@@ -26,7 +28,7 @@ import BrandName from "./BrandName.astro";
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 bg-bg-secondary hover:bg-primary text-text-tertiary hover:text-text-primary rounded-lg flex items-center justify-center transition-all"
+                class="w-10 h-10 bg-bg-secondary hover:bg-primary text-text-tertiary hover:text-bg-primary rounded-lg flex items-center justify-center transition-all"
                 aria-label={social.label}
               >
                 <i class={`${social.icon} text-xl`} />
@@ -43,7 +45,7 @@ import BrandName from "./BrandName.astro";
         </h4>
         <ul class="space-y-2">
           {
-            navigation.map((item) => (
+            footerQuickLinks.map((item) => (
               <li>
                 <a
                   href={item.href}
@@ -59,7 +61,7 @@ import BrandName from "./BrandName.astro";
 
       <!-- Contact Info -->
       <div>
-        <h4 class="text-lg font-semibold text-text-primary mb-4">Contact Us</h4>
+        <h4 class="text-lg font-semibold text-text-primary mb-4">Contact Me</h4>
         <ul class="space-y-4 text-text-tertiary">
           {
             contactInfo.slice(0, 3).map((info) => (

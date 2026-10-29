@@ -1,0 +1,52 @@
+---
+import ScheduleCalendar from "./ScheduleCalendar.astro";
+import type { ScheduleSlot } from "../utils/classSchedule";
+import type { ScheduleSeasonKind } from "../utils/scheduleSeason";
+
+interface CalendarDay {
+  label: string;
+  slots: ScheduleSlot[];
+}
+
+interface Props {
+  season: ScheduleSeasonKind;
+  title: string;
+  description: string;
+  days: CalendarDay[];
+  brandName: string;
+}
+
+const { season, title, description, days, brandName } = Astro.props;
+---
+
+<article
+  class="schedule-season-block"
+  data-schedule-season={season}
+  aria-labelledby={`schedule-season-${season}`}
+>
+  <header class="schedule-season-header">
+    <div class="min-w-0 flex-1">
+      <h2
+        id={`schedule-season-${season}`}
+        class="text-2xl md:text-3xl font-bold text-text-primary mb-2"
+      >
+        {title}
+      </h2>
+      <p class="text-text-secondary text-base md:text-lg">{description}</p>
+    </div>
+    <div class="schedule-season-badges shrink-0">
+      <span
+        class="schedule-season-badge schedule-season-badge--status-active"
+      >
+        Active Now
+      </span>
+      <span
+        class="schedule-season-badge schedule-season-badge--status-inactive"
+      >
+        Inactive
+      </span>
+    </div>
+  </header>
+
+  <ScheduleCalendar days={days} brandName={brandName} />
+</article>

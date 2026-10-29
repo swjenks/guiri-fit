@@ -1,19 +1,54 @@
-import { fullSchedule } from "@data/siteData";
+import { fullSchedule, outdoorFullSchedule } from "@data/siteData";
 
 export type ScheduleSlot = {
   time: string;
   class: string;
 };
 
-export const scheduleDays: ScheduleSlot[][] = [
-  fullSchedule.monday,
-  fullSchedule.tuesday,
-  fullSchedule.wednesday,
-  fullSchedule.thursday,
-  fullSchedule.friday,
-  fullSchedule.saturday,
-  fullSchedule.sunday,
-];
+export type FullWeekSchedule = typeof fullSchedule;
+
+export const CALENDAR_DAY_LABELS = [
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+  "Sun",
+] as const;
+
+export function scheduleDaysFromFull(full: FullWeekSchedule): ScheduleSlot[][] {
+  return [
+    full.monday,
+    full.tuesday,
+    full.wednesday,
+    full.thursday,
+    full.friday,
+    full.saturday,
+    full.sunday,
+  ];
+}
+
+export const scheduleDays = scheduleDaysFromFull(fullSchedule);
+export const outdoorScheduleDays = scheduleDaysFromFull(outdoorFullSchedule);
+
+export type CalendarDay = {
+  label: string;
+  slots: ScheduleSlot[];
+  /** Sunday — no sessions */
+  closed?: boolean;
+};
+
+export function toCalendarDays(
+  days: ScheduleSlot[][],
+  labels: readonly string[] = CALENDAR_DAY_LABELS,
+): CalendarDay[] {
+  return days.map((slots, index) => ({
+    label: labels[index] ?? `Day ${index + 1}`,
+    slots,
+    closed: index === 6,
+  }));
+}
 
 function parseTimeLabel(time: string): number {
   const dashIndex = time.search(/[–-]/);
@@ -214,19 +249,22 @@ export function getHourMarkers(rangeStart: number, rangeEnd: number): number[] {
   for (let minute = rangeStart; minute < rangeEnd; minute += 60) {
     markers.push(minute);
   }
+  // Show the closing hour when availability ends on the hour (e.g. 20:00).
+  if (
+    rangeEnd % 60 === 0 &&
+    rangeEnd >= rangeStart &&
+    markers[markers.length - 1] !== rangeEnd
+  ) {
+    markers.push(rangeEnd);
+  }
   return markers;
 }
 
+/** 24-hour labels for the calendar time gutter (e.g. 07:00, 14:30). */
 export function formatMinutes(totalMinutes: number): string {
   const hour24 = Math.floor(totalMinutes / 60);
   const minute = totalMinutes % 60;
-  const isPM = hour24 >= 12;
-  let hour12 = hour24 % 12;
-  if (hour12 === 0) hour12 = 12;
-
-  if (minute === 0) {
-    return `${hour12} ${isPM ? "PM" : "AM"}`;
-  }
-
-  return `${hour12}:${minute.toString().padStart(2, "0")} ${isPM ? "PM" : "AM"}`;
+  const hour = hour24.toString().padStart(2, "0");
+  const min = minute.toString().padStart(2, "0");
+  return `${hour}:${min}`;
 }

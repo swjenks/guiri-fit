@@ -51,7 +51,7 @@ export const contactInfo = [
 ];
 
 export const navigation = [
-  { name: "About", href: "/about" },
+  { name: "About Me", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Hours", href: "/hours" },
   { name: "Pricing", href: "/pricing" },
@@ -278,7 +278,7 @@ export const faqs = [
   {
     question: "What are your operating hours?",
     answer:
-      "I'm available for training 07:00-12:00, and 16:00-19:00 Monday-Friday, and 10:00-14:00 on Saturdays. You can see what spots are available by checking the schedule here. I will also respond to any WhatsApp messages or emails within 24 hours.",
+      "Hours change with the season—Spring and Fall (outdoor) vs Summer and Winter (studio). You can see what spots are available by checking the schedule here. I will also respond to any WhatsApp messages or emails within 24 hours.",
     answerLink: { href: "/hours", label: "here" },
   },
   {
@@ -293,7 +293,7 @@ export const faqs = [
 
 function scheduleSlot(
   time: string,
-  className: "GuiriFit" | "Open Availability",
+  className: "GuiriFit" | "Open Availability" | "Outdoor Training",
 ) {
   return {
     time,
@@ -301,17 +301,17 @@ function scheduleSlot(
   };
 }
 
-const dailySchedule = [
-  scheduleSlot("7:00–8:50 AM", "Open Availability"),
-  scheduleSlot("9:00–10:00 AM", "GuiriFit"),
-  scheduleSlot("10:10–11:10 AM", "GuiriFit"),
-  scheduleSlot("1:30–4:20 PM", "Open Availability"),
-  scheduleSlot("4:30–5:30 PM", "GuiriFit"),
-  scheduleSlot("5:40–6:40 PM", "GuiriFit"),
-  scheduleSlot("6:50–8:00 PM", "Open Availability"),
+/** Summer & Winter (studio) — Mon–Fri */
+const summerWinterWeekdays = [
+  scheduleSlot("08:00–13:00", "Open Availability"),
+  scheduleSlot("16:00–20:00", "Open Availability"),
 ];
 
-export const classSchedule = dailySchedule;
+const saturdayOpenAvailability = [
+  scheduleSlot("10:00–14:00", "Open Availability"),
+];
+
+export const classSchedule = summerWinterWeekdays;
 
 export const successStories = [
   {
@@ -343,21 +343,29 @@ export const successStories = [
   },
 ];
 
-const saturdaySchedule = [
-  scheduleSlot("10:00–11:00 AM", "GuiriFit"),
-  scheduleSlot("11:10 AM–12:10 PM", "GuiriFit"),
-  scheduleSlot("12:20–2:30 PM", "Open Availability"),
+function buildWeekSchedule(weekdaySlots: ReturnType<typeof scheduleSlot>[]) {
+  return {
+    monday: weekdaySlots,
+    tuesday: weekdaySlots,
+    wednesday: weekdaySlots,
+    thursday: weekdaySlots,
+    friday: weekdaySlots,
+    saturday: saturdayOpenAvailability,
+    sunday: [],
+  };
+}
+
+export const fullSchedule = buildWeekSchedule(summerWinterWeekdays);
+
+/** Spring & Fall (outdoor season) — Mon–Fri */
+const springFallWeekdays = [
+  scheduleSlot("08:00–10:30", "Open Availability"),
+  scheduleSlot("11:00–12:00", "Outdoor Training"),
+  scheduleSlot("16:00–17:00", "Outdoor Training"),
+  scheduleSlot("17:30–20:00", "Open Availability"),
 ];
 
-export const fullSchedule = {
-  monday: dailySchedule,
-  tuesday: dailySchedule,
-  wednesday: dailySchedule,
-  thursday: dailySchedule,
-  friday: dailySchedule,
-  saturday: saturdaySchedule,
-  sunday: [],
-};
+export const outdoorFullSchedule = buildWeekSchedule(springFallWeekdays);
 
 export const trainers = [
   {

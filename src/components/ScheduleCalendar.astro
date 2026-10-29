@@ -2,13 +2,8 @@
 import ScheduleDayColumn from "./ScheduleDayColumn.astro";
 import ScheduleDayTabs from "./ScheduleDayTabs.astro";
 import ScheduleTimeGutter from "./ScheduleTimeGutter.astro";
-import type { ScheduleSlot } from "../utils/classSchedule";
+import type { CalendarDay } from "../utils/classSchedule";
 import { getCalendarRange, getHourMarkers } from "../utils/classSchedule";
-
-interface CalendarDay {
-  label: string;
-  slots: ScheduleSlot[];
-}
 
 interface Props {
   days: CalendarDay[];
@@ -37,6 +32,7 @@ const hourMarkers = getHourMarkers(range.start, range.end);
                 hourMarkers={hourMarkers}
                 range={range}
                 brandName={brandName}
+                closed={day.closed}
               />
             </div>
           ))
@@ -54,7 +50,14 @@ const hourMarkers = getHourMarkers(range.start, range.end);
       <div class="schedule-calendar-corner" aria-hidden="true"></div>
       {
         days.map((day) => (
-          <div class="schedule-day-header">{day.label}</div>
+          <div
+            class:list={[
+              "schedule-day-header",
+              day.closed && "schedule-day-header--closed",
+            ]}
+          >
+            {day.label}
+          </div>
         ))
       }
 
@@ -67,6 +70,7 @@ const hourMarkers = getHourMarkers(range.start, range.end);
             hourMarkers={hourMarkers}
             range={range}
             brandName={brandName}
+            closed={day.closed}
           />
         ))
       }

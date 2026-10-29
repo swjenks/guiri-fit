@@ -1,29 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { siteData } from "@data/siteData";
-import ScheduleCalendar from "../components/ScheduleCalendar.astro";
-import { scheduleDays } from "../utils/classSchedule";
+import ScheduleSeasonBlock from "../components/ScheduleSeasonBlock.astro";
+import ScheduleSeasonInit from "../components/ScheduleSeasonInit.astro";
+import {
+  outdoorScheduleDays,
+  scheduleDays,
+  toCalendarDays,
+} from "../utils/classSchedule";
+import { scheduleSeasonCopy } from "../utils/scheduleSeason";
 
-const calendarDayLabels = [
-  "Mon",
-  "Tue",
-  "Wed",
-  "Thu",
-  "Fri",
-  "Sat",
-  "Sun",
-];
-
-const calendarDays = scheduleDays.map((slots, index) => ({
-  label: calendarDayLabels[index],
-  slots,
-}));
+const springFallDays = toCalendarDays(outdoorScheduleDays);
+const summerWinterDays = toCalendarDays(scheduleDays);
 ---
 
 <Layout
   title={`Hours - ${siteData.name}`}
   description="Weekly training hours and class schedule in Granada"
 >
+  <ScheduleSeasonInit />
   <section
     class="pt-32 pb-20 bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary"
   >
@@ -33,16 +28,28 @@ const calendarDays = scheduleDays.map((slots, index) => ({
           Hours
         </h1>
         <p class="text-xl text-text-secondary">
-          Plan your week with GuiriFit sessions and open availability—see class
-          times below and contact us to book a spot.
+          There are two seasonal calendars, the active one always appears first.
+          Times are shown in CET.
         </p>
       </div>
 
-      <div class="p-4 sm:p-6">
-        <ScheduleCalendar days={calendarDays} brandName={siteData.name} />
-        <p class="text-text-tertiary text-center mt-6 text-sm">
-          * Schedule may vary. Please contact us for the most up-to-date times
-          or to book a spot.
+      <div class="schedule-season-stack p-4 sm:p-6">
+        <ScheduleSeasonBlock
+          season="spring-fall"
+          title={scheduleSeasonCopy.springFall.title}
+          description={scheduleSeasonCopy.springFall.description}
+          days={springFallDays}
+          brandName={siteData.name}
+        />
+        <ScheduleSeasonBlock
+          season="summer-winter"
+          title={scheduleSeasonCopy.summerWinter.title}
+          description={scheduleSeasonCopy.summerWinter.description}
+          days={summerWinterDays}
+          brandName={siteData.name}
+        />
+        <p class="text-text-tertiary text-center mt-2 text-sm order-3">
+          Times subject to change based on client needs and gym availability.
         </p>
       </div>
     </div>
