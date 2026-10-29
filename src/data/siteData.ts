@@ -1,6 +1,8 @@
 export const siteData = {
-  name: "GuiriFit",
-  tagline: "Get healthy get strong get GuiriFit",
+  name: "GUIRIFIT",
+  /** Internal schedule slot `class` value (display label is localized via i18n/schedule). */
+  scheduleBrandClass: "GuiriFit",
+  tagline: "Get healthy get strong get GUIRIFIT",
   description: "Functional Fitness based personal and group training for abilities and skill levels in Granada",
   address: "Granada, Spain",
   phone: "+34 746 055 787",
@@ -72,7 +74,7 @@ export const features = [
   {
     title: "Outdoor Training (Seasonal)",
     description:
-      "Train with other GuiriFit members, make new friends, and motivate each other to achieve your goals.",
+      "Train with other GUIRIFIT members, make new friends, and motivate each other to achieve your goals.",
     image:
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop&q=80",
   },
@@ -128,7 +130,7 @@ export const classes = [
     name: "Outdoor Training",
     slug: "outdoor-training",
     description: "Seasonal larger group training in a local Calisthenics park.",
-    detailedDescription: "Seasonal outdoor training in a local Calisthenics park with other GuiriFit members, make new friends, motivate each other, and get some vitamin D while doing it.",
+    detailedDescription: "Seasonal outdoor training in a local Calisthenics park with other GUIRIFIT members, make new friends, motivate each other, and get some vitamin D while doing it.",
     duration: "60 min",
     difficulty: "All Levels",
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop&q=80",

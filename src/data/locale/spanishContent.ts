@@ -4,7 +4,7 @@ import { siteData as enSiteData } from "../siteData";
 export const spanishContent = {
   siteData: {
     ...enSiteData,
-    tagline: "Ponte en forma, hazte fuerte, hazte GuiriFit",
+    tagline: "Ponte en forma, hazte fuerte, hazte GUIRIFIT",
     description:
       "Entrenamiento personal y grupal de fitness funcional para todos los niveles en Granada",
   },
@@ -54,7 +54,7 @@ export const spanishContent = {
     {
       title: "Entrenamiento al aire libre (temporada)",
       description:
-        "Entrena con otros miembros de GuiriFit, conoce gente nueva y motivaos mutuamente.",
+        "Entrena con otros miembros de GUIRIFIT, conoce gente nueva y motivaos mutuamente.",
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=600&fit=crop&q=80",
     },
@@ -127,7 +127,7 @@ export const spanishContent = {
       description:
         "Entrenamiento grupal de temporada en un parque de calistenia local.",
       detailedDescription:
-        "Sesiones al aire libre con la comunidad GuiriFit: nuevos amigos, motivación y vitamina D.",
+        "Sesiones al aire libre con la comunidad GUIRIFIT: nuevos amigos, motivación y vitamina D.",
       duration: "60 min",
       difficulty: "Todos los niveles",
       image:
@@ -249,7 +249,7 @@ export const spanishContent = {
       name: "Sarah Johnson",
       role: "Miembro desde hace 2 años",
       content:
-        "GuiriFit ha transformado mi camino fitness. Los entrenadores son increíbles y la comunidad muy solidaria.",
+        "GUIRIFIT ha transformado mi camino fitness. Los entrenadores son increíbles y la comunidad muy solidaria.",
       rating: 5,
     },
     {
@@ -274,7 +274,7 @@ export const spanishContent = {
       duration: "8 meses",
       result: "Perdió 20 kg",
       story:
-        "Al principio dudaba, pero GuiriFit cambió mi vida. Entrenadores y comunidad me mantuvieron motivada.",
+        "Al principio dudaba, pero GUIRIFIT cambió mi vida. Entrenadores y comunidad me mantuvieron motivada.",
       beforeImage:
         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=600&fit=crop&q=80",
       afterImage:

@@ -30,12 +30,12 @@ const dayLabels = {
 
 const classLabels = {
   en: {
-    GuiriFit: "GuiriFit",
+    GuiriFit: "GUIRIFIT",
     "Open Availability": "Open Availability",
     "Outdoor Training": "Outdoor Training",
   },
   es: {
-    GuiriFit: "GuiriFit",
+    GuiriFit: "GUIRIFIT",
     "Open Availability": "Disponibilidad abierta",
     "Outdoor Training": "Entrenamiento al aire libre",
   },

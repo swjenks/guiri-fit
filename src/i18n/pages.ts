@@ -10,11 +10,11 @@ const en = {
     ctaTitle: "Ready to start your fitness journey?",
     ctaBody: "Sometimes, all you need is a little nudge to hit this button...",
     ctaButton: "Start Your Adventure",
-    faqSubtitle: "Everything you need to know about GuiriFit",
+    faqSubtitle: "Everything you need to know about GUIRIFIT",
     aboutIntro: {
-      title: "What is GuiriFit?",
+      title: "What is GUIRIFIT?",
       lead:
-        "GuiriFit is based in functional fitness, which is a training classification designed to prepare the body for real-life movements and daily activities by simulating common tasks like walking, pushing, pulling, bending, and squatting. Unlike traditional isolation exercises that target specific muscles for aesthetic purposes, functional fitness focuses on compound movements that engage multiple muscle groups and joints simultaneously to improve overall coordination, stability, and strength.",
+        "GUIRIFIT is based in functional fitness, which is a training classification designed to prepare the body for real-life movements and daily activities by simulating common tasks like walking, pushing, pulling, bending, and squatting. Unlike traditional isolation exercises that target specific muscles for aesthetic purposes, functional fitness focuses on compound movements that engage multiple muscle groups and joints simultaneously to improve overall coordination, stability, and strength.",
       cards: [
         {
           title: "Real-World Application",
@@ -35,7 +35,7 @@ const en = {
     },
   },
   about: {
-    metaDescription: "Meet Coach Shawn and learn about the mission behind GuiriFit",
+    metaDescription: "Meet Coach Shawn and learn about the mission behind GUIRIFIT",
     heroTitle: "About Me",
     heroSubtitle: "Get to know your Guiri Coach",
     missionTitle: "My Mission",
@@ -112,11 +112,11 @@ const es: PageCopy = {
     ctaTitle: "¿Listo para empezar tu camino fitness?",
     ctaBody: "A veces solo hace falta un pequeño empujón para pulsar este botón…",
     ctaButton: "Empieza tu aventura",
-    faqSubtitle: "Todo lo que necesitas saber sobre GuiriFit",
+    faqSubtitle: "Todo lo que necesitas saber sobre GUIRIFIT",
     aboutIntro: {
-      title: "¿Qué es GuiriFit?",
+      title: "¿Qué es GUIRIFIT?",
       lead:
-        "GuiriFit se basa en el fitness funcional: un enfoque de entrenamiento que prepara el cuerpo para movimientos de la vida real y actividades cotidianas, simulando tareas como caminar, empujar, tirar, agacharse o levantarse. A diferencia de ejercicios aislados orientados sobre todo a la estética, el fitness funcional prioriza movimientos compuestos que activan varios grupos musculares y articulaciones a la vez para mejorar coordinación, estabilidad y fuerza general.",
+        "GUIRIFIT se basa en el fitness funcional: un enfoque de entrenamiento que prepara el cuerpo para movimientos de la vida real y actividades cotidianas, simulando tareas como caminar, empujar, tirar, agacharse o levantarse. A diferencia de ejercicios aislados orientados sobre todo a la estética, el fitness funcional prioriza movimientos compuestos que activan varios grupos musculares y articulaciones a la vez para mejorar coordinación, estabilidad y fuerza general.",
       cards: [
         {
           title: "Aplicación en la vida real",
@@ -138,7 +138,7 @@ const es: PageCopy = {
   },
   about: {
     metaDescription:
-      "Conoce a Coach Shawn y la misión detrás de GuiriFit",
+      "Conoce a Coach Shawn y la misión detrás de GUIRIFIT",
     heroTitle: "Sobre mí",
     heroSubtitle: "Conoce a tu entrenador Guiri",
     missionTitle: "Mi misión",
