@@ -19,7 +19,7 @@ const intro = pages.home.aboutIntro;
     <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-3">
       {
         intro.cards.map((point, index) => (
-          <div class="card-interactive flex h-full min-w-0 flex-col bg-bg-secondary p-8 rounded-xl border border-border-primary text-center">
+          <div class="card-bordered card-interactive flex h-full min-w-0 flex-col bg-bg-secondary p-8 text-center">
             <div class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
               <i
                 class={`${(["ri-run-line", "ri-heart-pulse-line", "ri-dna-line"] as const)[index] ?? "ri-run-line"} text-4xl text-primary`}

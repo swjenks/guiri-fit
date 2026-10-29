@@ -1,7 +1,32 @@
 @import "tailwindcss";
 
+/* ─── Interactive hover (shared motion + optional scale) ─── */
+@utility interactive-motion {
+  @apply transition-all duration-200 ease-out;
+}
+
+@utility interactive-border-hover {
+  @apply hover:border-border-accent;
+}
+
+/** Standard bordered card shell — pair with `card-interactive` or `card-interactive-subtle`. */
+@utility card-bordered {
+  @apply rounded-xl border border-border-primary;
+}
+
+/** Default card hover: accent border + 5% scale (grid cards, testimonials, etc.). */
 @utility card-interactive {
-  @apply transition-all hover:scale-105 hover:border-border-accent;
+  @apply interactive-motion interactive-border-hover hover:scale-105;
+}
+
+/** Wide/full-width cards: same border hover, 2% scale so motion matches smaller cards. */
+@utility card-interactive-subtle {
+  @apply interactive-motion interactive-border-hover hover:scale-[1.02];
+}
+
+/** Border hover only (no scale) — e.g. FAQ accordions. */
+@utility card-interactive-border {
+  @apply interactive-motion interactive-border-hover;
 }
 
 @utility hero-profile-parallelogram {
@@ -9,7 +34,19 @@
 }
 
 @utility btn-interactive {
-  @apply transition-all hover:scale-105;
+  @apply interactive-motion hover:scale-105;
+}
+
+@layer components {
+  @media (prefers-reduced-motion: reduce) {
+    :where(
+      .card-interactive,
+      .card-interactive-subtle,
+      .btn-interactive
+    ):hover {
+      transform: none;
+    }
+  }
 }
 
 /* Trailing CTA icons — nudge right on hover (portfolio-style) */
