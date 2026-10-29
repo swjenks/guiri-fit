@@ -479,7 +479,24 @@ html[data-outdoor-schedule="inactive"]
 }
 
 .site-table__institution-cell {
-  @apply w-0 whitespace-nowrap align-middle pr-3 sm:pr-4 md:min-w-40 md:w-40;
+  @apply w-0 whitespace-nowrap align-middle pr-3 transition-colors duration-150 sm:pr-4 md:min-w-40 md:w-40;
+}
+
+/* Certifications table: group block hover — rules generated in AboutCertifications.astro */
+.certifications-table tbody td {
+  @apply transition-colors duration-150;
+}
+
+.certifications-table tbody tr.site-table__row:hover td {
+  background-color: transparent;
+}
+
+.site-table__institution-cell--merged {
+  @apply align-middle;
+}
+
+.site-table__institution-merged-inner {
+  @apply flex min-h-full flex-col justify-center;
 }
 
 .site-table__institution-acronym {
