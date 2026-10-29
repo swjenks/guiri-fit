@@ -14,36 +14,28 @@
   @apply rounded-xl border border-border-primary;
 }
 
-/** Default card hover: accent border + 5% scale (grid cards, testimonials, etc.). */
+/** Default card hover: accent border + lift (scale + shadow). */
 @utility card-interactive {
-  @apply interactive-motion interactive-border-hover hover:scale-105;
+  @apply interactive-motion interactive-border-hover hover:scale-105 hover:shadow-lg;
 }
 
-/** Wide/full-width cards: same border hover, 2% scale so motion matches smaller cards. */
+/** Wide/full-width cards: same lift, lighter shadow + 2% scale. */
 @utility card-interactive-subtle {
-  @apply interactive-motion interactive-border-hover hover:scale-[1.02];
+  @apply interactive-motion interactive-border-hover hover:scale-[1.02] hover:shadow-md;
 }
 
 /** Border hover only (no scale) — e.g. FAQ accordions. */
 @utility card-interactive-border {
-  @apply interactive-motion interactive-border-hover;
+  @apply interactive-motion interactive-border-hover hover:shadow-sm;
 }
 
 @utility hero-profile-parallelogram {
   aspect-ratio: 4 / 5;
 }
 
-@utility btn-interactive {
-  @apply interactive-motion hover:scale-105;
-}
-
 @layer components {
   @media (prefers-reduced-motion: reduce) {
-    :where(
-      .card-interactive,
-      .card-interactive-subtle,
-      .btn-interactive
-    ):hover {
+    :where(.card-interactive, .card-interactive-subtle):hover {
       transform: none;
     }
   }

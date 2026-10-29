@@ -55,17 +55,20 @@ const footerQuickLinks = [
         <ul class="space-y-4 text-text-tertiary">
           {
             contactInfo.slice(0, 3).map((info) => (
-              <li class="flex items-start gap-3">
-                <i class={`${info.icon} text-primary text-xl mt-1 shrink-0`} />
+              <li class="flex items-center gap-3">
+                <i
+                  class={`${info.icon} text-primary text-xl shrink-0 leading-none`}
+                  aria-hidden="true"
+                />
                 {info.link ? (
                   <a
                     href={info.link}
-                    class="hover:text-primary transition-colors leading-relaxed"
+                    class="min-w-0 hover:text-primary transition-colors leading-normal"
                   >
                     {info.content}
                   </a>
                 ) : (
-                  <span class="leading-relaxed">{info.content}</span>
+                  <span class="min-w-0 leading-normal">{info.content}</span>
                 )}
               </li>
             ))
