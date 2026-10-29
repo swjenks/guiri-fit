@@ -90,14 +90,25 @@ const certGroupHoverRules = issuers
                               {issuer.institutionShort}
                             </span>
                             <span class="hidden md:block">
-                              <span class="cert-institution-logo">
+                              <span
+                                class="cert-institution-logo"
+                                tabindex="0"
+                                aria-label={issuer.institute}
+                              >
                                 <Image
                                   src={logos[issuer.logo]}
-                                  alt={issuer.institute}
+                                  alt=""
                                   width={158}
                                   height={32}
                                   class="cert-institution-logo__img"
+                                  aria-hidden="true"
                                 />
+                                <span
+                                  class="cert-institution-tooltip"
+                                  role="tooltip"
+                                >
+                                  {issuer.institute}
+                                </span>
                               </span>
                             </span>
                             <span class="sr-only md:hidden">

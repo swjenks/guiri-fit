@@ -415,6 +415,10 @@ html[data-outdoor-schedule="inactive"]
   @apply min-w-0 overflow-hidden bg-bg-primary rounded-xl border border-border-primary;
 }
 
+.site-table-card:has(.certifications-table) {
+  overflow: visible;
+}
+
 .site-table {
   @apply w-full;
 }
@@ -492,7 +496,7 @@ html[data-outdoor-schedule="inactive"]
 }
 
 .site-table__institution-cell--merged {
-  @apply align-middle;
+  @apply align-middle overflow-visible;
 }
 
 .site-table__institution-merged-inner {
@@ -524,11 +528,22 @@ html[data-outdoor-schedule="inactive"]
 }
 
 .cert-institution-logo {
-  @apply box-border inline-flex h-10 w-40 shrink-0 items-center justify-center rounded-lg border border-border-primary/40 bg-white px-3 py-2;
+  @apply relative box-border inline-flex h-10 w-40 shrink-0 cursor-default items-center justify-center rounded-lg border border-border-primary/40 bg-white px-3 py-2;
 }
 
 .cert-institution-logo__img {
   @apply h-7 w-full max-w-full object-contain object-center;
+}
+
+.cert-institution-tooltip {
+  @apply pointer-events-none absolute left-1/2 top-full z-50 mt-2 box-border w-52 max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-lg border border-border-primary bg-bg-tertiary px-3 py-2 text-center text-xs font-medium leading-snug text-text-primary opacity-0 shadow-md transition-opacity duration-150;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.cert-institution-logo:hover .cert-institution-tooltip,
+.cert-institution-logo:focus-visible .cert-institution-tooltip {
+  @apply opacity-100;
 }
 
 /* Pricing tables: compact layout with swappable center column */
