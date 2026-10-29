@@ -2,14 +2,20 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm.astro";
+import ScheduleSeasonInit from "../components/ScheduleSeasonInit.astro";
 import { siteData, socialLinks, contactInfo } from "../data/siteData";
+import { getContactHoursLines } from "../utils/contactHours";
 import MapImage from "@assets/photo-1517487881594-2787fef5ebf7.jpg";
+
+const springFallContactHours = getContactHoursLines("spring-fall");
+const summerWinterContactHours = getContactHoursLines("summer-winter");
 ---
 
 <Layout
   title={`Contact Me - ${siteData.name}`}
   description="Get in touch with us to start your fitness journey"
 >
+  <ScheduleSeasonInit />
   <!-- Hero Section -->
   <section
     class="pt-32 pb-20 bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary"
@@ -66,6 +72,75 @@ import MapImage from "@assets/photo-1517487881594-2787fef5ebf7.jpg";
                 </div>
               ))
             }
+
+            <div class="flex items-start gap-4">
+              <div class="bg-primary p-4 rounded-lg shrink-0">
+                <i class="ri-time-line text-2xl text-bg-primary"></i>
+              </div>
+              <div class="min-w-0 flex-1">
+                <h3 class="text-xl font-semibold text-text-primary mb-2">
+                  Hours
+                </h3>
+                <div
+                  class="contact-hours-season space-y-1"
+                  data-season="spring-fall"
+                >
+                  {
+                    springFallContactHours.map((line, index) => (
+                      <p
+                        class:list={[
+                          "leading-relaxed",
+                          index === 0
+                            ? "text-text-secondary font-medium"
+                            : "text-text-tertiary",
+                        ]}
+                      >
+                        {line}
+                      </p>
+                    ))
+                  }
+                  <p class="text-text-tertiary leading-relaxed">
+                    Times shown in CET. See the full calendar{" "}
+                    <a
+                      href="/hours"
+                      class="text-primary hover:text-primary-hover underline underline-offset-2"
+                    >
+                      here
+                    </a>
+                    .
+                  </p>
+                </div>
+                <div
+                  class="contact-hours-season space-y-1"
+                  data-season="summer-winter"
+                >
+                  {
+                    summerWinterContactHours.map((line, index) => (
+                      <p
+                        class:list={[
+                          "leading-relaxed",
+                          index === 0
+                            ? "text-text-secondary font-medium"
+                            : "text-text-tertiary",
+                        ]}
+                      >
+                        {line}
+                      </p>
+                    ))
+                  }
+                  <p class="text-text-tertiary leading-relaxed">
+                    Times shown in CET. See the full calendar{" "}
+                    <a
+                      href="/hours"
+                      class="text-primary hover:text-primary-hover underline underline-offset-2"
+                    >
+                      here
+                    </a>
+                    .
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Social Links -->

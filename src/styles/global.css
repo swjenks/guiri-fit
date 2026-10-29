@@ -123,6 +123,17 @@ h6 {
   @apply bg-primary-hover;
 }
 
+/* Contact page — show hours for active season only */
+.contact-hours-season {
+  @apply hidden;
+}
+
+html[data-outdoor-schedule="active"] .contact-hours-season[data-season="spring-fall"],
+html[data-outdoor-schedule="inactive"]
+  .contact-hours-season[data-season="summer-winter"] {
+  @apply block;
+}
+
 /* Seasonal schedule blocks (Spring/Fall vs Summer/Winter) */
 .schedule-season-stack {
   @apply flex flex-col gap-14 md:gap-16;

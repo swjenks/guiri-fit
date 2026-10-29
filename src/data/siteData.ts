@@ -42,12 +42,6 @@ export const contactInfo = [
     content: siteData.email,
     link: `mailto:${siteData.email}`,
   },
-  {
-    icon: "ri-time-line",
-    title: "Hours",
-    content: ["Open 24/7 for Premium and Elite members", "Basic members: 5 AM - 11 PM daily"],
-    link: null,
-  },
 ];
 
 export const navigation = [
@@ -189,7 +183,7 @@ export function serviceCta(
     };
   }
   return {
-    label: variant === "detail" ? "Book This Class" : "Book Now",
+    label: "Get Started",
     href: "/contact",
     external: false,
   };
