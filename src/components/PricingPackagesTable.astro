@@ -1,5 +1,7 @@
 ---
 import type { TrainingPackageRow } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
 
 interface Props {
   rows: TrainingPackageRow[];
@@ -7,7 +9,10 @@ interface Props {
   totalColumnLabel?: string;
 }
 
-const { rows, tableId, totalColumnLabel = "Total" } = Astro.props;
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const table = getSiteContent(locale).ui.pricingTable;
+
+const { rows, tableId, totalColumnLabel = table.total } = Astro.props;
 
 const rowBorder = (index: number, length: number) =>
   index < length - 1 ? "border-b border-border-primary/50" : "";
@@ -24,7 +29,7 @@ const rowClass = "pricing-packages-table__row";
       <div
         class="pricing-metric-tabs"
         role="tablist"
-        aria-label={`Pricing details for ${tableId}`}
+        aria-label={`${table.ariaPricingDetails} ${tableId}`}
       >
         <button
           type="button"
@@ -33,8 +38,8 @@ const rowClass = "pricing-packages-table__row";
           data-pricing-metric-tab="sessions"
           aria-selected="true"
         >
-          <span class="pricing-metric-tab-long">Sessions/Month</span>
-          <span class="pricing-metric-tab-short">Sessions</span>
+          <span class="pricing-metric-tab-long">{table.sessionsPerMonth}</span>
+          <span class="pricing-metric-tab-short">{table.sessionsShort}</span>
         </button>
         <button
           type="button"
@@ -43,8 +48,8 @@ const rowClass = "pricing-packages-table__row";
           data-pricing-metric-tab="effective"
           aria-selected="false"
         >
-          <span class="pricing-metric-tab-long">Effective €/session</span>
-          <span class="pricing-metric-tab-short">€/session</span>
+          <span class="pricing-metric-tab-long">{table.effectivePerSession}</span>
+          <span class="pricing-metric-tab-short">{table.effectiveShort}</span>
         </button>
         <button
           type="button"
@@ -53,7 +58,7 @@ const rowClass = "pricing-packages-table__row";
           data-pricing-metric-tab="discount"
           aria-selected="false"
         >
-          Discount
+          {table.discount}
         </button>
       </div>
 
@@ -69,13 +74,13 @@ const rowClass = "pricing-packages-table__row";
               <th
                 class="pricing-compact-edge pricing-compact-edge--start px-2 py-3 text-left text-sm font-semibold text-text-primary sm:px-3"
               >
-                Package
+                {table.package}
               </th>
               <th
                 class="px-2 py-3 text-center text-sm font-semibold text-text-primary sm:px-3"
                 data-pricing-metric-header
               >
-                Sessions/Month
+                {table.sessionsPerMonth}
               </th>
               <th
                 class="pricing-compact-edge pricing-compact-edge--end px-2 py-3 text-right text-sm font-semibold text-text-primary sm:px-3"
@@ -134,10 +139,10 @@ const rowClass = "pricing-packages-table__row";
         </colgroup>
         <thead>
           <tr class="border-b border-border-primary">
-            <th class="text-left">Package</th>
-            <th class="text-center">Sessions/Month</th>
-            <th class="text-center">Effective €/session</th>
-            <th class="text-center">Discount</th>
+            <th class="text-left">{table.package}</th>
+            <th class="text-center">{table.sessionsPerMonth}</th>
+            <th class="text-center">{table.effectivePerSession}</th>
+            <th class="text-center">{table.discount}</th>
             <th class="pricing-packages-table__total">{totalColumnLabel}</th>
           </tr>
         </thead>

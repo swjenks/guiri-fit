@@ -1,4 +1,7 @@
 ---
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/paths";
+import { getScheduleUi, translateScheduleClass } from "../i18n/schedule";
 import type { CalendarRange, ScheduleSlot } from "../utils/classSchedule";
 import { layoutMinutePercent, layoutSlotPercent } from "../utils/classSchedule";
 
@@ -11,6 +14,9 @@ interface Props {
 }
 
 const { slots, hourMarkers, range, brandName, closed = false } = Astro.props;
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const scheduleUi = getScheduleUi(locale);
+const contactHref = localizedPath(locale, "/contact");
 
 function pct(value: number) {
   return `${value}%`;
@@ -21,7 +27,7 @@ function pct(value: number) {
   {
     closed && (
       <p class="schedule-day-closed-label" aria-hidden="true">
-        No Training
+        {scheduleUi.noTraining}
       </p>
     )
   }
@@ -38,16 +44,17 @@ function pct(value: number) {
       const isBrand =
         slot.class === brandName || slot.class === "Outdoor Training";
       const { top, height } = layoutSlotPercent(slot.time, range);
+      const title = translateScheduleClass(locale, slot.class);
       return (
         <a
-          href="/contact"
+          href={contactHref}
           class:list={[
             "schedule-event",
             isBrand ? "schedule-event--brand" : "schedule-event--open",
           ]}
           style={`top: ${pct(top)}; height: ${pct(height)}`}
         >
-          <span class="schedule-event-title">{slot.class}</span>
+          <span class="schedule-event-title">{title}</span>
           <span class="schedule-event-time">{slot.time}</span>
         </a>
       );

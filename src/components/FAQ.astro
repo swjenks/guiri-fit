@@ -1,7 +1,9 @@
 ---
-import { faqs } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/paths";
+import { getSiteContent } from "../data/getSiteContent";
 
-type FaqItem = (typeof faqs)[number];
+type FaqItem = ReturnType<typeof getSiteContent>["faqs"][number];
 
 interface Props {
   items?: FaqItem[];
@@ -11,9 +13,12 @@ interface Props {
   showFooter?: boolean;
 }
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { faqs, ui, contactHref } = getSiteContent(locale);
+
 const {
   items = faqs,
-  title = "Frequently Asked Questions",
+  title = ui.faqTitle,
   subtitle,
   id = "faq",
   showFooter = true,
@@ -46,11 +51,11 @@ const {
             <div class="px-6 pb-6">
               <p class="text-text-secondary leading-relaxed whitespace-pre-line">
                 {
-                  faq.answerLink ? (
+                  "answerLink" in faq && faq.answerLink ? (
                     <>
                       {faq.answer.split(faq.answerLink.label)[0]}
                       <a
-                        href={faq.answerLink.href}
+                        href={localizedPath(locale, faq.answerLink.href)}
                         class="font-medium text-primary hover:text-primary-hover underline-offset-2 hover:underline"
                       >
                         {faq.answerLink.label}
@@ -71,12 +76,12 @@ const {
     {
       showFooter && (
         <div class="text-center mt-12">
-          <p class="text-text-tertiary mb-4">Still have questions?</p>
+          <p class="text-text-tertiary mb-4">{ui.faqStillQuestions}</p>
           <a
-            href="/contact"
+            href={contactHref}
             class="btn-interactive inline-flex items-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary hover:bg-primary-hover"
           >
-            Contact Me
+            {ui.faqContact}
             <i class="ri-arrow-right-line" aria-hidden="true"></i>
           </a>
         </div>
@@ -90,7 +95,7 @@ const {
     display: none;
   }
 
-  .faq-item[open] .faq-icon {
+  details[open] .faq-icon {
     transform: rotate(180deg);
   }
 </style>

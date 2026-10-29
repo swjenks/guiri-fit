@@ -1,52 +1,29 @@
 ---
-import { siteData } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
 
-const functionalTrainingPoints = [
-  {
-    title: "Real-World Application",
-    description:
-      "Exercises mimic activities such as lifting objects, climbing stairs, or carrying groceries, making everyday tasks easier and safer.",
-    icon: "ri-run-line",
-  },
-  {
-    title: "Increased Health and Injury Prevention",
-    description:
-      "By strengthening core muscles, improving balance, and enhancing mobility, this approach reduces the risk of injury during daily life.",
-    icon: "ri-heart-pulse-line",
-  },
-  {
-    title: "Efficiency and Adaptability",
-    description:
-      "It targets multiple muscle groups at once, providing a time-efficient workout that boosts cardiovascular health and calorie burn without requiring specialized equipment.",
-    icon: "ri-dna-line",
-  },
-];
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { pages } = getSiteContent(locale);
+const intro = pages.home.aboutIntro;
 ---
 
 <section class="py-20 bg-bg-primary">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
-        What is {siteData.name}?
+        {intro.title}
       </h2>
-      <p class="text-xl text-text-secondary">
-        GuiriFit is based in functional fitness, which is a training
-        classification designed to prepare the body for real-life movements and
-        daily activities by simulating common tasks like walking, pushing,
-        pulling, bending, and squatting. Unlike traditional isolation exercises
-        that target specific muscles for aesthetic purposes, functional fitness
-        focuses on compound movements that engage multiple muscle groups and
-        joints simultaneously to improve overall coordination, stability, and
-        strength.
-      </p>
+      <p class="text-xl text-text-secondary">{intro.lead}</p>
     </div>
 
     <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-3">
       {
-        functionalTrainingPoints.map((point) => (
+        intro.cards.map((point, index) => (
           <div class="card-interactive flex h-full min-w-0 flex-col bg-bg-secondary p-8 rounded-xl border border-border-primary text-center">
             <div class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
-              <i class={`${point.icon} text-4xl text-primary`} />
+              <i
+                class={`${(["ri-run-line", "ri-heart-pulse-line", "ri-dna-line"] as const)[index] ?? "ri-run-line"} text-4xl text-primary`}
+              />
             </div>
             <h3 class="text-2xl font-bold text-text-primary mb-3">
               {point.title}

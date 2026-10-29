@@ -12,6 +12,23 @@
   @apply transition-all hover:scale-105;
 }
 
+/* Trailing CTA icons — nudge right on hover (portfolio-style) */
+@layer components {
+  a .ri-arrow-right-line,
+  a .ri-whatsapp-line,
+  button .ri-arrow-right-line {
+    @apply inline-block shrink-0 transition-transform duration-200 ease-out;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    a:hover .ri-arrow-right-line,
+    a:hover .ri-whatsapp-line,
+    button:hover .ri-arrow-right-line {
+      @apply translate-x-1;
+    }
+  }
+}
+
 @utility page-hero-bg {
   @apply bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary pt-32 pb-20;
 }

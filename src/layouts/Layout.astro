@@ -3,19 +3,23 @@ import "../styles/global.css";
 import "remixicon/fonts/remixicon.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { siteData } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData } = getSiteContent(locale);
+
 const { title = siteData.name, description = siteData.description } =
   Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

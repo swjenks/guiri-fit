@@ -1,9 +1,17 @@
 ---
 import SocialLinks from "./SocialLinks.astro";
-import { siteData, navigation, contactInfo } from "../data/siteData";
 import BrandName from "./BrandName.astro";
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/paths";
+import { getSiteContent } from "../data/getSiteContent";
 
-const footerQuickLinks = [{ name: "Home", href: "/" }, ...navigation];
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, navigation, contactInfo, ui } = getSiteContent(locale);
+
+const footerQuickLinks = [
+  { name: ui.footerHome, href: "/" },
+  ...navigation,
+];
 ---
 
 <footer class="bg-bg-primary border-t border-border-primary">
@@ -21,14 +29,14 @@ const footerQuickLinks = [{ name: "Home", href: "/" }, ...navigation];
       <!-- Quick Links -->
       <div>
         <h4 class="text-lg font-semibold text-text-primary mb-4">
-          Quick Links
+          {ui.footerQuickLinks}
         </h4>
         <ul class="space-y-2">
           {
             footerQuickLinks.map((item) => (
               <li>
                 <a
-                  href={item.href}
+                  href={localizedPath(locale, item.href)}
                   class="text-text-tertiary hover:text-primary transition-colors"
                 >
                   {item.name}
@@ -41,7 +49,9 @@ const footerQuickLinks = [{ name: "Home", href: "/" }, ...navigation];
 
       <!-- Contact Info -->
       <div>
-        <h4 class="text-lg font-semibold text-text-primary mb-4">Contact Me</h4>
+        <h4 class="text-lg font-semibold text-text-primary mb-4">
+          {ui.footerContact}
+        </h4>
         <ul class="space-y-4 text-text-tertiary">
           {
             contactInfo.slice(0, 3).map((info) => (
@@ -70,7 +80,7 @@ const footerQuickLinks = [{ name: "Home", href: "/" }, ...navigation];
       <p>
         &copy;{" "}
         <span data-copyright-year>{new Date().getFullYear()}</span>{" "}
-        {siteData.name}. All rights reserved.
+        {siteData.name}. {ui.footerRights}
       </p>
     </div>
   </div>

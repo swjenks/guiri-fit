@@ -1,0 +1,283 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import CoachPhoto from "@assets/shawn.jpeg";
+import eptiLogo from "@assets/cert-logos/epti.png";
+import crossfitLogo from "@assets/cert-logos/crossfit.svg";
+import nasmLogo from "@assets/cert-logos/nasm.png";
+import type { Locale } from "../../i18n/config";
+import { getSiteContent } from "../../data/getSiteContent";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, trainers, history, pages } = getSiteContent(locale);
+const copy = pages.about;
+
+const coach = trainers[0]!;
+
+const instituteLogos = {
+  epti: eptiLogo,
+  crossfit: crossfitLogo,
+  nasm: nasmLogo,
+} as const;
+
+type InstituteLogoKey = keyof typeof instituteLogos;
+---
+
+<Layout
+  title={`${copy.heroTitle} - ${siteData.name}`}
+  description={copy.metaDescription}
+>
+  <section
+    class="page-hero-bg"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
+          {copy.heroTitle}
+        </h1>
+        <p class="text-xl text-text-secondary">{copy.heroSubtitle}</p>
+      </div>
+
+      <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <div
+            class="relative mx-auto max-w-md overflow-hidden rounded-2xl border-2 border-border-primary bg-bg-secondary shadow-2xl lg:mx-0"
+          >
+            <Image
+              src={CoachPhoto}
+              alt={`${coach.name} - ${coach.role}`}
+              width={600}
+              height={750}
+              class="hero-profile-parallelogram w-full object-cover"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-3">
+            {coach.name}
+          </h2>
+          <p class="text-xl font-semibold text-primary mb-2">{coach.role}</p>
+          <p class="text-text-tertiary mb-4">{coach.specialization}</p>
+          <p class="mb-8 inline-flex items-center gap-2 rounded-full border border-border-primary bg-bg-primary/60 px-4 py-2 text-sm text-text-secondary">
+            <i class="ri-medal-line text-primary" aria-hidden="true"></i>
+            {coach.experience}
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed mb-8">
+            {coach.bio}
+          </p>
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div>
+              <h2
+                class="text-sm font-semibold uppercase tracking-wide text-text-primary mb-4"
+              >
+                Certifications
+              </h2>
+              <div
+                class="rounded-xl border border-border-primary bg-bg-primary/60 px-5 py-4 h-full"
+              >
+                <div class="mb-3 flex items-center gap-3">
+                  <Image
+                    src={
+                      instituteLogos[
+                        coach.certifications.logo as InstituteLogoKey
+                      ]
+                    }
+                    alt=""
+                    width={158}
+                    height={32}
+                    class="h-8 w-auto max-w-22 shrink-0 object-contain object-left"
+                  />
+                  <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
+                    {coach.certifications.institute}
+                  </p>
+                </div>
+                <ul class="space-y-1.5 pl-1">
+                  {
+                    coach.certifications.credentials.map((credential) => (
+                      <li class="flex items-start gap-2 text-sm text-text-secondary">
+                        <span
+                          class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary"
+                          aria-hidden="true"
+                        />
+                        {credential}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <h2
+                class="text-sm font-semibold uppercase tracking-wide text-text-primary mb-4"
+              >
+                Next Up
+              </h2>
+              <div class="flex h-full flex-col gap-4">
+                {
+                  coach.currentlyStudying.map((program) => (
+                    <div class="rounded-xl border border-border-primary bg-bg-primary/60 px-5 py-4">
+                      <div class="mb-3 flex items-center gap-3">
+                        <Image
+                          src={
+                            instituteLogos[program.logo as InstituteLogoKey]
+                          }
+                          alt=""
+                          width={158}
+                          height={32}
+                          class="h-8 w-auto max-w-22 shrink-0 object-contain object-left"
+                        />
+                        <p class="min-w-0 text-base font-semibold leading-snug text-text-primary">
+                          {program.institute}
+                        </p>
+                      </div>
+                      <ul class="space-y-1.5 pl-1">
+                        {program.credentials.map((credential) => (
+                          <li class="flex items-start gap-2 text-sm text-text-secondary">
+                            <span
+                              class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary"
+                              aria-hidden="true"
+                            />
+                            {credential}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-20 bg-bg-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold text-text-primary mb-8 text-center">
+          {copy.missionTitle}
+        </h2>
+        <div class="prose prose-invert max-w-none">
+          <p
+            class="mission-callout mb-8 rounded-xl border border-border-primary bg-bg-secondary px-6 py-6 text-xl font-semibold leading-snug text-text-primary md:text-2xl"
+          >
+            I believe that fitness isn't just about how much you can lift, how
+            fast and far you can run, how flexible you are, or how well you eat.
+            It's about what you want your quality of life to be.
+          </p>
+          <p class="text-lg text-text-tertiary mb-6 leading-relaxed">
+            As we age, the risk of chronic conditions like heart disease and
+            osteoporosis rises sharply, but regular physical activity is a
+            powerful tool to mitigate these dangers. Cardiovascular health is
+            significantly improved through aerobic exercise, which lowers blood
+            pressure, reduces cholesterol, and decreases the risk of stroke and
+            heart attack. Simultaneously, bone density naturally declines with
+            age, particularly in post-menopausal women who can lose up to 2% of
+            bone density yearly, making strength training critical to prevent
+            fractures and osteoporosis.
+          </p>
+          <p class="text-lg text-text-tertiary mb-6 leading-relaxed">
+            Functional fitness training addresses these risks by combining
+            aerobic exercise with muscle strengthening and balance work. This
+            combination not only builds lean muscle mass and improves
+            cardiovascular reserve but also enhances mobility and independence.
+            By engaging in regular physical activity, older adults can slow the
+            physiological effects of aging, reduce the risk of falls, and
+            maintain the functional ability needed for daily living.
+          </p>
+          <p class="text-lg text-text-tertiary mb-6 leading-relaxed">
+            Ultimately, staying active is essential for healthy aging and
+            longevity. Research shows that individuals who maintain high levels
+            of physical activity have lower mortality rates and a reduced risk
+            of developing chronic diseases. Whether through brisk walking,
+            resistance training, or balance exercises like Tai Chi, consistent
+            movement helps preserve muscle strength, bone health, and overall
+            vitality, allowing you to live independently and actively for
+            longer.
+          </p>
+          <p class="text-lg text-text-tertiary leading-relaxed">
+            {copy.missionBody}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-20 bg-bg-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
+        {copy.valuesTitle}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {
+          copy.values.map((value, index) => (
+            <div class="bg-bg-secondary p-8 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all">
+              <div class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
+                <i
+                  class={`${(["ri-heart-pulse-line", "ri-run-line", "ri-hand-heart-line"] as const)[index]} text-4xl text-primary`}
+                />
+              </div>
+              <h3 class="text-2xl font-bold text-text-primary mb-3">
+                {value.title}
+              </h3>
+              <p class="text-text-tertiary leading-relaxed">{value.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- History/Timeline Section -->
+  <section class="py-20 bg-bg-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
+        {copy.journeyTitle}
+      </h2>
+      <div class="max-w-4xl mx-auto">
+        <div class="relative">
+          <!-- Timeline Line -->
+          <div
+            class="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/30 hidden md:block"
+          >
+          </div>
+
+          <div class="space-y-12">
+            {
+              history.map((milestone) => (
+                <div class="relative flex items-start gap-6">
+                  <div class="hidden md:block shrink-0">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center border-4 border-bg-primary">
+                      <span class="text-bg-primary font-bold text-sm">
+                        {milestone.year}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex-1 bg-bg-secondary p-6 rounded-xl border border-border-primary hover:border-border-accent transition-all">
+                    <div class="md:hidden mb-2">
+                      <span class="bg-primary text-bg-primary px-3 py-1 rounded-full text-sm font-bold">
+                        {milestone.year}
+                      </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-text-primary mb-2">
+                      {milestone.title}
+                    </h3>
+                    <p class="text-text-secondary leading-relaxed">
+                      {milestone.description}
+                    </p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

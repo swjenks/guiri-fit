@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import AboutIntro from '../../components/AboutIntro.astro';
+import Features from '../../components/Features.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import FAQ from '../../components/FAQ.astro';
+import type { Locale } from '../../i18n/config';
+import { getSiteContent } from '../../data/getSiteContent';
+
+const locale = (Astro.currentLocale ?? 'en') as Locale;
+const { siteData, pages, contactHref } = getSiteContent(locale);
+---
+
+<Layout title={`${siteData.name} - ${siteData.tagline}`} description={siteData.description}>
+  <Hero />
+  <AboutIntro />
+  <Features />
+  <Testimonials />
+  <FAQ subtitle={pages.home.faqSubtitle} />
+
+  <!-- CTA Section -->
+  <section class="section-cta-gradient">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-bg-primary mb-4">
+        {pages.home.ctaTitle}
+      </h2>
+      <p class="text-xl text-bg-primary/90 mb-8 max-w-2xl mx-auto">
+        {pages.home.ctaBody}
+      </p>
+      <a
+        href={contactHref}
+        class="btn-interactive inline-flex items-center justify-center gap-3 rounded-lg bg-bg-primary px-8 py-4 text-lg font-bold text-text-primary shadow-lg hover:bg-bg-secondary"
+      >
+        {pages.home.ctaButton}
+        <i class="ri-arrow-right-line"></i>
+      </a>
+    </div>
+  </section>
+</Layout>

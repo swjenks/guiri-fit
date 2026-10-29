@@ -4,18 +4,27 @@ import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm.astro";
 import ScheduleSeasonInit from "../components/ScheduleSeasonInit.astro";
 import SocialLinks from "../components/SocialLinks.astro";
-import { siteData, contactInfo } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/paths";
+import { getSiteContent } from "../data/getSiteContent";
 import { getContactHoursLines } from "../utils/contactHours";
 import MapImage from "@assets/photo-1517487881594-2787fef5ebf7.jpg";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, contactInfo, pages } = getSiteContent(locale);
+const copy = pages.contact;
+const hoursHref = localizedPath(locale, "/hours");
+const hoursHere = locale === "es" ? "aquí" : "here";
+const hoursCetLine =
+  locale === "es"
+    ? "Horas en CET. Calendario completo"
+    : "Times shown in CET. See the full calendar";
 
 const springFallContactHours = getContactHoursLines("spring-fall");
 const summerWinterContactHours = getContactHoursLines("summer-winter");
 ---
 
-<Layout
-  title={`Contact Me - ${siteData.name}`}
-  description="Get in touch with us to start your fitness journey"
->
+<Layout title={`${copy.heroTitle} - ${siteData.name}`} description={copy.metaDescription}>
   <ScheduleSeasonInit />
   <!-- Hero Section -->
   <section
@@ -24,11 +33,9 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto">
         <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
-          Contact Me
+          {copy.heroTitle}
         </h1>
-        <p class="text-xl text-text-secondary">
-          We're here to help you on your fitness journey. Get in touch today!
-        </p>
+        <p class="text-xl text-text-secondary">{copy.heroSubtitle}</p>
       </div>
     </div>
   </section>
@@ -40,7 +47,7 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
         <!-- Contact Information -->
         <div>
           <h2 class="text-3xl font-bold text-text-primary mb-8">
-            Get In Touch
+            {copy.getInTouch}
           </h2>
           <div class="space-y-6">
             {
@@ -80,7 +87,7 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
               </div>
               <div class="min-w-0 flex-1">
                 <h3 class="text-xl font-semibold text-text-primary mb-2">
-                  Hours
+                  {copy.hoursTitle}
                 </h3>
                 <div
                   class="contact-hours-season space-y-1"
@@ -101,12 +108,12 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
                     ))
                   }
                   <p class="text-text-tertiary leading-relaxed">
-                    Times shown in CET. See the full calendar{" "}
+                    {hoursCetLine}{" "}
                     <a
-                      href="/hours"
+                      href={hoursHref}
                       class="text-primary hover:text-primary-hover underline underline-offset-2"
                     >
-                      here
+                      {hoursHere}
                     </a>
                     .
                   </p>
@@ -130,12 +137,12 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
                     ))
                   }
                   <p class="text-text-tertiary leading-relaxed">
-                    Times shown in CET. See the full calendar{" "}
+                    {hoursCetLine}{" "}
                     <a
-                      href="/hours"
+                      href={hoursHref}
                       class="text-primary hover:text-primary-hover underline underline-offset-2"
                     >
-                      here
+                      {hoursHere}
                     </a>
                     .
                   </p>
@@ -147,7 +154,7 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
           <!-- Social Links -->
           <div class="mt-10">
             <h3 class="text-xl font-semibold text-text-primary mb-4">
-              Follow Us
+              {locale === "es" ? "Sígueme" : "Follow Us"}
             </h3>
             <SocialLinks variant="contact" />
           </div>

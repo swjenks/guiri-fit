@@ -5,7 +5,12 @@ import CoachPhoto from "@assets/shawn.jpeg";
 import eptiLogo from "@assets/cert-logos/epti.png";
 import crossfitLogo from "@assets/cert-logos/crossfit.svg";
 import nasmLogo from "@assets/cert-logos/nasm.png";
-import { siteData, trainers, history } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, trainers, history, pages } = getSiteContent(locale);
+const copy = pages.about;
 
 const coach = trainers[0]!;
 
@@ -19,8 +24,8 @@ type InstituteLogoKey = keyof typeof instituteLogos;
 ---
 
 <Layout
-  title={`About Me - ${siteData.name}`}
-  description="Meet Coach Shawn and learn about the mission behind GuiriFit"
+  title={`${copy.heroTitle} - ${siteData.name}`}
+  description={copy.metaDescription}
 >
   <section
     class="page-hero-bg"
@@ -28,11 +33,9 @@ type InstituteLogoKey = keyof typeof instituteLogos;
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
-          About Me
+          {copy.heroTitle}
         </h1>
-        <p class="text-xl text-text-secondary">
-          Get to know your Guiri Coach
-        </p>
+        <p class="text-xl text-text-secondary">{copy.heroSubtitle}</p>
       </div>
 
       <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
@@ -157,7 +160,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-4xl font-bold text-text-primary mb-8 text-center">
-          My Mission
+          {copy.missionTitle}
         </h2>
         <div class="prose prose-invert max-w-none">
           <p
@@ -198,9 +201,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
             longer.
           </p>
           <p class="text-lg text-text-tertiary leading-relaxed">
-            I provide expert guidance and a supportive environment that empowers
-            everyone that trains with me to push their limits and achieve
-            extraordinary results.
+            {copy.missionBody}
           </p>
         </div>
       </div>
@@ -211,51 +212,24 @@ type InstituteLogoKey = keyof typeof instituteLogos;
   <section class="py-20 bg-bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
-        My Values
+        {copy.valuesTitle}
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <div
-          class="bg-bg-secondary p-8 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all"
-        >
-          <div
-            class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6"
-          >
-            <i class="ri-heart-pulse-line text-4xl text-primary"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-text-primary mb-3">Health</h3>
-          <p class="text-text-tertiary leading-relaxed">
-            Training and habits that support long-term wellbeing—not quick fixes
-            or burnout
-          </p>
-        </div>
-        <div
-          class="bg-bg-secondary p-8 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all"
-        >
-          <div
-            class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6"
-          >
-            <i class="ri-run-line text-4xl text-primary"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-text-primary mb-3">Fitness</h3>
-          <p class="text-text-tertiary leading-relaxed">
-            Building strength, stamina, and skill at a level that fits your life
-            and goals
-          </p>
-        </div>
-        <div
-          class="bg-bg-secondary p-8 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all"
-        >
-          <div
-            class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6"
-          >
-            <i class="ri-hand-heart-line text-4xl text-primary"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-text-primary mb-3">Community</h3>
-          <p class="text-text-tertiary leading-relaxed">
-            A supportive circle where people show up, encourage each other, and
-            stay accountable
-          </p>
-        </div>
+        {
+          copy.values.map((value, index) => (
+            <div class="bg-bg-secondary p-8 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all">
+              <div class="w-20 h-20 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
+                <i
+                  class={`${(["ri-heart-pulse-line", "ri-run-line", "ri-hand-heart-line"] as const)[index]} text-4xl text-primary`}
+                />
+              </div>
+              <h3 class="text-2xl font-bold text-text-primary mb-3">
+                {value.title}
+              </h3>
+              <p class="text-text-tertiary leading-relaxed">{value.body}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -264,7 +238,7 @@ type InstituteLogoKey = keyof typeof instituteLogos;
   <section class="py-20 bg-bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
-        My Journey
+        {copy.journeyTitle}
       </h2>
       <div class="max-w-4xl mx-auto">
         <div class="relative">

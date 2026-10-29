@@ -1,32 +1,41 @@
 ---
-import { testimonials } from '../data/siteData';
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { testimonials } = getSiteContent(locale);
+
+const sectionTitle =
+  locale === "es" ? "Lo que dicen los miembros" : "What Members Say";
 ---
 
-<section id="testimonials" class="py-20 bg-bg-primary">
+<section class="py-20 bg-bg-primary">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">What Our Members Say</h2>
-      <p class="text-xl text-text-secondary max-w-2xl mx-auto">
-        Real stories from real people achieving their fitness goals
-      </p>
+      <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">
+        {sectionTitle}
+      </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      {testimonials.map((testimonial) => (
-        <div class="card-interactive bg-bg-secondary p-8 rounded-xl border border-border-primary">
-          <div class="flex mb-6 gap-1">
-            {Array.from({ length: testimonial.rating }).map(() => (
-              <i class="ri-star-fill text-primary text-xl"></i>
-            ))}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {
+        testimonials.map((testimonial) => (
+          <div class="card-interactive bg-bg-secondary p-8 rounded-xl border border-border-primary">
+            <div class="flex gap-1 mb-4">
+              {Array.from({ length: testimonial.rating }).map(() => (
+                <i class="ri-star-fill text-primary" />
+              ))}
+            </div>
+            <p class="text-text-secondary mb-6 leading-relaxed italic">
+              "{testimonial.content}"
+            </p>
+            <div>
+              <h4 class="font-bold text-text-primary">{testimonial.name}</h4>
+              <p class="text-text-tertiary text-sm">{testimonial.role}</p>
+            </div>
           </div>
-          <p class="text-text-secondary mb-6 italic leading-relaxed">"{testimonial.content}"</p>
-          <div class="pt-4 border-t border-border-primary">
-            <div class="font-bold text-text-primary mb-1">{testimonial.name}</div>
-            <div class="text-sm text-text-tertiary">{testimonial.role}</div>
-          </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
-

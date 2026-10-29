@@ -1,16 +1,15 @@
 ---
 import { Image } from "astro:assets";
-import { siteData } from "@data/siteData";
 import HeroBackgroundImage from "@assets/photo-1534438327276-14e5300c3a48.jpg";
 import HeroForegroundImage from "@assets/shawn.jpeg";
 import BrandName from "./BrandName.astro";
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/paths";
+import { getSiteContent } from "../data/getSiteContent";
 
-const taglineClean = siteData.tagline.replace(/[,!]/g, "").trim();
-const taglineSegments = taglineClean.split(/\s+(?=get\s)/i);
-const taglineLine1 = taglineSegments[0] ?? "";
-const taglineLine2 = taglineSegments[1] ?? "";
-const taglineClosing = taglineSegments[2] ?? "";
-const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, ui, pages, contactHref } = getSiteContent(locale);
+const heroLines = pages.home.heroLines;
 ---
 
 <section
@@ -37,32 +36,14 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
       <div class="text-center lg:text-left">
         <h1 class="hero-tagline mb-6 font-bold text-text-primary">
           {
-            taglineLine1 && (
+            heroLines.map((line) => (
               <span class="hero-tagline-line whitespace-nowrap">
-                {taglineLine1}
+                {line.text}
+                {"suffixBrand" in line && line.suffixBrand ? (
+                  <BrandName class="hero-tagline-brand text-primary" />
+                ) : null}
               </span>
-            )
-          }
-          {
-            taglineLine2 && (
-              <span class="hero-tagline-line whitespace-nowrap">
-                {taglineLine2}
-              </span>
-            )
-          }
-          {
-            taglineClosingMatch ? (
-              <span class="hero-tagline-line whitespace-nowrap">
-                {taglineClosingMatch[1]}
-                <BrandName class="hero-tagline-brand text-primary" />
-              </span>
-            ) : (
-              taglineClosing && (
-                <span class="hero-tagline-line whitespace-nowrap">
-                  {taglineClosing}
-                </span>
-              )
-            )
+            ))
           }
         </h1>
         <p
@@ -74,17 +55,17 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
           class="hero-tagline-follow flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start"
         >
           <a
-            href="/contact"
+            href={contactHref}
             class="bg-primary hover:bg-primary-hover text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all transform inline-flex items-center justify-center gap-3"
           >
-            Start Your Journey
+            {ui.startYourJourney}
             <i class="ri-arrow-right-line"></i>
           </a>
           <a
-            href="/about"
+            href={localizedPath(locale, "/about")}
             class="bg-transparent border-2 border-text-primary text-text-primary hover:bg-text-primary hover:text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center"
           >
-            About Me
+            {ui.aboutMe}
           </a>
         </div>
       </div>
@@ -97,7 +78,7 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
           <div class="absolute inset-0 skew-x-10 origin-center scale-[1.14]">
             <Image
               src={HeroForegroundImage}
-              alt="Fitness training with GuiriFit"
+              alt={`Fitness training with ${siteData.name}`}
               width={800}
               height={1000}
               class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
@@ -110,12 +91,12 @@ const taglineClosingMatch = taglineClosing.match(/^(get\s+)(GuiriFit)$/i);
             >
               <div class="skew-x-10">
                 <h3 class="text-base font-bold leading-tight text-bg-primary">
-                  Coach Shawn
+                  {ui.heroCoachName}
                 </h3>
                 <p
                   class="mt-1 text-base font-medium leading-tight text-bg-primary/85"
                 >
-                  Your Guiri Trainer
+                  {ui.heroCoachRole}
                 </p>
               </div>
             </div>

@@ -1,16 +1,16 @@
 ---
-import {
-  siteData,
-  socialLinks,
-  socialLinksEnabled,
-  socialMediaComingSoonNote,
-} from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
+import { socialLinks } from "../data/siteData";
 
 interface Props {
   variant?: "footer" | "contact";
 }
 
 const { variant = "footer" } = Astro.props;
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, socialLinksEnabled, socialMediaComingSoonNote } =
+  getSiteContent(locale);
 
 const iconWrapperClass =
   variant === "contact"

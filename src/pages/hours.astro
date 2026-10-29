@@ -1,55 +1,54 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { siteData } from "@data/siteData";
 import ScheduleSeasonBlock from "../components/ScheduleSeasonBlock.astro";
 import ScheduleSeasonInit from "../components/ScheduleSeasonInit.astro";
+import type { Locale } from "../i18n/config";
+import { getScheduleSeasonCopy, getCalendarDayLabels } from "../i18n/schedule";
+import { getSiteContent } from "../data/getSiteContent";
 import {
   outdoorScheduleDays,
   scheduleDays,
   toCalendarDays,
 } from "../utils/classSchedule";
-import { scheduleSeasonCopy } from "../utils/scheduleSeason";
 
-const springFallDays = toCalendarDays(outdoorScheduleDays);
-const summerWinterDays = toCalendarDays(scheduleDays);
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, pages } = getSiteContent(locale);
+const seasonCopy = getScheduleSeasonCopy(locale);
+const dayLabels = getCalendarDayLabels(locale);
+
+const springFallDays = toCalendarDays(outdoorScheduleDays, dayLabels);
+const summerWinterDays = toCalendarDays(scheduleDays, dayLabels);
+const copy = pages.hours;
 ---
 
-<Layout
-  title={`Hours - ${siteData.name}`}
-  description="Weekly training hours and class schedule in Granada"
->
+<Layout title={`${copy.heroTitle} - ${siteData.name}`} description={copy.metaDescription}>
   <ScheduleSeasonInit />
-  <section
-    class="page-hero-bg"
-  >
+  <section class="page-hero-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
-          Hours
+          {copy.heroTitle}
         </h1>
-        <p class="text-xl text-text-secondary">
-          There are two seasonal calendars, the active one always appears first.
-          Times are shown in CET.
-        </p>
+        <p class="text-xl text-text-secondary">{copy.heroSubtitle}</p>
       </div>
 
       <div class="schedule-season-stack p-4 sm:p-6">
         <ScheduleSeasonBlock
           season="spring-fall"
-          title={scheduleSeasonCopy.springFall.title}
-          description={scheduleSeasonCopy.springFall.description}
+          title={seasonCopy.springFall.title}
+          description={seasonCopy.springFall.description}
           days={springFallDays}
           brandName={siteData.name}
         />
         <ScheduleSeasonBlock
           season="summer-winter"
-          title={scheduleSeasonCopy.summerWinter.title}
-          description={scheduleSeasonCopy.summerWinter.description}
+          title={seasonCopy.summerWinter.title}
+          description={seasonCopy.summerWinter.description}
           days={summerWinterDays}
           brandName={siteData.name}
         />
         <p class="text-text-tertiary text-center mt-2 text-sm order-3">
-          Times subject to change based on client needs and gym availability.
+          {copy.disclaimer}
         </p>
       </div>
     </div>

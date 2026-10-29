@@ -1,14 +1,18 @@
 ---
 import PricingPackagesTable from "./PricingPackagesTable.astro";
-import { outdoorTrainingPackages } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { outdoorTrainingPackages, pricingSectionCopy, ui, contactHref } =
+  getSiteContent(locale);
 const { subtitle, rows } = outdoorTrainingPackages;
 ---
 
 <div class="max-w-6xl mx-auto mb-16">
   <div class="text-center mb-10">
     <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-3">
-      Outdoor Training (Seasonal)
+      {pricingSectionCopy.outdoor.title}
     </h2>
     <p class="text-lg md:text-xl text-text-secondary">{subtitle}</p>
   </div>
@@ -20,10 +24,10 @@ const { subtitle, rows } = outdoorTrainingPackages;
 
     <div class="flex justify-center">
       <a
-        href="/contact"
+        href={contactHref}
         class="inline-flex min-w-56 items-center justify-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary transition-all hover:bg-primary-hover"
       >
-        Get Started
+        {ui.getStarted}
         <i class="ri-arrow-right-line" aria-hidden="true"></i>
       </a>
     </div>

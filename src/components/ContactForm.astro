@@ -1,6 +1,9 @@
 ---
-import { siteData } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, ui } = getSiteContent(locale);
 const mailto = `mailto:${siteData.email}`;
 ---
 
@@ -10,8 +13,7 @@ const mailto = `mailto:${siteData.email}`;
     role="status"
   >
     <p>
-      This form is still under construction. For now, please email me directly
-      at{" "}
+      {ui.contactFormNotice}{" "}
       <a
         href={mailto}
         class="font-medium text-primary hover:text-primary-hover underline-offset-2 hover:underline"
@@ -24,7 +26,7 @@ const mailto = `mailto:${siteData.email}`;
 
   <div>
     <label for="name" class="block text-text-primary font-semibold mb-2">
-      Full Name
+      {ui.contactFormFullName}
     </label>
     <input
       type="text"
@@ -32,13 +34,13 @@ const mailto = `mailto:${siteData.email}`;
       name="name"
       required
       class="w-full px-4 py-3 bg-bg-secondary border border-border-primary rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-border-accent transition-colors"
-      placeholder="John Doe"
+      placeholder={ui.contactFormNamePlaceholder}
     />
   </div>
 
   <div>
     <label for="email" class="block text-text-primary font-semibold mb-2">
-      Email Address
+      {ui.contactFormEmail}
     </label>
     <input
       type="email"
@@ -46,26 +48,26 @@ const mailto = `mailto:${siteData.email}`;
       name="email"
       required
       class="w-full px-4 py-3 bg-bg-secondary border border-border-primary rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-border-accent transition-colors"
-      placeholder="john@example.com"
+      placeholder={ui.contactFormEmailPlaceholder}
     />
   </div>
 
   <div>
     <label for="whatsapp" class="block text-text-primary font-semibold mb-2">
-      WhatsApp
+      {ui.contactFormWhatsApp}
     </label>
     <input
       type="tel"
       id="whatsapp"
       name="whatsapp"
       class="w-full px-4 py-3 bg-bg-secondary border border-border-primary rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-border-accent transition-colors"
-      placeholder="+1 (555) 123-4567"
+      placeholder={ui.contactFormWhatsAppPlaceholder}
     />
   </div>
 
   <div>
     <label for="message" class="block text-text-primary font-semibold mb-2">
-      Message
+      {ui.contactFormMessage}
     </label>
     <textarea
       id="message"
@@ -73,7 +75,7 @@ const mailto = `mailto:${siteData.email}`;
       rows="5"
       required
       class="w-full px-4 py-3 bg-bg-secondary border border-border-primary rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:border-border-accent transition-colors resize-none"
-      placeholder="Tell us about your fitness goals..."
+      placeholder={ui.contactFormMessagePlaceholder}
     ></textarea>
   </div>
 
@@ -81,8 +83,7 @@ const mailto = `mailto:${siteData.email}`;
     type="submit"
     class="btn-interactive flex w-full items-center justify-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary hover:bg-primary-hover"
   >
-    Send Message
+    {ui.contactFormSubmit}
     <i class="ri-send-plane-line"></i>
   </button>
 </form>
-

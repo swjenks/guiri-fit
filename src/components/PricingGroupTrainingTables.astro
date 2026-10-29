@@ -1,28 +1,30 @@
 ---
 import PricingPackagesTable from "./PricingPackagesTable.astro";
-import { groupTrainingPackages } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { groupTrainingPackages, pricingSectionCopy, ui, contactHref } =
+  getSiteContent(locale);
 const { subtitle, footnote, totalColumnLabel, tables } = groupTrainingPackages;
 
 const tableIds = ["duo", "trio", "quad"] as const;
 const groupSizes = [2, 3, 4] as const;
+const groupTabLabel =
+  locale === "es" ? "Tamaño del grupo" : "Group training size";
 ---
 
 <div class="max-w-6xl mx-auto mb-16">
   <div class="text-center mb-10">
     <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-3">
-      Group Training
+      {pricingSectionCopy.groupTraining.title}
     </h2>
     <p class="text-lg md:text-xl text-text-secondary">{subtitle}</p>
   </div>
 
   <div class="flex flex-col gap-8">
     <div class="min-w-0" data-pricing-group-root>
-      <div
-        class="pricing-group-tabs"
-        role="tablist"
-        aria-label="Group training size"
-      >
+      <div class="pricing-group-tabs" role="tablist" aria-label={groupTabLabel}>
         {
           tables.map((table, index) => {
             const id = tableIds[index] ?? `group-${index}`;
@@ -38,7 +40,7 @@ const groupSizes = [2, 3, 4] as const;
                 <i
                   class="ri-group-line pricing-group-tab-icon"
                   aria-hidden="true"
-                ></i>
+                />
                 <span class="tabular-nums">{groupSizes[index]}</span>
               </button>
             );
@@ -72,10 +74,10 @@ const groupSizes = [2, 3, 4] as const;
 
     <div class="flex justify-center">
       <a
-        href="/contact"
+        href={contactHref}
         class="inline-flex min-w-56 items-center justify-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary transition-all hover:bg-primary-hover"
       >
-        Get Started
+        {ui.getStarted}
         <i class="ri-arrow-right-line" aria-hidden="true"></i>
       </a>
     </div>

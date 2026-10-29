@@ -1,6 +1,12 @@
 ---
-import { navigation } from "../data/siteData";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
 import BrandName from "./BrandName.astro";
+import type { Locale } from "../i18n/config";
+import { localizedPath } from "../i18n/paths";
+import { getSiteContent } from "../data/getSiteContent";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { navigation, ui, contactHref } = getSiteContent(locale);
 ---
 
 <header
@@ -10,17 +16,17 @@ import BrandName from "./BrandName.astro";
     <div class="flex items-center justify-between py-4">
       <!-- Logo -->
       <div class="shrink-0 flex items-center">
-        <a href="/" class="text-primary">
+        <a href={localizedPath(locale, "/")} class="text-primary">
           <BrandName />
         </a>
       </div>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex md:items-center md:justify-center md:gap-8">
+      <div class="hidden md:flex md:items-center md:justify-center md:gap-6 lg:gap-8">
         {
           navigation.map((item) => (
             <a
-              href={item.href}
+              href={localizedPath(locale, item.href)}
               class="text-text-secondary hover:text-primary transition-colors font-medium text-base py-2"
             >
               {item.name}
@@ -28,12 +34,13 @@ import BrandName from "./BrandName.astro";
           ))
         }
         <a
-          href="/contact"
+          href={contactHref}
           class="bg-primary hover:bg-primary-hover text-bg-primary rounded-lg font-semibold transition-all duration-200 inline-flex items-center justify-center gap-2 px-6 py-2.5"
         >
-          Contact
+          {ui.navContact}
           <i class="ri-arrow-right-line"></i>
         </a>
+        <LanguageSwitcher />
       </div>
 
       <!-- Mobile menu button -->
@@ -49,10 +56,13 @@ import BrandName from "./BrandName.astro";
 
     <!-- Mobile Navigation -->
     <div id="mobile-menu" class="hidden md:hidden pb-6 pt-2 space-y-2">
+      <div class="flex justify-center pb-2">
+        <LanguageSwitcher />
+      </div>
       {
         navigation.map((item) => (
           <a
-            href={item.href}
+            href={localizedPath(locale, item.href)}
             class="block px-4 py-3 text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors font-medium"
           >
             {item.name}
@@ -60,10 +70,10 @@ import BrandName from "./BrandName.astro";
         ))
       }
       <a
-        href="/contact"
+        href={contactHref}
         class="flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-bg-primary rounded-lg text-center font-semibold transition-all duration-200 mt-2 shadow-md hover:shadow-lg"
       >
-        Contact
+        {ui.navContact}
         <i class="ri-arrow-right-line"></i>
       </a>
     </div>

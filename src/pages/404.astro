@@ -1,33 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { siteData } from '../data/siteData';
+import type { Locale } from '../i18n/config';
+import { localizedPath } from '../i18n/paths';
+import { getSiteContent } from '../data/getSiteContent';
+
+const locale = (Astro.currentLocale ?? 'en') as Locale;
+const { siteData, ui, contactHref } = getSiteContent(locale);
+const notFoundBody =
+  locale === 'es'
+    ? 'La página que buscas no existe o se ha movido.'
+    : "The page you're looking for doesn't exist or has been moved.";
+const goHome = locale === 'es' ? 'Ir al inicio' : 'Go Home';
 ---
 
-<Layout title={`404 - Page Not Found | ${siteData.name}`} description="Page not found">
+<Layout title={`404 - ${ui.notFound.title} | ${siteData.name}`} description={ui.notFound.title}>
   <section class="min-h-screen flex items-center justify-center bg-linear-to-br from-bg-primary via-bg-secondary to-bg-primary pt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-8xl font-bold text-primary mb-4">404</h1>
-      <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">Page Not Found</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">{ui.notFound.title}</h2>
       <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-        The page you're looking for doesn't exist or has been moved.
+        {notFoundBody}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
         <a
-          href="/"
+          href={localizedPath(locale, '/')}
           class="btn-interactive inline-flex items-center justify-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary hover:bg-primary-hover"
         >
-          Go Home
+          {goHome}
           <i class="ri-home-line"></i>
         </a>
         <a
-          href="/contact"
+          href={contactHref}
           class="bg-transparent border-2 border-text-primary text-text-primary hover:bg-text-primary hover:text-bg-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-3"
         >
-          Contact Me
+          {ui.notFound.contact}
           <i class="ri-mail-line"></i>
         </a>
       </div>
     </div>
   </section>
 </Layout>
-

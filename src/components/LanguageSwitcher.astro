@@ -1,0 +1,46 @@
+---
+import type { Locale } from "../i18n/config";
+import { localeLabels } from "../i18n/config";
+import { localizedPath } from "../i18n/paths";
+import { getUi } from "../i18n/ui";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const ui = getUi(locale);
+const pathname = Astro.url.pathname;
+---
+
+<div
+  class="lang-switch flex items-center gap-1.5 text-sm font-semibold tracking-wide"
+  role="navigation"
+  aria-label={ui.languageNavLabel}
+>
+  <a
+    href={localizedPath("en", pathname)}
+    class:list={[
+      "rounded px-1 py-0.5 transition-colors",
+      locale === "en"
+        ? "text-primary"
+        : "text-text-tertiary hover:text-primary",
+    ]}
+    lang="en"
+    hreflang="en"
+    aria-current={locale === "en" ? "true" : undefined}
+  >
+    {localeLabels.en}
+  </a>
+  <span class="text-text-muted/80 select-none" aria-hidden="true">|</span>
+  <a
+    href={localizedPath("es", pathname)}
+    class:list={[
+      "rounded px-1 py-0.5 transition-colors",
+      locale === "es"
+        ? "text-primary"
+        : "text-text-tertiary hover:text-primary",
+    ]}
+    lang="es"
+    hreflang="es"
+    aria-current={locale === "es" ? "true" : undefined}
+  >
+    {localeLabels.es}
+  </a>
+</div>

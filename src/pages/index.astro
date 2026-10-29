@@ -5,7 +5,11 @@ import AboutIntro from '../components/AboutIntro.astro';
 import Features from '../components/Features.astro';
 import Testimonials from '../components/Testimonials.astro';
 import FAQ from '../components/FAQ.astro';
-import { siteData } from '../data/siteData';
+import type { Locale } from '../i18n/config';
+import { getSiteContent } from '../data/getSiteContent';
+
+const locale = (Astro.currentLocale ?? 'en') as Locale;
+const { siteData, pages, contactHref } = getSiteContent(locale);
 ---
 
 <Layout title={`${siteData.name} - ${siteData.tagline}`} description={siteData.description}>
@@ -13,22 +17,22 @@ import { siteData } from '../data/siteData';
   <AboutIntro />
   <Features />
   <Testimonials />
-  <FAQ subtitle="Everything you need to know about GuiriFit" />
+  <FAQ subtitle={pages.home.faqSubtitle} />
 
   <!-- CTA Section -->
   <section class="section-cta-gradient">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-bg-primary mb-4">
-        Ready to start your fitness journey?
+        {pages.home.ctaTitle}
       </h2>
       <p class="text-xl text-bg-primary/90 mb-8 max-w-2xl mx-auto">
-        Sometimes, all you need is a little nudge to hit this button...
+        {pages.home.ctaBody}
       </p>
       <a
-        href="/contact"
+        href={contactHref}
         class="btn-interactive inline-flex items-center justify-center gap-3 rounded-lg bg-bg-primary px-8 py-4 text-lg font-bold text-text-primary shadow-lg hover:bg-bg-secondary"
       >
-        Start Your Adventure
+        {pages.home.ctaButton}
         <i class="ri-arrow-right-line"></i>
       </a>
     </div>

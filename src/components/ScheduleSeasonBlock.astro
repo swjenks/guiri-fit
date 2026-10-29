@@ -1,5 +1,7 @@
 ---
 import ScheduleCalendar from "./ScheduleCalendar.astro";
+import type { Locale } from "../i18n/config";
+import { getScheduleUi } from "../i18n/schedule";
 import type { ScheduleSlot } from "../utils/classSchedule";
 import type { ScheduleSeasonKind } from "../utils/scheduleSeason";
 
@@ -17,6 +19,8 @@ interface Props {
 }
 
 const { season, title, description, days, brandName } = Astro.props;
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const scheduleUi = getScheduleUi(locale);
 ---
 
 <article
@@ -38,12 +42,12 @@ const { season, title, description, days, brandName } = Astro.props;
       <span
         class="schedule-season-badge schedule-season-badge--status-active"
       >
-        Active Now
+        {scheduleUi.activeNow}
       </span>
       <span
         class="schedule-season-badge schedule-season-badge--status-inactive"
       >
-        Inactive
+        {scheduleUi.inactive}
       </span>
     </div>
   </header>

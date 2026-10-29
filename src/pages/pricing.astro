@@ -6,24 +6,23 @@ import PricingGroupTrainingTables from "../components/PricingGroupTrainingTables
 import PricingNutritionSupportTable from "../components/PricingNutritionSupportTable.astro";
 import PricingOutdoorTrainingTable from "../components/PricingOutdoorTrainingTable.astro";
 import PricingTrainingPackagesTable from "../components/PricingTrainingPackagesTable.astro";
-import { paymentOptions, pricingFaqs, siteData } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const { siteData, paymentOptions, pricingFaqs, pages, contactHref } =
+  getSiteContent(locale);
+const copy = pages.pricing;
 ---
 
-<Layout
-  title={`Pricing - ${siteData.name}`}
-  description="Choose the perfect membership plan for your fitness journey"
->
-  <section
-    class="page-hero-bg"
-  >
+<Layout title={`${copy.heroTitle} - ${siteData.name}`} description={copy.metaDescription}>
+  <section class="page-hero-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">
-          Pricing
+          {copy.heroTitle}
         </h1>
-        <p class="text-xl text-text-secondary">
-          Flexible pricing options to fit your lifestyle and fitness goals
-        </p>
+        <p class="text-xl text-text-secondary">{copy.heroSubtitle}</p>
       </div>
 
       <PricingTrainingPackagesTable />
@@ -34,18 +33,17 @@ import { paymentOptions, pricingFaqs, siteData } from "../data/siteData";
     </div>
   </section>
 
-  <!-- Payment Options Section -->
   <section class="py-20 bg-bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-text-primary mb-12 text-center">
-        Payment Options
+        {copy.paymentTitle}
       </h2>
       <div class="max-w-4xl mx-auto">
         <div
           class="bg-bg-primary p-8 rounded-xl border border-border-primary mb-8"
         >
           <h3 class="text-2xl font-bold text-text-primary mb-6 text-center">
-            Accepted Payment Methods
+            {copy.paymentMethodsTitle}
           </h3>
           <div class="flex flex-wrap justify-center gap-4">
             {
@@ -89,24 +87,23 @@ import { paymentOptions, pricingFaqs, siteData } from "../data/siteData";
   <FAQ
     id="payment-questions"
     items={pricingFaqs}
-    title="Common Payment Questions"
+    title={copy.faqSectionTitle}
     showFooter={false}
   />
 
-  <!-- CTA Section -->
   <section class="section-cta-gradient">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-bg-primary mb-4">
-        Ready to Get Started?
+        {copy.ctaTitle}
       </h2>
       <p class="text-xl text-bg-primary/90 mb-8 max-w-2xl mx-auto">
-        Contact us today to schedule a tour and start your fitness journey
+        {copy.ctaBody}
       </p>
       <a
-        href="/contact"
+        href={contactHref}
         class="btn-interactive inline-flex items-center justify-center gap-3 rounded-lg bg-bg-primary px-8 py-4 text-lg font-bold text-text-primary shadow-lg hover:bg-bg-secondary"
       >
-        Contact Me
+        {copy.ctaButton}
         <i class="ri-arrow-right-line"></i>
       </a>
     </div>

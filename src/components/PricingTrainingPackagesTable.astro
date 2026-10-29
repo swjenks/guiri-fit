@@ -1,18 +1,25 @@
 ---
 import PricingPackagesTable from "./PricingPackagesTable.astro";
-import { personalTrainingPackages } from "../data/siteData";
+import type { Locale } from "../i18n/config";
+import { getSiteContent } from "../data/getSiteContent";
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const {
+  personalTrainingPackages,
+  pricingSectionCopy,
+  ui,
+  contactHref,
+} = getSiteContent(locale);
 const { footnote, rows } = personalTrainingPackages;
+const copy = pricingSectionCopy.personalTraining;
 ---
 
 <div class="max-w-6xl mx-auto mb-16">
   <div class="text-center mb-10">
     <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-3">
-      Personal Training
+      {copy.title}
     </h2>
-    <p class="text-lg md:text-xl text-text-secondary">
-      Base rate €30/session • Volume discounts up to 18%
-    </p>
+    <p class="text-lg md:text-xl text-text-secondary">{copy.subtitle}</p>
   </div>
 
   <div class="flex flex-col gap-8">
@@ -23,10 +30,10 @@ const { footnote, rows } = personalTrainingPackages;
 
     <div class="flex justify-center">
       <a
-        href="/contact"
+        href={contactHref}
         class="inline-flex min-w-56 items-center justify-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-bold text-bg-primary transition-all hover:bg-primary-hover"
       >
-        Get Started
+        {ui.getStarted}
         <i class="ri-arrow-right-line" aria-hidden="true"></i>
       </a>
     </div>
