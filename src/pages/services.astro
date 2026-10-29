@@ -36,8 +36,10 @@ import {
             <div
               id={`service-${classItem.slug}`}
               class:list={[
-                "scroll-mt-28 bg-bg-primary rounded-xl border border-border-primary overflow-hidden",
-                comingSoon && "service-coming-soon",
+                "scroll-mt-28 overflow-hidden rounded-xl border border-border-primary bg-bg-primary transition-all",
+                comingSoon
+                  ? "service-coming-soon"
+                  : "transform hover:scale-105 hover:border-border-accent",
               ]}
             >
               {comingSoon && (

@@ -11,7 +11,6 @@ export const siteData = {
   social: {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
-    twitter: "https://twitter.com",
     youtube: "https://youtube.com",
   },
 };
@@ -19,9 +18,13 @@ export const siteData = {
 export const socialLinks = [
   { name: "facebook", icon: "ri-facebook-fill", label: "Facebook" },
   { name: "instagram", icon: "ri-instagram-fill", label: "Instagram" },
-  { name: "twitter", icon: "ri-twitter-x-fill", label: "Twitter" },
   { name: "youtube", icon: "ri-youtube-fill", label: "YouTube" },
 ];
+
+/** Set true when profile URLs are ready; links use `siteData.social`. */
+export const socialLinksEnabled = false;
+
+export const socialMediaComingSoonNote = "Social Media to come eventually...";
 
 export const contactInfo = [
   {

@@ -3,7 +3,8 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm.astro";
 import ScheduleSeasonInit from "../components/ScheduleSeasonInit.astro";
-import { siteData, socialLinks, contactInfo } from "../data/siteData";
+import SocialLinks from "../components/SocialLinks.astro";
+import { siteData, contactInfo } from "../data/siteData";
 import { getContactHoursLines } from "../utils/contactHours";
 import MapImage from "@assets/photo-1517487881594-2787fef5ebf7.jpg";
 
@@ -148,25 +149,7 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
             <h3 class="text-xl font-semibold text-text-primary mb-4">
               Follow Us
             </h3>
-            <div class="flex space-x-4">
-              {
-                socialLinks.map((social) => (
-                  <a
-                    href={
-                      siteData.social[
-                        social.name as keyof typeof siteData.social
-                      ]
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="w-12 h-12 bg-bg-tertiary hover:bg-primary rounded-lg flex items-center justify-center transition-all text-text-tertiary hover:text-bg-primary"
-                    aria-label={social.label}
-                  >
-                    <i class={`${social.icon} text-xl`} />
-                  </a>
-                ))
-              }
-            </div>
+            <SocialLinks variant="contact" />
           </div>
         </div>
 
@@ -178,74 +161,8 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
     </div>
   </section>
 
-  <!-- Visit Expectations Section -->
-  <section class="py-20 bg-bg-primary">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-text-primary mb-4 text-center">
-        What to Expect When You Visit
-      </h2>
-      <p
-        class="text-xl text-text-secondary mb-12 text-center max-w-2xl mx-auto"
-      >
-        Your first visit is important to us. Here's what you can expect.
-      </p>
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12"
-      >
-        <div
-          class="bg-bg-secondary p-6 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all"
-        >
-          <div
-            class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="ri-user-search-line text-3xl text-primary"></i>
-          </div>
-          <h3 class="text-xl font-bold text-text-primary mb-3">
-            Tour & Consultation
-          </h3>
-          <p class="text-text-secondary text-sm leading-relaxed">
-            We'll give you a comprehensive tour of our facilities and discuss
-            your fitness goals
-          </p>
-        </div>
-        <div
-          class="bg-bg-secondary p-6 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all"
-        >
-          <div
-            class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="ri-group-line text-3xl text-primary"></i>
-          </div>
-          <h3 class="text-xl font-bold text-text-primary mb-3">
-            Meet Our Team
-          </h3>
-          <p class="text-text-secondary text-sm leading-relaxed">
-            Get introduced to our trainers and staff who will support you on
-            your journey
-          </p>
-        </div>
-        <div
-          class="bg-bg-secondary p-6 rounded-xl border border-border-primary text-center hover:border-border-accent transition-all"
-        >
-          <div
-            class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="ri-file-list-3-line text-3xl text-primary"></i>
-          </div>
-          <h3 class="text-xl font-bold text-text-primary mb-3">
-            Membership Options
-          </h3>
-          <p class="text-text-secondary text-sm leading-relaxed">
-            Explore our flexible membership plans designed to fit your lifestyle
-            and budget
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Response Time Section -->
-  <section class="py-20 bg-bg-secondary">
+  <section class="py-20 bg-bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <div class="bg-bg-primary p-8 rounded-xl border border-border-primary">
@@ -319,7 +236,7 @@ const summerWinterContactHours = getContactHoursLines("summer-winter");
   </section>
 
   <!-- Map Section (Placeholder) -->
-  <section class="py-20 bg-bg-primary">
+  <section class="py-20 bg-bg-secondary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-text-primary mb-12 text-center">
         Find Us

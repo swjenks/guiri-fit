@@ -1,7 +1,27 @@
 ---
+import { siteData } from "../data/siteData";
+
+const mailto = `mailto:${siteData.email}`;
 ---
 
 <form class="bg-bg-primary p-8 rounded-xl border border-border-primary space-y-6">
+  <div
+    class="rounded-lg border border-border-primary/60 bg-bg-secondary/40 p-4 text-sm leading-relaxed text-text-secondary"
+    role="status"
+  >
+    <p>
+      This form is still under construction. For now, please email me directly
+      at{" "}
+      <a
+        href={mailto}
+        class="font-medium text-primary hover:text-primary-hover underline-offset-2 hover:underline"
+      >
+        {siteData.email}
+      </a>
+      .
+    </p>
+  </div>
+
   <div>
     <label for="name" class="block text-text-primary font-semibold mb-2">
       Full Name

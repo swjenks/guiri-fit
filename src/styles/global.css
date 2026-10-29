@@ -96,6 +96,52 @@ h6 {
   gap: 0.06em;
 }
 
+.hero-tagline-line {
+  opacity: 0;
+  transform: translate3d(0, 40px, 0);
+  animation: hero-tagline-fade-up 1.2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.hero-tagline-line:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hero-tagline-line:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.hero-tagline-line:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes hero-tagline-fade-up {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-tagline-follow {
+  opacity: 0;
+  animation: hero-tagline-fade-in 1.2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-delay: 3s;
+}
+
+@keyframes hero-tagline-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tagline-line,
+  .hero-tagline-follow {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
 .hero-tagline .brand-name {
   font-size: 1em;
   display: inline;

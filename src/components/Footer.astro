@@ -1,10 +1,6 @@
 ---
-import {
-  siteData,
-  navigation,
-  socialLinks,
-  contactInfo,
-} from "../data/siteData";
+import SocialLinks from "./SocialLinks.astro";
+import { siteData, navigation, contactInfo } from "../data/siteData";
 import BrandName from "./BrandName.astro";
 
 const footerQuickLinks = [{ name: "Home", href: "/" }, ...navigation];
@@ -19,23 +15,7 @@ const footerQuickLinks = [{ name: "Home", href: "/" }, ...navigation];
           <BrandName />
         </h3>
         <p class="text-text-tertiary mb-4">{siteData.description}</p>
-        <div class="flex space-x-4">
-          {
-            socialLinks.map((social) => (
-              <a
-                href={
-                  siteData.social[social.name as keyof typeof siteData.social]
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-10 h-10 bg-bg-secondary hover:bg-primary text-text-tertiary hover:text-bg-primary rounded-lg flex items-center justify-center transition-all"
-                aria-label={social.label}
-              >
-                <i class={`${social.icon} text-xl`} />
-              </a>
-            ))
-          }
-        </div>
+        <SocialLinks variant="footer" />
       </div>
 
       <!-- Quick Links -->
