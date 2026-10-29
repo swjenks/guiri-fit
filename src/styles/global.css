@@ -194,7 +194,8 @@ h6 {
   @apply hidden;
 }
 
-html[data-outdoor-schedule="active"] .contact-hours-season[data-season="spring-fall"],
+html[data-outdoor-schedule="active"]
+  .contact-hours-season[data-season="spring-fall"],
 html[data-outdoor-schedule="inactive"]
   .contact-hours-season[data-season="summer-winter"] {
   @apply block;
@@ -236,23 +237,19 @@ html[data-outdoor-schedule="inactive"]
   @apply inline-flex;
 }
 
-html[data-outdoor-schedule="active"]
-  [data-schedule-season="spring-fall"] {
+html[data-outdoor-schedule="active"] [data-schedule-season="spring-fall"] {
   order: 1;
 }
 
-html[data-outdoor-schedule="active"]
-  [data-schedule-season="summer-winter"] {
+html[data-outdoor-schedule="active"] [data-schedule-season="summer-winter"] {
   order: 2;
 }
 
-html[data-outdoor-schedule="inactive"]
-  [data-schedule-season="summer-winter"] {
+html[data-outdoor-schedule="inactive"] [data-schedule-season="summer-winter"] {
   order: 1;
 }
 
-html[data-outdoor-schedule="inactive"]
-  [data-schedule-season="spring-fall"] {
+html[data-outdoor-schedule="inactive"] [data-schedule-season="spring-fall"] {
   order: 2;
 }
 
@@ -296,7 +293,10 @@ html[data-outdoor-schedule="inactive"]
   display: grid;
   width: 100%;
   min-width: 0;
-  grid-template-columns: clamp(3.25rem, 7vw, 5rem) repeat(var(--day-count), minmax(0, 1fr));
+  grid-template-columns: clamp(3.25rem, 7vw, 5rem) repeat(
+      var(--day-count),
+      minmax(0, 1fr)
+    );
   grid-template-rows: auto minmax(0, 1fr);
 }
 
@@ -381,9 +381,18 @@ html[data-outdoor-schedule="inactive"]
   @apply font-bold text-primary tabular-nums transition-colors duration-150;
 }
 
-.pricing-packages-table tbody tr.pricing-packages-table__row:hover .pricing-packages-table__total-value,
-.pricing-compact-table tbody tr.pricing-packages-table__row:hover .pricing-packages-table__total-value,
-.pricing-nutrition-table tbody tr.pricing-packages-table__row:hover .pricing-packages-table__total-value {
+.pricing-packages-table
+  tbody
+  tr.pricing-packages-table__row:hover
+  .pricing-packages-table__total-value,
+.pricing-compact-table
+  tbody
+  tr.pricing-packages-table__row:hover
+  .pricing-packages-table__total-value,
+.pricing-nutrition-table
+  tbody
+  tr.pricing-packages-table__row:hover
+  .pricing-packages-table__total-value {
   @apply text-border-accent;
 }
 
